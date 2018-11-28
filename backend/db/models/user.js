@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
 })
 
 // doctorId를 Auto Increment 필드로 지정
-doctorSchema.plugin(autoIncrement, {
+userSchema.plugin(autoIncrement, {
     model: 'User',
     field: 'userId',
     startAt: 1
