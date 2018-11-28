@@ -2,8 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 
 require('./db/mongo') //connect db
-const doctor = require('./routes/doctor')
-const patient = require('./routes/patient')
+const user = require('./routes/user')
+
 
 const app = express()
 app.use((req, res, next) =>{
@@ -14,7 +14,7 @@ app.use((req, res, next) =>{
 })
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
-app.use('/doctor', doctor)
-app.use('/patient', patient)
+app.use('/user', user)
+
 
 module.exports = app

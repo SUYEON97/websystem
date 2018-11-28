@@ -1,6 +1,7 @@
 const { Router } = require('Express')
+const userModel = require('../db/models/user')
+
 const router = Router()
-const patientModel = require('../db/models/patient')
 
 /* ... */
 
