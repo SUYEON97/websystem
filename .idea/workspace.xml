@@ -136,9 +136,9 @@
       <path value="$PROJECT_DIR$/backend/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="351" />
-    <option name="width" value="1301" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-9" />
+    <option name="width" value="977" />
     <option name="height" value="1042" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -215,7 +215,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543401398572</updated>
-      <workItem from="1543401400643" duration="3862000" />
+      <workItem from="1543401400643" duration="4460000" />
     </task>
     <task id="LOCAL-00001" summary="올려봅니당">
       <created>1543401911480</created>
@@ -228,14 +228,14 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3862000" />
+    <option name="totallyTimeSpent" value="4460000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="307" y="0" width="1135" height="909" extended-state="1" />
+    <frame x="-7" y="0" width="852" height="909" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15967153" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21525215" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
