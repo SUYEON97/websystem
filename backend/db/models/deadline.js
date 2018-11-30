@@ -15,7 +15,7 @@ const deadLineSchema = new mongoose.Schema({
   major_name: {
     type: String,
     required: true
-  }
+  },
   hw_name: {
     type: String,
     required: true

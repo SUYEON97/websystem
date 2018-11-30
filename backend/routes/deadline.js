@@ -4,19 +4,20 @@ const {
 const router = Router()
 const deadLineModel = require('../db/models/deadline')
 
+var year;
+var month;
+var day;
 
-// router.get('/', function(req,res){
-//   deadLineModel.create({userId : 0, majorId : 0, hw_name : 'dd', hw_date : new Date('2018-12-3 UTC 00:00:00')}, function(err,dl){
-//     console.log(dl);
-//   })
-// })
+router.get('/', function(req,res){
+  deadLineModel.create({userId : 0, majorId : 0, hw_name : 'dd', hw_date : new Date('2018-12-3 UTC 00:00:00')}, function(err,dl){
+    console.log(dl);
+  })
+})
 
 router.get('/', async function(req, res) {
   var millis = [];
   var timeRmArray = [];
   var now = Date.now();
-
-
 
   var sorted = await deadLineModel.find({}).sort({ hw_date: 1 })
   console.log(sorted.length);
