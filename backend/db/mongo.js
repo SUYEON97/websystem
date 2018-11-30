@@ -4,6 +4,8 @@ const autoIncrement = require('mongoose-auto-increment')
 const { DB } = require('../constants')
 
 mongoose.connect(DB, {useNewUrlParser: true})
+mongoose.set('useCreateIndex', true)
+mongoose.set('useFindAndModify', false)
 mongoose.connection.on('connected', () => {
     console.info(`Running mongoose v${mongoose.version}`)
 })
