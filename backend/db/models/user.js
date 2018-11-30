@@ -5,6 +5,12 @@ const userSchema = new mongoose.Schema({
         type: Number,
         unique: true
     },
+    userName: String,
+    loginId: {
+      type: String,
+      unique: true
+    },
+    loginPw: String
 })
 
 // doctorId를 Auto Increment 필드로 지정
