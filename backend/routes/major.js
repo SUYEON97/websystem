@@ -75,7 +75,7 @@ router.get('/subject', function(req, res, next) {
 });
 
 router.post('/register', (req, res) => {
-    const newDeadline = new deadlineModel({userId:1, hw_name: req.body.hw_name, major_name: req.body.major_name, subject_name:req.body.subject_name,hw_date: req.body.hw_date});
+    const newDeadline = new deadlineModel({userId:1, hw_name: req.body.hw_name, major_name: req.body.major_name, subject_name:req.body.subject_name, hw_date : new Date(Date.UTC(req.body.deadlineYear,req.body.deadlineMonth-1,req.body.deadlineDate))});
     newDeadline.save(err => {
         if (err) return res.status(500).send(err);
         return res.end();

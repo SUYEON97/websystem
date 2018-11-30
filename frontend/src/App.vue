@@ -22,7 +22,8 @@
             <span>과제이름을 적어주세요!</span><br>
                 <input type="text" name="hwName" v-model="hwName"><br>
             <span>데드라인을 적어주세요!</span><br>
-                <input type="text" name="date" v-model="deadlineDate"><br>
+            <!--<input type="text" name="date" v-model="deadlineDate">-->
+                <input type="text" name="date" v-model="deadlineYear"><input type="text" name="date" v-model="deadlineMonth"><input type="text" name="date" v-model="deadlineDate">
                 <input type="submit" value="확인">
         </form>
 
@@ -42,6 +43,8 @@
                 selected: '과를 선택해주세요',
                 selected2: '과목을 선택해주세요',
                 hwName:"",
+                deadlineYear:"",
+                deadlineMonth:"",
                 deadlineDate:""
             }
         },
@@ -68,9 +71,11 @@
             },
             writeHwname:function () {
                 this.$http.post('http://localhost:8000/major/register',
-                    {hw_name: this.hwName,subject_name:this.selected2 ,major_name: this.selected, hw_date: this.deadlineDate}).then( (response)=> {
+                    {hw_name: this.hwName,subject_name:this.selected2 ,major_name: this.selected, deadlineYear: this.deadlineYear, deadlineMonth:this.deadlineMonth, deadlineDate:this.deadlineDate}).then( (response)=> {
                     this.hwName="";
                     this.deadlineDate="";
+                    this.deadlineMonth="";
+                    this.deadlineYear="";
                     this.selected ="";
                     this.selected2="";
                     console.log(response.data);
