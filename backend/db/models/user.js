@@ -3,7 +3,10 @@ const { mongoose, autoIncrement } = require('../mongo')
 const userSchema = new mongoose.Schema({
     userId: Number,
     userName: String,
-    loginId: String,
+    loginId: {
+        type: String,
+        unique: true
+      },
     loginPw: String,
     //create_date: { type:Date, default:Date.now }
 })

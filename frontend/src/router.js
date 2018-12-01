@@ -3,11 +3,11 @@ import Router from 'vue-router'
 
 import SignUp from './components/login/SignUp'
 import Login from './components/login/Login'
-
+import registTodo from './components/registTodo/registTodo'
 import Information from './components/account/Information'
 import ChangePw from './components/account/ChangePw'
 
-import Menu from './components/Menu'
+import Home from './components/home/Home'
 
 Vue.use(Router)
 
@@ -30,15 +30,21 @@ export default new Router({
       name: 'Information',
       component: Information
     },
-    {
-      path: '/menu',
-      name: 'Menu',
-      component: Menu
-    },
+   
     {
       path: '/changepw',
       name: 'ChangePw',
       component: ChangePw
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/regist',
+      name: 'regist',
+      component: registTodo
     }
   ]
 })

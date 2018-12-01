@@ -27,7 +27,7 @@ export default {
                 alert('success')
                 this.name = response.data.userName
                 console.log(this.name)
-                this.$router.push({name: "Menu", params: {name: this.name}});
+                this.$router.push({name: "Home", params: {name: this.name}});
             },(error)=>{
                 console.log('err')
                 alert(error.response.data.error)
