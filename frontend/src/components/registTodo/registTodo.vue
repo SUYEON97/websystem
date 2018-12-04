@@ -1,4 +1,5 @@
 <template>
+
   <div id="app">
         <div>
           <h2>!과제 등록을 해주세요!</h2>
@@ -23,19 +24,19 @@
             <span>과제이름을 적어주세요!</span><br>
                 <input type="text" name="hwName" v-model="hwName"><br>
             <span>데드라인을 적어주세요!</span><br>
-            <!--<input type="text" name="date" v-model="deadlineDate">-->
+            <input type="text" name="date" v-model="deadlineDate">
                 <input type="text" name="date" v-model="deadlineYear"><input type="text" name="date" v-model="deadlineMonth"><input type="text" name="date" v-model="deadlineDate">
                 <input type="submit" value="확인">
-        </form>
 
+        </form>
   </div>
 </template>
 
 <script>
+
     export default{
         name: 'app',
         components: {
-
         },
         data: function () {
             return{
@@ -84,7 +85,7 @@
                 }).catch(function (error) {
                     console.log(error.response);
                 })
-            }
+            },
         },
         created: function () {
             this.callMajorList();
@@ -93,5 +94,8 @@
     }
 </script>
 <style>
+    #app {
+        text-align: center;
+    }
 
 </style>
