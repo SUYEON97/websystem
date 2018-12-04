@@ -8,5 +8,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="@types/body-parser" level="application" />
+    <orderEntry type="library" name="@types/express" level="application" />
+    <orderEntry type="library" name="@types/express-domain-middleware" level="application" />
+    <orderEntry type="library" name="@types/express-route-fs" level="application" />
+    <orderEntry type="library" name="@types/express-xml-bodyparser" level="application" />
+    <orderEntry type="library" name="@types/route-parser" level="application" />
   </component>
 </module>
