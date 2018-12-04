@@ -1,9 +1,12 @@
 const { mongoose, autoIncrement } = require('../mongo')
 
 const userSchema = new mongoose.Schema({
-    userId: {
-        type: Number,
+    userId: Number,
+    userName: String,
+    loginId: {
+        type: String,
         unique: true
+<<<<<<< HEAD
     },
     userName: String,
     loginId: {
@@ -11,6 +14,11 @@ const userSchema = new mongoose.Schema({
       unique: true
     },
     loginPw: String
+=======
+      },
+    loginPw: String,
+    //create_date: { type:Date, default:Date.now }
+>>>>>>> 8ec70af51aecb82082550664037b9a9b9a36f51a
 })
 
 // doctorId를 Auto Increment 필드로 지정

@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <div id="nav">
+<<<<<<< HEAD
       <router-link to="/">Home</router-link> |
       <router-link to="/home">About</router-link>
+=======
+>>>>>>> 8ec70af51aecb82082550664037b9a9b9a36f51a
     </div>
     <router-view/>
   </div>
