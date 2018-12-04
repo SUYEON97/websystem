@@ -4,7 +4,8 @@
   <router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link> |
   <router-link :to="{name: 'Information', params: {name: this.name}}">information</router-link> |
   <router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link>|
-  <router-link :to="{name: 'Login'}">log out</router-link>
+  <router-link :to="{name: 'Login'}">log out</router-link>|
+  <router-link :to="{name: 'communiteHome'}">커뮤니티</router-link>
   <p>Hello {{name}}</p>
   <div v-for='hw in hwList' :key="hw.id" >
     <div id='short' v-if="hw.timeRemaining<4000000000">
