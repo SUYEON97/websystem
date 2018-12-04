@@ -1,4 +1,5 @@
 <template>
+
   <div id="app">
     <Slide width='200'>
         <a id="home" href="#">
@@ -16,7 +17,7 @@
       </Slide>
         <div>
           <h2>!과제 등록을 해주세요!</h2>
-          
+
         </div>
 
         <div>
@@ -37,11 +38,11 @@
             <span>과제이름을 적어주세요!</span><br>
                 <input type="text" name="hwName" v-model="hwName"><br>
             <span>데드라인을 적어주세요!</span><br>
-            <!--<input type="text" name="date" v-model="deadlineDate">-->
+            <input type="text" name="date" v-model="deadlineDate">
                 <input type="text" name="date" v-model="deadlineYear"><input type="text" name="date" v-model="deadlineMonth"><input type="text" name="date" v-model="deadlineDate">
                 <input type="submit" value="확인">
-        </form>
 
+        </form>
   </div>
 </template>
 
@@ -50,7 +51,6 @@ import { Slide } from 'vue-burger-menu'
     export default{
         name: 'app',
         components: {
-
         },
         data: function () {
             return{
@@ -99,7 +99,7 @@ import { Slide } from 'vue-burger-menu'
                 }).catch(function (error) {
                     console.log(error.response);
                 })
-            }
+            },
         },
         created: function () {
             this.callMajorList();
@@ -111,5 +111,8 @@ import { Slide } from 'vue-burger-menu'
     }
 </script>
 <style>
+    #app {
+        text-align: center;
+    }
 
 </style>

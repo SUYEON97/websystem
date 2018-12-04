@@ -8,6 +8,9 @@ const login = require('./routes/login')
 const user = require('./routes/user')
 const deadline = require('./routes/deadline')
 const major = require('./routes/major')
+const board = require('./routes/board')
+const comment = require('./routes/comment')
+const write = require('./routes/write')
 const app = express()
 
 app.use((req, res, next) =>{
@@ -24,5 +27,8 @@ app.use('/user', user)
 //app.use('/',indexRouter)
 app.use('/home', deadline)
 app.use('/regist', major)
+app.use('/board', board)
+app.use('/comment', comment)
+app.use('/write', write)
 
 module.exports = app
