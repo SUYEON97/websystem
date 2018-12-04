@@ -23,7 +23,7 @@ const deadLineSchema = new mongoose.Schema({
     },
     timeRemaining: Number
   })
-  
+
   deadLineSchema.plugin(autoIncrement, {
     model: 'User',
     field: 'hwId',

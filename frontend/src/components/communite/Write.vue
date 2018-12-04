@@ -1,5 +1,22 @@
 <template>
     <div id="write">
+      <Slide width='200'>
+          <a id="home" href="#">
+            <span><router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link></span>
+          </a>
+          <a href ="#">
+            <span><router-link :to="{name: 'Information', params: {name: this.name}}">information</router-link></span>
+          </a>
+          <a href ="#">
+            <span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span>
+          </a>
+          <a href ="#">
+            <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+          </a>
+          <a href ="#">
+            <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
+          </a>
+        </Slide>
         <p id="title">
             제목 : <input v-model="newTitle" type="text">
         </p>
@@ -11,6 +28,7 @@
 </template>
 
 <script>
+import { Slide } from 'vue-burger-menu'
     export default {
         name: "Write",
         data : function(){
@@ -28,6 +46,9 @@
                     this.$router.push({name: "communiteHome"})
                 })
             }
+        },
+        components : {
+          Slide
         }
     }
 </script>

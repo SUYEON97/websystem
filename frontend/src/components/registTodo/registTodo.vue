@@ -1,9 +1,26 @@
 <template>
 
   <div id="app">
+    <Slide width='200'>
+        <a id="home" href="#">
+          <span><router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link></span>
+        </a>
+        <a href ="#">
+          <span><router-link :to="{name: 'Information', params: {name: this.name}}">information</router-link></span>
+        </a>
+        <a href ="#">
+          <span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span>
+        </a>
+        <a href ="#">
+          <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+        </a>
+        <a href ="#">
+          <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
+        </a>
+      </Slide>
         <div>
           <h2>!과제 등록을 해주세요!</h2>
-          <router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link>
+          
         </div>
 
         <div>
@@ -33,6 +50,7 @@
 </template>
 
 <script>
+import { Slide } from 'vue-burger-menu'
 
     export default{
         name: 'app',
@@ -89,6 +107,9 @@
         },
         created: function () {
             this.callMajorList();
+        },
+        components : {
+          Slide
         }
 
     }

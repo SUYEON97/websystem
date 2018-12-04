@@ -68,6 +68,7 @@ export default {
         text-transform: uppercase;
         letter-spacing: 10px;
     }
+    
 
     #link {
         text-decoration: none;
@@ -123,6 +124,6 @@ export default {
         color: #5B5A5A;
     }
 
+
+
 </style>
-
-
