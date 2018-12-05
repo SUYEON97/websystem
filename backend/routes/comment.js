@@ -1,16 +1,10 @@
 const Router = require('Express')
 const router = Router()
-const boardModel = require('../db/models/board')
 const commentModel = require('../db/models/comment')
-const userModel = require('../db/models/user')
-const mongoose = require('mongoose');
-
-
 
 router.post('/create', (req,res) => {
     var comments = new commentModel({
         content: req.body.content,
-        // userId : req.body.userId,
         boardId : req.body.boardId
     });
 
