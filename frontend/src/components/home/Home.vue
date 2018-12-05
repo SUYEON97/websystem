@@ -35,9 +35,21 @@
             </li>
         </ul>
     </div>
-    <div id='long' v-if="hw.timeRemaining>172800000">
-      과제이름: {{hw.hw_name}}
-      데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
+    <div class="deadline2" v-if="hw.timeRemaining>172800000">
+      <!--과제이름: {{hw.hw_name}}-->
+      <!--데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일-->
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color: white; color:black">
+                <label>
+                    <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                </label>
+                <b-button-group vertical class="button-group">
+                    <b-button class="btn" style="background-color: white"><Zondicon icon="trash" class="hi"></Zondicon></b-button>
+                    <b-button class="btn" style="background-color: white"><Zondicon icon="checkmark" class="hi"></Zondicon></b-button>
+                </b-button-group>
+            </li>
+        </ul>
     </div>
 
   </div>
@@ -132,7 +144,14 @@ export default {
 
     }
     .deadline{
-
+        line-height: 1.5rem;
+        padding: 10px 20px;
+        margin: 0;
+        width: 100%;
+        left: auto;
+        right: auto;
+    }
+    .deadline2{
         line-height: 1.5rem;
         padding: 10px 20px;
         margin: 0;
