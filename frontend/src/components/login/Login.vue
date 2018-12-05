@@ -35,7 +35,6 @@ export default {
             }).catch(error=>{
                 alert(error)
             })
-
         }
     }
 }
@@ -44,12 +43,11 @@ export default {
     html {
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         height: 100vh;
-        
+
         color: #5B5A5A;
         font-size:12px;
         font-weight: 200;
     }
-
     .container {
         position: relative;
         width: 380px;
@@ -58,7 +56,6 @@ export default {
         border: 1px solid #EEEEEE;
         box-shadow: 0 0 8px 2px #ccc;
     }
-
     h1 {
         margin-top: 50px;
         margin-bottom: 30px;
@@ -68,13 +65,10 @@ export default {
         text-transform: uppercase;
         letter-spacing: 10px;
     }
-
-
     #link {
         text-decoration: none;
         color: inherit;
     }
-
     input[type="text"] {
         padding: 10px;
         margin-bottom: 7px;
@@ -85,7 +79,6 @@ export default {
         margin: 0 auto;
         width: 75%;
     }
-
     input[type="password"] {
         padding: 10px;
         margin-bottom: 7px;
@@ -97,8 +90,7 @@ export default {
         margin-bottom: 12px;
         width: 75%;
     }
-
-    input[type="submit"] {
+    #form {
         padding: 16px;
         border-radius: 50px;
         background: #129793;
@@ -113,7 +105,6 @@ export default {
         font-weight: 700;
         letter-spacing: 1.05px;
     }
-
     form #link{
         display: block;
         width: 80%;
@@ -123,7 +114,4 @@ export default {
         text-align: right;
         color: #5B5A5A;
     }
-
-
-
 </style>

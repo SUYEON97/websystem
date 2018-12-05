@@ -20,19 +20,16 @@
         <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
       </a>
     </Slide>
-  <h1>Home</h1>
-
+  <h1>History</h1>
   <p>Hello {{name}}</p>
   <div v-for='hw in hwList' :key="hw.id" >
     <div id='short' v-if="hw.timeRemaining<172800000">
       과제이름: {{hw.hw_name}}
       데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
-      <input class= 'btDelete' type = 'submit' value = 'Delete' v-on:click='deleteHw(hw.hwId)'/>
     </div>
     <div id='long' v-if="hw.timeRemaining>172800000">
       과제이름: {{hw.hw_name}}
       데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
-      <input class= 'btDelete' type = 'submit' value = 'Delete' v-on:click='deleteHw(hw.hwId)'/>
     </div>
 
   </div>
@@ -99,18 +96,9 @@ export default {
         this.hwList[i].day = stDate.day;
       }
     },
-    deleteHw(deleteId) {
-      console.log('deleteHw');
-      console.log(deleteId);
-      axios.post('http://localhost:8000/home/delete', {hwId: deleteId}).then(res => {
-
-      })
-      //const hwIndex = this.hwList.indexOf(deleteId);
-      for(var i = 0; i<this.hwList.length; i++){
-        if(this.hwList[i].hwId == deleteId){
-          this.hwList.splice(i,1)
-        }
-      }
+    deleteTodo(todo) {
+      const todoIndex = this.hwList.indexOf(todo);
+      this.hwList.splice(todoIndex, 1);
     }
   },
   components: {
@@ -118,53 +106,3 @@ export default {
   }
 }
 </script>
-
-
-<style>
-.btDelete {
-    padding: 16px;
-    display: block;
-    border-radius: 50px;
-    background: #129793;
-    border: none;
-    box-shadow: 0 8px 15px 0 rgba(18, 151, 147, .4);
-    margin: 0 auto;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 12%;
-    color: white;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: 700;
-    font-size:10px;
-    letter-spacing: 0.5px;
-}
-
-#short {
-  color: red;
-}
-a {
-    text-decoration: none;
-    color: inherit;
-}
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-
-</style>

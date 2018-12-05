@@ -16,6 +16,9 @@
           <a href ="#">
             <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
           </a>
+          <a href ="#">
+            <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
+          </a>
         </Slide>
         <li v-for="Theme in list" v-bind:key="Theme.boardId">
             <router-link :to="{name : 'board', params: {boardId:Theme.boardId}}">

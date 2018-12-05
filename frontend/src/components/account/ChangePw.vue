@@ -16,6 +16,9 @@
           <a href ="#">
             <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
           </a>
+          <a href ="#">
+            <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
+          </a>
         </Slide>
         <h1>Change Password</h1>
         <form v-on:submit.prevent='change'>

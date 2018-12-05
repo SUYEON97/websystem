@@ -17,6 +17,10 @@
         <a href ="#">
           <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
         </a>
+        <a href ="#">
+          <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
+        </a>
+
       </Slide>
         <div>
           <h2>!과제 등록을 해주세요!</h2>
