@@ -7,7 +7,8 @@
             <li id=question v-for="Theme in list" v-bind:key="Theme.boardId">
                 <router-link :to="{name : 'board', params: {boardId:Theme.boardId}}">
                     <p id="titleForm">{{Theme.title}}</p>
-                    <p id="timeForm">{{Theme.time}}</p>
+                    <!--<p id="timeForm">{{Theme.time}}</p>-->
+                    <p id="timeForm">{{Theme.month}}.{{Theme.day}}   {{Theme.hour}}:{{Theme.min}} </p>
                 </router-link>
             </li>
 
@@ -36,8 +37,42 @@
             getList: function () {
                 this.$http.get('http://localhost:8000/board/list').then((result) => {
                     this.list = result.data;
+                    this.splitDate();
                 })
             },
+            splitDate(){
+                var stDate = {
+                    year: "",
+                    month: "",
+                    day: "",
+                    time : "",
+                    hour :"",
+                    min :"",
+                };
+                var arr=[];
+                var arr2=[];
+                var arr3=[];
+                for(var i=0; i<this.list.length; i++){
+                    arr = this.list[i].time.split("-")
+                    stDate.year = arr[0];
+                    stDate.month = arr[1];
+                    arr2 = arr[2].split("T");
+                    stDate.day = arr2[0];
+                    stDate.time = arr2[1];
+                    arr3=arr2[1].split(":");
+                    stDate.hour=arr3[0];
+                    stDate.min=arr3[1];
+                    this.list[i].year = stDate.year;
+                    this.list[i].month = stDate.month;
+                    this.list[i].day = stDate.day;
+                    this.list[i].hour = stDate.hour;
+                    this.list[i].min = stDate.min;
+
+
+                }
+                console.log(Date.now())
+            }
+
         }
         ,
         created: function () {
@@ -87,14 +122,15 @@
         text-align: left;
         margin-top: 0.2em;
         margin-bottom: 0.2em;
-        font-size: 15px;
+        font-size: 20px;
     }
 
     #timeForm {
         margin-top: 0.2em;
         margin-bottom: 0.2em;
-        font-size: 5px;
-        text-align: right;
+        font-size: 10px;
+        text-align: left;
+        margin-top: 5px;
     }
 
     #question {
