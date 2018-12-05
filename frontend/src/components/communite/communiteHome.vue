@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <ul>
       <Slide width='200'>
           <a id="home" href="#">
             <span><router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link></span>
@@ -17,31 +17,43 @@
             <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
           </a>
         </Slide>
-        <h1>Information</h1>
-        
-        <h1>{{name}}</h1>
-        <p>{{user.loginId}}</p>
-        <router-link :to="{name: 'ChangePw', params: {name: this.name}}">change password</router-link>
-    </div>
+        <li v-for="Theme in list" v-bind:key="Theme.boardId">
+            <router-link :to="{name : 'board', params: {boardId:Theme.boardId}}">
+                <p>{{Theme.title}}</p>
+                <p>{{Theme.time}}</p>
+            </router-link>
+        </li>
+        <router-link to="/write">글쓰기</router-link>
+    </ul>
 </template>
+
 <script>
 import { Slide } from 'vue-burger-menu'
-export default {
-
-    data(){
-        return{
-            name: this.$route.params.name,
-            user:{}
+    export default {
+        name: 'home',
+        data: function () {
+            return {
+                list: [],
+            }
+        },
+        methods: {
+            getList: function () {
+                this.$http.get('http://localhost:8000/board/list').then((result) => {
+                    this.list = result.data;
+                })
+            },
         }
-    },
-    created(){
-        this.$http.get('http://localhost:8000/user/'+this.name).then((res)=>{
-            this.user = res.data
-            console.log(this.user)
-        })
-    },
-    components: {
-      Slide
+        ,
+        created: function () {
+            this.getList()
+
+        },
+        components: {
+          Slide
+        }
     }
-}
 </script>
+
+<style scoped>
+
+</style>
