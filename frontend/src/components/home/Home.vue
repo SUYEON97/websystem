@@ -23,11 +23,11 @@
   <div v-for='hw in hwList' :key="hw.id" >
     <div id='short' v-if="hw.timeRemaining<4000000000">
       과제이름: {{hw.hw_name}}
-      데드라인: {{hw.hw_date}}
+      데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
     </div>
     <div id='long' v-if="hw.timeRemaining>4000000000">
       과제이름: {{hw.hw_name}}
-      데드라인: {{hw.hw_date}}
+      데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
     </div>
 
   </div>
@@ -70,12 +70,29 @@ export default {
       this.hwList = res.data
       console.log(res.data)
       //location.reload();
+      this.splitDate();
     })
-
-
-    //this.$http.get(`http://localhost:8000/user`).then(res => {
-      //this.user = res.data
-    //})
+  },
+  methods : {
+    splitDate(){
+      var stDate = {
+        year: "",
+        month: "",
+        day: "",
+      };
+      var arr=[];
+      var arr2=[];
+      for(var i=0; i<this.hwList.length; i++){
+        arr = this.hwList[i].hw_date.split("-")
+        stDate.year = arr[0];
+        stDate.month = arr[1];
+        arr2 = arr[2].split("T");
+        stDate.day = arr2[0];
+        this.hwList[i].year = stDate.year;
+        this.hwList[i].month = stDate.month;
+        this.hwList[i].day = stDate.day;
+      }
+    }
   },
   components: {
     Slide
@@ -85,6 +102,8 @@ export default {
 
 
 <style>
+
+
 #short {
   color: red;
 }

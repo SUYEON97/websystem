@@ -44,7 +44,7 @@ export default {
     html {
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         height: 100vh;
-        background: #F5F6F7;
+        
         color: #5B5A5A;
         font-size:12px;
         font-weight: 200;
@@ -68,7 +68,7 @@ export default {
         text-transform: uppercase;
         letter-spacing: 10px;
     }
-    
+
 
     #link {
         text-decoration: none;

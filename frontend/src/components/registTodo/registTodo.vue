@@ -109,9 +109,6 @@ import DatePicker from 'v-cal-input'
         },
         created: function () {
             this.callMajorList();
-        },
-        components : {
-          Slide
         }
 
     }
