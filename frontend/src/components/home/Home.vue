@@ -21,11 +21,11 @@
 
   <p>Hello {{name}}</p>
   <div v-for='hw in hwList' :key="hw.id" >
-    <div id='short' v-if="hw.timeRemaining<4000000000">
+    <div id='short' v-if="hw.timeRemaining<172800000">
       과제이름: {{hw.hw_name}}
       데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
     </div>
-    <div id='long' v-if="hw.timeRemaining>4000000000">
+    <div id='long' v-if="hw.timeRemaining>172800000">
       과제이름: {{hw.hw_name}}
       데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
     </div>
