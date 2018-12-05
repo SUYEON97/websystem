@@ -3,21 +3,30 @@
         <div>
           <h2>!과제 등록을 해주세요!</h2>
           <router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link>
-        </div>
+        <!--</div>-->
 
-        <div>
-                  <span>과를 선택해주세요!</span><br>
-                  <select v-model="selected" name="items1" v-on:change="filter">
-                    <option v-for="majorlist in majorList" :key="majorlist.id" v-if="majorlist.majorNameId==1">{{majorlist.majorName}}</option>
-                  </select><br>
-        </div>
+        <!--<div>-->
+                  <!--<span>과를 선택해주세요!</span><br>-->
+                  <!--<b-form-select v-model="selected" class="mb-3" v-on:change="filter" >-->
+                  <!--&lt;!&ndash;<select  v-model="selected" name="items1" v-on:change="filter">&ndash;&gt;-->
+                    <!--<option v-for="majorlist in majorList" v-if="majorlist.majorNameId==1">{{majorlist.majorName}}</option>-->
+                  <!--</b-form-select>-->
+            <!--<br>-->
+        <!--</div>-->
+      <!--<div>-->
+          <span>과를 선택해주세요!</span><br>
+
+              <select  v-model="selected" name="items1" v-on:change="filter">
+              <option v-for="majorlist in majorList" v-if="majorlist.majorNameId==1">{{majorlist.majorName}}</option>
+              </select><br>
+      </div>
+
         <div>
                 <span>과목을 선택해주세요!</span><br>
                 <select v-model="selected2" name="items2">
                   <option v-for="subjectlist in subjectList" :key="subjectlist.id">{{subjectlist.subjectName}}</option>
                 </select><br>
         </div>
-
         <form v-on:submit.prevent="writeHwname">
             <span>과제이름을 적어주세요!</span><br>
                 <input type="text" name="hwName" v-model="hwName"><br>
@@ -32,21 +41,30 @@
 
 <script>
      import DatePicker from 'v-cal-input'
+    // import dropdown from 'vue-dropdowns';
+     import 'bootstrap/dist/css/bootstrap.css'
+     import 'bootstrap-vue/dist/bootstrap-vue.css'
 
     export default{
         name: 'app',
         components: {
-            DatePicker
+            DatePicker,
+            // 'dropdown' : dropdown
         },
         data: function () {
             return{
                 date: null,
                 majorList:[],
                 subjectList:[],
-                selected: '과를 선택해주세요',
-                selected2: '과목을 선택해주세요',
+                selected: '',
+                selected2: '',
+                hi:'',
                 hwName:"",
-                name: this.$route.params.name
+                name: this.$route.params.name,
+                arrayOfObjects: [],
+                object: {
+                    name: 'Object Name',
+                }
             }
         },
         methods:{
@@ -57,11 +75,14 @@
                 }).catch((error)=> {
                     console.log(error.response);
                 })
+            },methodToRunOnSelect(payload) {
+                this.object = payload;
             },
             filter:function () {
                 var k = 0;
                 for (var i = 0; i < this.majorList.length; i++) {
                     // console.log(this.majorList[0].majorName)
+                    console.log(this.selected)
                     if (this.majorList[i].majorName == this.selected) {
                         this.subjectList[k] = this.majorList[i];
                         k++

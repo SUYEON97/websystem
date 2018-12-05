@@ -9,6 +9,7 @@ import ChangePw from './components/account/ChangePw'
 
 import Home from './components/home/Home'
 
+
 Vue.use(Router)
 
 export default new Router({
