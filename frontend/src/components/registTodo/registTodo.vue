@@ -20,11 +20,10 @@
       </Slide>
         <div>
           <h2>!과제 등록을 해주세요!</h2>
-          
+
         </div>
 
         <div>
-            <!--v-on:submit.prevent="doctorRegister"-->
                   <span>과를 선택해주세요!</span><br>
                   <select v-model="selected" name="items1" v-on:change="filter">
                     <option v-for="majorlist in majorList" :key="majorlist.id" v-if="majorlist.majorNameId==1">{{majorlist.majorName}}</option>
@@ -40,32 +39,35 @@
         <form v-on:submit.prevent="writeHwname">
             <span>과제이름을 적어주세요!</span><br>
                 <input type="text" name="hwName" v-model="hwName"><br>
-            <span>데드라인을 적어주세요!</span><br>
-            <input type="text" name="date" v-model="deadlineDate">
-                <input type="text" name="date" v-model="deadlineYear"><input type="text" name="date" v-model="deadlineMonth"><input type="text" name="date" v-model="deadlineDate">
-                <input type="submit" value="확인">
 
+            <span>데드라인을 선택해주세요!</span><br>
+                <date-picker v-model="date"/>
+                <input type="text" name="date" v-model="date">
+                <input type="submit" value="확인">
         </form>
   </div>
 </template>
 
 <script>
+
 import { Slide } from 'vue-burger-menu'
+import DatePicker from 'v-cal-input'
+
 
     export default{
         name: 'app',
         components: {
+          Slide,
+          DatePicker
         },
         data: function () {
             return{
+                date: null,
                 majorList:[],
                 subjectList:[],
                 selected: '과를 선택해주세요',
                 selected2: '과목을 선택해주세요',
                 hwName:"",
-                deadlineYear:"",
-                deadlineMonth:"",
-                deadlineDate:"",
                 name: this.$route.params.name
             }
         },
@@ -92,14 +94,14 @@ import { Slide } from 'vue-burger-menu'
             },
             writeHwname:function () {
                 this.$http.post('http://localhost:8000/regist/register',
-                    {hw_name: this.hwName,subject_name:this.selected2 ,major_name: this.selected, deadlineYear: this.deadlineYear, deadlineMonth:this.deadlineMonth, deadlineDate:this.deadlineDate}).then( (response)=> {
+                    {hw_name: this.hwName,subject_name:this.selected2 ,major_name: this.selected, hdate:this.date}).then( (response)=> {
                     this.hwName="";
-                    this.deadlineDate="";
-                    this.deadlineMonth="";
-                    this.deadlineYear="";
                     this.selected ="";
                     this.selected2="";
-                    console.log(response.data);
+                    //console.log(this.date)
+                    this.date=null;
+
+                    //console.log(response.data);
                 }).catch(function (error) {
                     console.log(error.response);
                 })

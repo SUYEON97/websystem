@@ -10,8 +10,9 @@
   "dependencies": {
     "@vue/cli": "^3.2.1",
     "axios": "^0.18.0",
-    "v-calendar": "^0.9.7",
+    "v-cal-input": "^0.1.9",
     "vue": "^2.5.17",
+    "vue-icon": "^2.0.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
