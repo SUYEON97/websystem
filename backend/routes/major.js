@@ -76,12 +76,12 @@ router.get('/subject', function(req, res, next) {
 
 
 
-router.post('/register', (req, res) => { 
+router.post('/register', (req, res) => {
     var aaa = new Date(req.body.hdate) - Date.now();
     var bbb = new Date(req.body.hdate);
     bbb.setHours(9);
-  
-    const newDeadline = new deadlineModel({userId:1, hw_name: req.body.hw_name, major_name: req.body.major_name, subject_name:req.body.subject_name, hw_date : new Date(bbb), timeRemaining: aaa});
+
+    const newDeadline = new deadlineModel({userId:1, hw_name: req.body.hw_name, major_name: req.body.major_name, subject_name:req.body.subject_name, hw_date : new Date(bbb), timeRemaining: aaa, status: 0});
 
     newDeadline.save(err => {
         if (err) return res.status(500).send(err);

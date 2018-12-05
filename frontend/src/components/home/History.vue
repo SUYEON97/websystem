@@ -21,13 +21,14 @@
       </a>
     </Slide>
   <h1>History</h1>
-  <p>Hello {{name}}</p>
+  <p>Hello {{name}}</p><br />
+  <p>완료 목록</p>
   <div v-for='hw in hwList' :key="hw.id" >
-    <div id='short' v-if="hw.timeRemaining<172800000">
+    <div v-if="hw.status ==1">
       과제이름: {{hw.hw_name}}
       데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
     </div>
-    <div id='long' v-if="hw.timeRemaining>172800000">
+    <div id='long' v-if="hw.status ==2">
       과제이름: {{hw.hw_name}}
       데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
     </div>

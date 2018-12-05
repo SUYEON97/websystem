@@ -23,16 +23,37 @@
   <h1>Home</h1>
 
   <p>Hello {{name}}</p>
+
   <div v-for='hw in hwList' :key="hw.id" >
-    <div id='short' v-if="hw.timeRemaining<172800000">
-      과제이름: {{hw.hw_name}}
-      데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
-      <input class= 'btDelete' type = 'submit' value = 'Delete' v-on:click='deleteHw(hw.hwId)'/>
+    <div class = 'deadline' id='short' v-if="hw.timeRemaining<604800000 && hw.status==0">
+      <ul class="list-group">
+            <li class="list-group-item">
+                <label>
+                    <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                </label>
+                <b-button-group vertical class="button-group">
+                    <b-button class="btn" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
+                    <b-button class="btn" v-on:click='completeHw(hw.hwId)'><Zondicon icon="checkmark" class="hi"></Zondicon></b-button>
+                </b-button-group>
+            </li>
+        </ul>
     </div>
-    <div id='long' v-if="hw.timeRemaining>172800000">
+
+
+    <div id='long' v-if="hw.timeRemaining>604800000 && hw.timeRemaining<2592000000 && hw.status==0">
       과제이름: {{hw.hw_name}}
       데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
       <input class= 'btDelete' type = 'submit' value = 'Delete' v-on:click='deleteHw(hw.hwId)'/>
+      <input class= 'btComplete' type = 'submit' value = 'Complete' v-on:click='completeHw(hw.hwId)'/>
+    </div>
+
+
+    <div id='verylong' v-if="hw.timeRemaining>2592000000 && hw.status==0">
+      과제이름: {{hw.hw_name}}
+      데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
+      <input class= 'btDelete' type = 'submit' value = 'Delete' v-on:click='deleteHw(hw.hwId)'/>
+      <input class= 'btComplete' type = 'submit' value = 'Complete' v-on:click='completeHw(hw.hwId)'/>
     </div>
 
   </div>
@@ -49,6 +70,9 @@
 //import Vue from 'vue'
 import axios from 'axios'
 import { Slide } from 'vue-burger-menu'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Zondicon from 'vue-zondicons'
 
 export default {
   data: function() {
@@ -102,25 +126,75 @@ export default {
     deleteHw(deleteId) {
       console.log('deleteHw');
       console.log(deleteId);
-      axios.post('http://localhost:8000/home/delete', {hwId: deleteId}).then(res => {
+      axios.post('http://localhost:8000/home/delete', {hwId: deleteId})
 
-      })
-      //const hwIndex = this.hwList.indexOf(deleteId);
       for(var i = 0; i<this.hwList.length; i++){
         if(this.hwList[i].hwId == deleteId){
           this.hwList.splice(i,1)
         }
       }
+    },
+    completeHw(id){
+      axios.post('http://localhost:8000/home/complete', {hwId: id})
+
+      for(var i = 0; i<this.hwList.length; i++){
+        if(this.hwList[i].hwId == id){
+          this.hwList.splice(i,1)
+        }
+      }
+
     }
   },
   components: {
-    Slide
+    Slide,
+    Zondicon
   }
 }
 </script>
 
 
 <style>
+#verylong{
+  color: blue;
+}
+.button-group{
+        float: right;
+        heigth:15px;
+
+    }
+    .list-group-item{
+        margin-left: 300px;
+        margin-right: 300px;
+        background-color: #e26666;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+    }
+    .deadline{
+
+        line-height: 1.5rem;
+        padding: 10px 20px;
+        margin: 0;
+        width: 100%;
+        left: auto;
+        right: auto;
+    }
+    .btn{
+        background-color: #e26666;
+        border-style: none;
+    }
+    .hi{
+        width: 15px;
+        height: 15px;
+    }
+    .deadlinedate{
+        margin:0px;
+    }
+    .deadlinename{
+        margin-top: 5px;
+    }
 .btDelete {
     padding: 16px;
     display: block;
@@ -141,7 +215,7 @@ export default {
 }
 
 #short {
-  color: red;
+  color: white;
 }
 a {
     text-decoration: none;

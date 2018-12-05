@@ -21,7 +21,8 @@ const deadLineSchema = new mongoose.Schema({
       type: Date,
       required: true
     },
-    timeRemaining: Number
+    timeRemaining: Number,
+    status: Number
   })
 
   deadLineSchema.plugin(autoIncrement, {
