@@ -1,5 +1,3 @@
-//import moment from "moment";
-
 const { Router } = require('Express')
 var router = Router();
 const deadlineModel = require('../db/models/deadline')
@@ -815,9 +813,7 @@ router.post('/register', (req, res) => {
     var aaa = new Date(req.body.hdate) - Date.now();
     var bbb = new Date(req.body.hdate);
     bbb.setHours(9);
-    //var ccc= new Date(req.body.hdate)-new Date.now()
-    //console.log(new Date(aaa))
-    //console.log(moment(aaa,"YYYYMMDD").fromNow())
+
         const newDeadline = new deadlineModel({
             userId: 1,
             hw_name: req.body.hw_name,

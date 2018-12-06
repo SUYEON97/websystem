@@ -12,17 +12,15 @@ router.get('/deadlinelist', async function(req, res) {
   var millis = [];
   var timeRmArray = [];
   var now = Date.now();
-
   var sorted = await deadLineModel.find({}).sort({ hw_date: 1 })
   millis = await deadLineModel.find({}).select('hw_date -_id');
 
   for (var i = 0; i<sorted.length; i++) {
-    timeRmArray[i] = await Number(millis[i].hw_date)-Date.now();
+    timeRmArray[i] = await Number(millis[i].hw_date)-Date.now()-32400000; //KST - UTC - 9
     await deadLineModel.updateOne({hwId:i},{timeRemaining: timeRmArray[i]}).then(async function(){
         if(timeRmArray[i]<0){
             await deadLineModel.updateOne({hwId:i},{status: 2})
         }
-      console.log('aaaaaaaaaa');
     })
   }
 
