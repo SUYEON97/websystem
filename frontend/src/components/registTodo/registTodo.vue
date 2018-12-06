@@ -12,11 +12,15 @@
           <span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span>
         </a>
         <a href ="#">
-          <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+            <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
         </a>
         <a href ="#">
-          <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
+            <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
         </a>
+        <a href ="#">
+            <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+        </a>
+
       </Slide>
         <div>
           <h2>!과제 등록을 해주세요!</h2>
@@ -43,7 +47,7 @@
             <span>데드라인을 선택해주세요!</span><br>
                 <date-picker v-model="date"/>
                 <input type="text" name="date" v-model="date">
-                <input type="submit" value="확인" @click.prevent="goHome">
+                <input type="submit" value="확인">
         </form>
   </div>
 </template>
@@ -103,7 +107,7 @@ import DatePicker from 'v-cal-input'
                     this.selected2="";
                     //console.log(this.date)
                     this.date=null;
-
+                    this.$router.push({name:"Home"})
                     //console.log(response.data);
                 }).catch(function (error) {
                     console.log(error.response);
@@ -120,5 +124,19 @@ import DatePicker from 'v-cal-input'
     #app {
         text-align: center;
     }
-
+    #form {
+        padding: 16px;
+        border-radius: 50px;
+        background: #129793;
+        border: none;
+        box-shadow: 0 8px 15px 0 rgba(18, 151, 147, .4);
+        display: block;
+        margin: 0 auto;
+        margin-top: 12px;
+        width: 60%;
+        color: white;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 1.05px;
+    }
 </style>
