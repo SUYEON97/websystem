@@ -28,8 +28,8 @@
         <ul class="list-group">
             <li class="list-group-item" style="border-color: blue; background-color: white; color:black">
                 <label class="work2">
-                    <p class="historyname" >과제이름: {{hw.hw_name}}</p>
-                    <p class="historydate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p class="historyname" style="font-size:18px" >과제이름: {{hw.hw_name}}</p>
+                    <p class="historydate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
                 </label>
                 <label class="iconloc">
                     <Zondicon  icon="mood-happy-outline" class="historyicon"></Zondicon>
@@ -45,8 +45,8 @@
         <ul class="list-group">
             <li class="list-group-item" style="border-color: red; background-color: white; color:black;">
                 <label class="work2">
-                    <p class="historyname" >과제이름: {{hw.hw_name}}</p>
-                    <p class="historydate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p class="historyname" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
+                    <p class="historydate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
                 </label>
                 <label class="iconloc">
                     <Zondicon style="color: blue;" icon="mood-sad-outline" class="historyicon"></Zondicon>
@@ -166,7 +166,7 @@ export default {
         background-color: #de1d1d;
         padding-left: 0px;
         padding-right: 0px;
-        width:400px;
+        width:750px;
         padding-top: 5px;
         padding-bottom: 5px;
         text-align: center;
@@ -174,7 +174,7 @@ export default {
     }
     ul{
         position : center;
-        margin-left: 180px;
+        /*margin-left: 50px;*/
     }
     .work2{
         margin-left: 35px;
