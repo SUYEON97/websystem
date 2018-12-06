@@ -22,32 +22,31 @@
         </a>
 
       </Slide>
-        <div>
+        <div style="margin-bottom: 20px;">
           <h2>ADD HOMEWORK</h2>
-
         </div>
 
       <div class="inputbox">
-          <span>과를 선택해주세요</span><br>
+          <Zondicon icon="arrow-outline-down" class="bye"></Zondicon><span style="font-size:20px">과를 선택해주세요</span><br>
           <select class="custom-select" style="width:200px; height:40px" v-model="selected" name="items1" v-on:change="filter">
               <option v-for="majorlist in majorList" :key="majorlist.id" v-if="majorlist.majorNameId==1">{{majorlist.majorName}}</option>
           </select>
       </div>
-        <div>
-                <span>과목을 선택해주세요</span><br>
+        <div class="inputbox">
+            <Zondicon icon="arrow-outline-down" class="bye"></Zondicon><span style="font-size:20px">과목을 선택해주세요</span><br>
                 <select class="custom-select" style="width:200px; height:40px" v-model="selected2" name="items2">
                   <option v-for="subjectlist in subjectList" :key="subjectlist.id">{{subjectlist.subjectName}}</option>
                 </select>
         </div>
 
-        <form v-on:submit.prevent="writeHwname">
-            <span>과제이름을 적어주세요</span><br>
+        <form class="all" v-on:submit.prevent="writeHwname">
+            <Zondicon icon="clipboard" class="bye"></Zondicon><span style="font-size:20px">과제이름을 적어주세요</span><br>
                 <input style="width:200px" type="text" name="hwName" v-model="hwName"><br>
 
-            <span>데드라인을 선택해주세요</span><br>
+            <Zondicon icon="calendar" class="bye"></Zondicon><span style="font-size:20px">데드라인을 선택해주세요</span><br>
                 <date-picker v-model="date"/>
                 <input style="width:200px" type="text" name="date" v-model="date">
-                <input type="submit" value="확인">
+                <input class="hello" type="submit" value="확인">
         </form>
   </div>
 </template>
@@ -56,11 +55,13 @@
 
 import { Slide } from 'vue-burger-menu'
 import DatePicker from 'v-cal-input'
+import Zondicon from "vue-zondicons/src/components/Zondicon";
 
 
     export default{
         name: 'app',
         components: {
+            Zondicon,
           Slide,
           DatePicker
         },
@@ -76,9 +77,7 @@ import DatePicker from 'v-cal-input'
             }
         },
         methods:{
-            goHome:function(){
-                this.$router.push({name: "Home"})
-            },
+
             callMajorList:function(){
                 this.$http.get('http://localhost:8000/regist/subject').then((response)=> {
                     this.majorList = response.data;//모든 리스트 다 가져옴
@@ -121,10 +120,14 @@ import DatePicker from 'v-cal-input'
     }
 </script>
 <style>
+    .bye{
+        width: 25px;
+        height: 25px;
+    }
     #app {
         text-align: center;
     }
-    #form {
+    .hello {
         padding: 16px;
         border-radius: 50px;
         background: #129793;
@@ -133,10 +136,16 @@ import DatePicker from 'v-cal-input'
         display: block;
         margin: 0 auto;
         margin-top: 12px;
-        width: 60%;
+        width: 25%;
         color: white;
         text-transform: uppercase;
         font-weight: 700;
         letter-spacing: 1.05px;
+    }
+    .all{
+        margin-bottom: 50px;
+    }
+    .inputbox{
+        margin-bottom: 20px;
     }
 </style>
