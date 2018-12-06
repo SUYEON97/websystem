@@ -814,7 +814,7 @@ router.get('/subject', function(req, res, next) {
 router.post('/register', (req, res) => {
     var aaa = new Date(req.body.hdate) - Date.now();
     var bbb = new Date(req.body.hdate);
-    bbb.setHours(9);
+    bbb.setHours(9); // UTC to KST
     //var ccc= new Date(req.body.hdate)-new Date.now()
     //console.log(new Date(aaa))
     //console.log(moment(aaa,"YYYYMMDD").fromNow())

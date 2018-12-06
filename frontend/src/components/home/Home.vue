@@ -174,7 +174,7 @@ export default {
     },
     dayRemain(){
       for(var i=0; i<this.hwList.length; i++){
-        var dayRm = (this.hwList[i].timeRemaining+32400000)/86400000
+        var dayRm = (this.hwList[i].timeRemaining)/86400000
         var arr=[];
         arr = dayRm.toString().split(".")
         this.hwList[i].dayRm = Number(arr[0])+1;
