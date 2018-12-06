@@ -161,12 +161,12 @@ export default {
         margin-top: 5px;
     }
     .list-group-item{
-        /*margin-left: 30%;*/
-        /*margin-right: 30%;*/
+        margin-left: 400px;
+        margin-right: 400px;
         background-color: #de1d1d;
         padding-left: 0px;
         padding-right: 0px;
-        width:750px;
+        /*width:750px;*/
         padding-top: 5px;
         padding-bottom: 5px;
         text-align: center;
