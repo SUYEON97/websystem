@@ -22,15 +22,37 @@
     </Slide>
   <h1>History</h1>
   <p>Hello {{name}}</p><br />
-  <p>완료 목록</p>
+  <p style="font-size:20px">완료 목록</p>
   <div v-for='hw in hwList' :key="hw.id" >
-    <div v-if="hw.status ==1">
-      과제이름: {{hw.hw_name}}
-      데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
+    <div class="history" v-if="hw.status ==1">
+        <ul class="list-group">
+            <li class="list-group-item" style="border-color: blue; background-color: white; color:black">
+                <label class="work2">
+                    <p class="historyname" style="font-size:18px" >과제이름: {{hw.hw_name}}</p>
+                    <p class="historydate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                </label>
+                <label class="iconloc">
+                    <Zondicon  icon="mood-happy-outline" class="historyicon"></Zondicon>
+                </label>
+            </li>
+        </ul>
     </div>
-    <div id='long' v-if="hw.status ==2">
-      과제이름: {{hw.hw_name}}
-      데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
+  </div><br>
+
+    <p style="font-size:20px">미완성 목록</p>
+    <div v-for='hw in hwList' :key="hw.id" >
+    <div class="history"  v-if="hw.status ==2">
+        <ul class="list-group">
+            <li class="list-group-item" style="border-color: red; background-color: white; color:black;">
+                <label class="work2">
+                    <p class="historyname" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
+                    <p class="historydate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                </label>
+                <label class="iconloc">
+                    <Zondicon style="color: blue;" icon="mood-sad-outline" class="historyicon"></Zondicon>
+                </label>
+            </li>
+        </ul>
     </div>
 
   </div>
@@ -47,6 +69,9 @@
 //import Vue from 'vue'
 import axios from 'axios'
 import { Slide } from 'vue-burger-menu'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Zondicon from 'vue-zondicons'
 
 export default {
   data: function() {
@@ -103,7 +128,56 @@ export default {
     }
   },
   components: {
-    Slide
+    Slide,
+      Zondicon
   }
 }
 </script>
+<style>
+    .historyicon{
+        width: 25px;
+        height: 25px;
+        float: right;
+    }
+    .iconloc{
+        float: right;
+        padding-top: 20px;
+        padding-right: 8px;
+
+    }
+    .history{
+
+        line-height: 1.5rem;
+        padding: 10px 20px;
+        margin: 0;
+        width: 100%;
+        left: auto;
+        right: auto;
+    }
+    .historydate{
+        margin:0px;
+    }
+    .historyname{
+        margin-top: 5px;
+    }
+    .list-group-item{
+        margin-left: 400px;
+        margin-right: 400px;
+        background-color: #de1d1d;
+        padding-left: 0px;
+        padding-right: 0px;
+        /*width:750px;*/
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-align: center;
+
+    }
+    ul{
+        position : center;
+        /*margin-left: 50px;*/
+    }
+    .work2{
+        margin-left: 35px;
+    }
+
+</style>

@@ -1,58 +1,107 @@
 <template>
-    <div id="write">
-      <Slide width='200'>
-          <a id="home" href="#">
-            <span><router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'Information', params: {name: this.name}}">information</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'Login'}">log out</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
-          </a>
-        </Slide>
-        <p id="title">
-            제목 : <input v-model="newTitle" type="text">
-        </p>
-        <p id="context">
-            내용 : <input v-model="newContent" type="text">
-        </p>
-        <button @click.prevent="newbutton">제출</button>
+    <div class="write">
+        <h3 style="text-align: left;margin-left: 50px;margin-top: 20px;">게시글 작성</h3>
+        <div class="inDiv">
+            <div class="input-group">
+
+                <input v-model="newTitle" type="text" class="form-control" placeholder="제목을 입력해주세요"
+                       aria-describedby="sizing-addon2">
+
+            </div>
+            <div class="input-group input-group-sm">
+            <textarea v-model="newContent" class="form-control" placeholder="내용을 입력해주세요"
+                      aria-describedby="sizing-addon3"
+                      style="height: 400px;"></textarea>
+            </div>
+
+            <b-button @click.prevent="newbutton" style="background-color: forestgreen">글쓰기</b-button>
+            <b-button @click.prevent="returnButton">뒤로가기</b-button>
+        </div>
     </div>
+
+
 </template>
 
 <script>
-import { Slide } from 'vue-burger-menu'
+    import 'bootstrap/dist/css/bootstrap.css'
+    import 'bootstrap-vue/dist/bootstrap-vue.css'
     export default {
         name: "Write",
-        data : function(){
+        data: function () {
             return {
-                newTitle :"",
-                newContent : "",
-
+                newTitle: "",
+                newContent: "",
             }
         },
-        methods : {
-            newbutton : function() {
-                this.$http.post('http://localhost:8000/write',{title:this.newTitle, content:this.newContent}).then((result) => {
-                    this.newTitle=''
-                    this.newContent=''
+        methods: {
+            newbutton: function () {
+                this.$http.post('http://localhost:8000/write', {
+                    title: this.newTitle,
+                    content: this.newContent
+                }).then((result) => {
+                    this.newTitle = ''
+                    this.newContent = ''
                     this.$router.push({name: "communiteHome"})
                 })
+            },
+            returnButton: function (){
+                this.$router.push({name: "communiteHome"})
             }
-        },
-        components : {
-          Slide
         }
     }
 </script>
 
 <style scoped>
-
+    html {
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif
+    ;
+        height: 100vh
+    ;
+        background: #F5F6F7
+    ;
+        color: #5B5A5A
+    ;
+        font-size: 12px
+    ;
+        font-weight: 200
+    ;
+    }
+    .write {
+        position: relative;
+        width: 1200px;
+        height: auto;
+        margin: 0 auto;
+        border: 1px solid #EEEEEE;
+        box-shadow: 0 0 8px 2px #ccc;
+        margin-top: 50px;
+    }
+    button {
+        margin-right: 8px;
+        margin-top: 15px;
+        margin-bottom: 30px;
+        /*font-size: 15px;*/
+        color: white;
+    }
+    input[type="text"] {
+        margin-left: 50px;
+        margin-right : 100px;
+        margin-top: 10px;
+    }
+    textarea {
+        margin-left: 50px;
+        margin-right : 100px;
+        margin-top: 10px;
+    }
+    h3{
+        margin-bottom: 20px;
+        margin-left: 50px;
+    }
+    .inDiv{
+        border: 2px solid #EEEEEE;
+        margin-left: 100px;
+        margin-bottom: 50px;
+        padding-top: 15px;
+        width: 1000px;
+        height: auto;
+    }
 </style>

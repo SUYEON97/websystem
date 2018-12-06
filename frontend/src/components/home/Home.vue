@@ -23,15 +23,14 @@
   <h1>Home</h1>
 
   <p>Hello {{name}}</p>
-
-
   <div v-for='hw in hwList' :key="hw.id" >
     <div class = 'deadline' id='short' v-if="hw.timeRemaining<604800000 && hw.timeRemaining>0 && hw.status==0">
       <ul class="list-group">
             <li class="list-group-item">
                 <label>
-                    <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
-                    <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p class="deadlinename" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p>{{hw.dayRm}}일 남음</p>
                 </label>
                 <b-button-group vertical class="button-group">
                     <b-button class="btn" style="background-color: #de1d1d" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
@@ -45,8 +44,9 @@
         <ul class="list-group">
             <li class="list-group-item" style="background-color: #e26666; color:white">
                 <label>
-                    <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
-                    <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p class="deadlinename" style="font-size:18px" >과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p>{{hw.dayRm}}일 남음</p>
                 </label>
                 <b-button-group vertical class="button-group">
                     <b-button class="btn" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
@@ -61,8 +61,9 @@
         <ul class="list-group">
             <li class="list-group-item" style="background-color: white; color:black">
                 <label>
-                    <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
-                    <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p class="deadlinename" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p>{{hw.dayRm}}일 남음</p>
                 </label>
                 <b-button-group vertical class="button-group">
                     <b-button class="btn" style="background-color: white" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
@@ -120,6 +121,7 @@ export default {
       console.log(res.data)
       //location.reload();
       this.splitDate();
+      this.dayRemain();
     })
       for(var i = 0; i<this.hwList.length; i++){
           if(this.hwList[i].status != 0){
@@ -165,6 +167,14 @@ export default {
         }
       }
     },
+    dayRemain(){
+      for(var i=0; i<this.hwList.length; i++){
+        var dayRm = (this.hwList[i].timeRemaining+32400000)/86400000
+        var arr=[];
+        arr = dayRm.toString().split(".")
+        this.hwList[i].dayRm = Number(arr[0])+1;
+      }
+    },
   },
   components: {
     Slide,
@@ -199,8 +209,8 @@ export default {
     right: auto;
 }
     .list-group-item{
-        margin-left: 300px;
-        margin-right: 300px;
+        margin-left: 400px;
+        margin-right: 400px;
         background-color: #de1d1d;
         padding-left: 0px;
         padding-right: 0px;
@@ -229,24 +239,7 @@ export default {
     .deadlinename{
         margin-top: 5px;
     }
-.btDelete {
-    padding: 16px;
-    display: block;
-    border-radius: 50px;
-    background: #129793;
-    border: none;
-    box-shadow: 0 8px 15px 0 rgba(18, 151, 147, .4);
-    margin: 0 auto;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 12%;
-    color: white;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: 700;
-    font-size:10px;
-    letter-spacing: 0.5px;
-}
+
 #short {
   color: white;
 }

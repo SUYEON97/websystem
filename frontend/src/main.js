@@ -3,7 +3,6 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 import feather from 'vue-icon'
-import Vuecal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
 Vue.use(feather, 'v-icon')
 import BootstrapVue from 'bootstrap-vue'
