@@ -46,11 +46,4 @@ router.post('/complete', function(req,res){
   });
 })
 
-router.post('/modify', function(req,res){
-    console.log(req.body.hwId);
-    deadLineModel.updateOne({ hwId: req.body.hwId }, { status: 2}, function(err){
-        if (err) return handleError(err);
-    });
-})
-
 module.exports = router

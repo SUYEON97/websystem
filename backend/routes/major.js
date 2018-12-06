@@ -1,3 +1,5 @@
+//import moment from "moment";
+
 const { Router } = require('Express')
 var router = Router();
 const deadlineModel = require('../db/models/deadline')
@@ -46,6 +48,62 @@ const objList=[
         subjectName: "진동학"
     },
     {
+        majorId:1,
+        majorNameId:0,
+        majorName: "기계공학과",
+        subjectId : 3,
+        subjectName: "진동신호분석법"
+    },
+    {
+        majorId:1,
+        majorNameId:0,
+        majorName: "기계공학과",
+        subjectId : 4,
+        subjectName: "전산열유체역학"
+    },
+    {
+        majorId:1,
+        majorNameId:0,
+        majorName: "기계공학과",
+        subjectId : 5,
+        subjectName: "자동차공학"
+    },
+    {
+        majorId:1,
+        majorNameId:0,
+        majorName: "기계공학과",
+        subjectId : 6,
+        subjectName: "유체역학"
+    },
+    {
+        majorId:1,
+        majorNameId:0,
+        majorName: "기계공학과",
+        subjectId : 7,
+        subjectName: "로봇공학"
+    },
+    {
+        majorId:1,
+        majorNameId:0,
+        majorName: "기계공학과",
+        subjectId : 8,
+        subjectName: "시스템동역학"
+    },
+    {
+        majorId:1,
+        majorNameId:0,
+        majorName: "기계공학과",
+        subjectId : 9,
+        subjectName: "공작기계"
+    },
+    {
+        majorId:1,
+        majorNameId:0,
+        majorName: "기계공학과",
+        subjectId : 10,
+        subjectName: "공작기계"
+    },
+    {
         majorId:2,
         majorNameId:1,
         majorName: "사이버보안학과",
@@ -80,8 +138,9 @@ router.post('/register', (req, res) => {
     var aaa = new Date(req.body.hdate) - Date.now();
     var bbb = new Date(req.body.hdate);
     bbb.setHours(9);
-
-
+    //var ccc= new Date(req.body.hdate)-new Date.now()
+    //console.log(new Date(aaa))
+    //console.log(moment(aaa,"YYYYMMDD").fromNow())
         const newDeadline = new deadlineModel({
             userId: 1,
             hw_name: req.body.hw_name,

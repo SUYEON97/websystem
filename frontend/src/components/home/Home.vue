@@ -23,15 +23,13 @@
   <h1>Home</h1>
 
   <p>Hello {{name}}</p>
-
-
   <div v-for='hw in hwList' :key="hw.id" >
     <div class = 'deadline' id='short' v-if="hw.timeRemaining<604800000 && hw.timeRemaining>0 && hw.status==0">
       <ul class="list-group">
             <li class="list-group-item">
                 <label>
-                    <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
-                    <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p class="deadlinename" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
                 </label>
                 <b-button-group vertical class="button-group">
                     <b-button class="btn" style="background-color: #de1d1d" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
@@ -45,8 +43,8 @@
         <ul class="list-group">
             <li class="list-group-item" style="background-color: #e26666; color:white">
                 <label>
-                    <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
-                    <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p class="deadlinename" style="font-size:18px" >과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
                 </label>
                 <b-button-group vertical class="button-group">
                     <b-button class="btn" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
@@ -61,8 +59,8 @@
         <ul class="list-group">
             <li class="list-group-item" style="background-color: white; color:black">
                 <label>
-                    <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
-                    <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p class="deadlinename" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
                 </label>
                 <b-button-group vertical class="button-group">
                     <b-button class="btn" style="background-color: white" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>

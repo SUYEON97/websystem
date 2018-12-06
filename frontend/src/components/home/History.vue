@@ -27,7 +27,7 @@
     <div class="history" v-if="hw.status ==1">
         <ul class="list-group">
             <li class="list-group-item" style="border-color: blue; background-color: white; color:black">
-                <label>
+                <label class="work2">
                     <p class="historyname" >과제이름: {{hw.hw_name}}</p>
                     <p class="historydate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
                 </label>
@@ -43,8 +43,8 @@
     <div v-for='hw in hwList' :key="hw.id" >
     <div class="history"  v-if="hw.status ==2">
         <ul class="list-group">
-            <li class="list-group-item" style="border-color: red; background-color: white; color:black">
-                <label>
+            <li class="list-group-item" style="border-color: red; background-color: white; color:black;">
+                <label class="work2">
                     <p class="historyname" >과제이름: {{hw.hw_name}}</p>
                     <p class="historydate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
                 </label>
@@ -140,6 +140,9 @@ export default {
         float: right;
     }
     .iconloc{
+        float: right;
+        padding-top: 20px;
+        padding-right: 8px;
 
     }
     .history{
@@ -158,13 +161,23 @@ export default {
         margin-top: 5px;
     }
     .list-group-item{
-        margin-left: 400px;
-        margin-right: 400px;
+        /*margin-left: 30%;*/
+        /*margin-right: 30%;*/
         background-color: #de1d1d;
         padding-left: 0px;
         padding-right: 0px;
+        width:400px;
         padding-top: 5px;
         padding-bottom: 5px;
+        text-align: center;
 
     }
+    ul{
+        position : center;
+        margin-left: 180px;
+    }
+    .work2{
+        margin-left: 35px;
+    }
+
 </style>
