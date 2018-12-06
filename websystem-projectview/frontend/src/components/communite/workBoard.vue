@@ -1,7 +1,7 @@
 <template>
     <div class="board" style="margin-top: 50px;">
 
-        <h1>자유게시판</h1>
+        <h1>과제게시판</h1>
         <div class="inDiv">
             <div class="collectBoard">
                 <div class="annoy"><Zondicon icon="user-solid-square" class="image"></Zondicon><strong>익명</strong></div>
@@ -29,7 +29,7 @@
                     <b-btn @click.prevent="newbutton">작성</b-btn>
                 </b-input-group>
             </div>
-<p class="List"><b-btn @click="listView" style="font-size: 15px"><Zondicon icon="list-bullet" class="bullet"></Zondicon> 글 목록</b-btn></p>
+            <p class="List"><b-btn @click="listView" style="font-size: 15px"><Zondicon icon="list-bullet" class="bullet"></Zondicon> 글 목록</b-btn></p>
         </div>
     </div>
 
@@ -54,7 +54,7 @@
             }
         },
         beforeRouteUpdate(to, from, next) {
-            this.$http.get('http://localhost:8000/board/' + this.boardId).then((result) => {
+            this.$http.get('http://localhost:8000/workBoard/' + this.boardId).then((result) => {
                 // console.log(result)
                 this.boardId = to.params.boardId
                 this.collectList = result.data.filter(c=>c.boardId==this.boardId)
@@ -69,34 +69,34 @@
         },
         methods : {
             getCommentList : function () {
-                this.$http.get('http://localhost:8000/comment/list').then((result) => {
+                this.$http.get('http://localhost:8000/workComment/list').then((result) => {
                     this.commentList = result.data.filter(c=>c.boardId==this.boardId)
                 })
 
             },
             newbutton : function() {
-                this.$http.post('http://localhost:8000/comment/create',{content:this.newComment, boardId:this.boardId}).then((result) => {
+                this.$http.post('http://localhost:8000/workComment/create',{content:this.newComment, boardId:this.boardId}).then((result) => {
                     this.newComment=""
                     this.getCommentList()
-                    this.$router.push({name: "board"})
+                    this.$router.push({name: "workBoard"})
                 })
             },
             listView : function () {
-                this.$router.push({name: "communiteHome"})
+                this.$router.push({name: "workBoardHome"})
             }
         },
         created: function () {
             this.getCommentList()
         },
         mounted() {
-            this.$http.get('http://localhost:8000/board/' + this.boardId).then((result) => {
+            this.$http.get('http://localhost:8000/workBoard/' + this.boardId).then((result) => {
                 // console.log(result)
                 this.collectList = result.data.filter(c=>c.boardId==this.boardId)
                 // console.log(this.collectList[0])
                 this.listTitle = this.collectList[0].title
                 this.listContent = this.collectList[0].content
             }),
-                this.$http.get('http://localhost:8000/comment/list').then((result) => {
+                this.$http.get('http://localhost:8000/workComment/list').then((result) => {
                     //console.log(result)
                     //this.boardId = to.params.boardId
                     // console.log(this.boardId)
@@ -220,10 +220,10 @@
         padding-bottom: 10px;
 
     }
-.bullet{
-    height: 20px;
-    width : 20px;
+    .bullet{
+        height: 20px;
+        width : 20px;
 
-}
+    }
 
 </style>

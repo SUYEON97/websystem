@@ -1,32 +1,32 @@
 <template>
-    <div class="communiteHome" style="margin-top: 50px;">
-    <Slide width='200'>
-        <a id="home" href="#">
-            <span><router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link></span>
-        </a>
-        <a href ="#">
-            <span><router-link :to="{name: 'Information', params: {name: this.name}}">information</router-link></span>
-        </a>
-        <a href ="#">
-            <span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span>
-        </a>
-        <a href ="#">
-            <span><router-link :to="{name: 'Login'}">log out</router-link></span>
-        </a>
-        <a href ="#">
-            <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
-        </a>
-        <a href ="#">
-            <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
-        </a>
-    </Slide>
+    <div class="workBoardHome" style="margin-top: 50px;">
+        <Slide width='200'>
+            <a id="home" href="#">
+                <span><router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'Information', params: {name: this.name}}">information</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
+            </a>
+        </Slide>
         <router-link to="/communite" class="temp" style=" color : black;">자유게시판</router-link>  |  <router-link to="/workBoard" class="temp" style=" color : black;">과제게시판</router-link>
         <div class="inDiv">
-            <router-link to="/write" class="newWrite"><Zondicon icon="compose" class="w"></Zondicon></router-link>
-            <div class="clickBoard">자유게시판</div>
+            <router-link to="/writeWorkBoard" class="newWrite"><Zondicon icon="compose" class="w"></Zondicon></router-link>
+            <div class="clickBoard">과제게시판</div>
             <ul>
                 <li id=question v-for="Theme in list" v-bind:key="Theme.boardId">
-                    <router-link :to="{name : 'board', params: {boardId:Theme.boardId}}">
+                    <router-link :to="{name : 'workBoard', params: {boardId:Theme.boardId}}">
                         <p id="titleForm">{{Theme.title}}</p>
                         <!--<p id="timeForm">{{Theme.time}}</p>-->
                         <p id="timeForm">{{Theme.month}}.{{Theme.day}}   {{Theme.hour}}:{{Theme.min}} </p>
@@ -34,18 +34,18 @@
                 </li>
             </ul>
 
-    </div>
+        </div>
     </div>
 </template>
 
 <script>
-import { Slide } from 'vue-burger-menu'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import Zondicon from 'vue-zondicons'
+    import { Slide } from 'vue-burger-menu'
+    import 'bootstrap/dist/css/bootstrap.css'
+    import 'bootstrap-vue/dist/bootstrap-vue.css'
+    import Zondicon from 'vue-zondicons'
 
     export default {
-        name: 'home',
+        name: 'workBoard',
         data: function () {
             return {
                 list: [],
@@ -54,7 +54,7 @@ import Zondicon from 'vue-zondicons'
         ,
         methods: {
             getList: function () {
-                this.$http.get('http://localhost:8000/board/list').then((result) => {
+                this.$http.get('http://localhost:8000/workBoard/list').then((result) => {
                     this.list = result.data;
                     this.splitDate();
                 })
@@ -96,8 +96,8 @@ import Zondicon from 'vue-zondicons'
 
         },
         components: {
-          Slide,
-          Zondicon
+            Slide,
+            Zondicon
         }
     }
 </script>
@@ -123,15 +123,17 @@ import Zondicon from 'vue-zondicons'
         font-family: "Open Sans";
         font-size:30px;
     }
-    .clickBoard{
-        border: 2px solid #EEEEEE;
-        margin:0 auto;
-        width: 800px;
-    }
+
+
     .temp {
 
         text-align: center;
         padding: 0;
+    }
+    .clickBoard{
+        border: 2px solid #EEEEEE;
+        margin:0 auto;
+        width: 800px;
     }
 
     #titleForm {

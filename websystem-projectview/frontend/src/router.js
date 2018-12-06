@@ -11,6 +11,9 @@ import Board from './components/communite/Board'
 import Write from './components/communite/Write'
 import Home from './components/home/Home'
 import History from './components/home/History'
+import workBoardHome from './components/communite/workBoardHome.vue'
+import writeWorkBoard from './components/communite/writeWorkBoard.vue'
+import workBoard from './components/communite/workBoard.vue'
 
 Vue.use(Router)
 
@@ -65,6 +68,21 @@ export default new Router({
         path: '/history',
         name: 'history',
         component:History
+      },
+      {
+          path: '/workBoard',
+          name: 'workBoardHome',
+          component:workBoardHome
+      },
+      {
+          path: '/writeWorkBoard',
+          name: 'writeWorkBoard',
+          component: writeWorkBoard
+      },
+      {
+          path: '/workBoard/:boardId',
+          name: 'workBoard',
+          component: workBoard
       }
 
   ]
