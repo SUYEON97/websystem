@@ -85,23 +85,37 @@ export default {
   },
   beforeRouteUpdate(){
     console.log("before")
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
+    axios.get('http://localhost:8000/home/deadlinelist').then(function(res){
       console.log("get home")
       this.hwList = res.data
       console.log(res.data)
 
     location.reload();
     })
+    for(var i = 0; i<this.hwList.length; i++){
+      if(this.hwList[i].status != 0){
+        this.hwList.splice(i,1)
+      }
+    }
+
   },
   created() {
     console.log("created")
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
+    axios.get('http://localhost:8000/home/deadlinelist').then(function(res){
       console.log("get home")
       this.hwList = res.data
       console.log(res.data)
       //location.reload();
       this.splitDate();
+
+
     })
+    for(var i = 0; i<this.hwList.length; i++){
+      if(this.hwList[i].status != 0){
+        this.hwList.splice(i,1)
+      }
+    }
+
   },
   methods : {
     splitDate(){
