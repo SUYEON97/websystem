@@ -12,7 +12,6 @@ router.get('/deadlinelist', async function(req, res) {
   var millis = [];
   var timeRmArray = [];
   var now = Date.now();
-
   var sorted = await deadLineModel.find({}).sort({ hw_date: 1 })
   millis = await deadLineModel.find({}).select('hw_date -_id');
 
