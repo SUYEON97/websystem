@@ -23,30 +23,30 @@
 
       </Slide>
         <div>
-          <h2>!과제 등록을 해주세요!</h2>
+          <h2>ADD HOMEWORK</h2>
 
         </div>
 
+      <div class="inputbox">
+          <span>과를 선택해주세요</span><br>
+          <select class="custom-select" style="width:200px; height:40px" v-model="selected" name="items1" v-on:change="filter">
+              <option v-for="majorlist in majorList" :key="majorlist.id" v-if="majorlist.majorNameId==1">{{majorlist.majorName}}</option>
+          </select>
+      </div>
         <div>
-                  <span>과를 선택해주세요!</span><br>
-                  <select v-model="selected" name="items1" v-on:change="filter">
-                    <option v-for="majorlist in majorList" :key="majorlist.id" v-if="majorlist.majorNameId==1">{{majorlist.majorName}}</option>
-                  </select><br>
-        </div>
-        <div>
-                <span>과목을 선택해주세요!</span><br>
-                <select v-model="selected2" name="items2">
+                <span>과목을 선택해주세요</span><br>
+                <select class="custom-select" style="width:200px; height:40px" v-model="selected2" name="items2">
                   <option v-for="subjectlist in subjectList" :key="subjectlist.id">{{subjectlist.subjectName}}</option>
-                </select><br>
+                </select>
         </div>
 
         <form v-on:submit.prevent="writeHwname">
-            <span>과제이름을 적어주세요!</span><br>
-                <input type="text" name="hwName" v-model="hwName"><br>
+            <span>과제이름을 적어주세요</span><br>
+                <input style="width:200px" type="text" name="hwName" v-model="hwName"><br>
 
-            <span>데드라인을 선택해주세요!</span><br>
+            <span>데드라인을 선택해주세요</span><br>
                 <date-picker v-model="date"/>
-                <input type="text" name="date" v-model="date">
+                <input style="width:200px" type="text" name="date" v-model="date">
                 <input type="submit" value="확인">
         </form>
   </div>

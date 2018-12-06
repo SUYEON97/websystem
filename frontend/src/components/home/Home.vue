@@ -26,7 +26,6 @@
 
 
   <div v-for='hw in hwList' :key="hw.id" >
-      <!--<div v-if="hw.timeRemaining<0" v-on:prevent="modifyHw(hw.hwId)"></div>-->
     <div class = 'deadline' id='short' v-if="hw.timeRemaining<604800000 && hw.timeRemaining>0 && hw.status==0">
       <ul class="list-group">
             <li class="list-group-item">
@@ -109,6 +108,11 @@ export default {
 
     location.reload();
     })
+      for(var i = 0; i<this.hwList.length; i++){
+          if(this.hwList[i].status != 0){
+              this.hwList.splice(i,1)
+          }
+      }
   },
   created() {
     console.log("created")
@@ -119,6 +123,11 @@ export default {
       //location.reload();
       this.splitDate();
     })
+      for(var i = 0; i<this.hwList.length; i++){
+          if(this.hwList[i].status != 0){
+              this.hwList.splice(i,1)
+          }
+      }
   },
   methods : {
     splitDate(){
@@ -161,14 +170,6 @@ export default {
       }
 
     },
-      // modifyHw(id){
-      //     axios.post('http://localhost:8000/home/modify', {hwId: id})
-      //     for(var i = 0; i<this.hwList.length; i++){
-      //         if(this.hwList[i].hwId == id){
-      //             this.hwList.splice(i,1)
-      //         }
-      //     }
-      // }
   },
   components: {
     Slide,
