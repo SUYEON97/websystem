@@ -30,10 +30,11 @@
                 <label>
                     <p class="deadlinename" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
                     <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p>{{hw.dayRm}}일 남음</p>
                 </label>
-                <label style="padding-left: 20px;">
-                    {{hw.dayRm}}일 남음
-                </label>
+
+
+
                 <b-button-group vertical class="button-group">
                     <b-button class="btn" style="background-color: #de1d1d" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
                     <b-button class="btn" style="background-color: #de1d1d" v-on:click='completeHw(hw.hwId)'><Zondicon icon="checkmark" class="hi"></Zondicon></b-button>
@@ -48,10 +49,9 @@
                 <label>
                     <p class="deadlinename" style="font-size:18px" >과제이름: {{hw.hw_name}}</p>
                     <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p>{{hw.dayRm}}일 남음</p>
                 </label>
-                <label style="padding-left: 20px;">
-                    {{hw.dayRm}}일 남음
-                </label>
+
                 <b-button-group vertical class="button-group">
                     <b-button class="btn" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
                     <b-button class="btn" v-on:click='completeHw(hw.hwId)'><Zondicon icon="checkmark" class="hi"></Zondicon></b-button>
@@ -67,10 +67,9 @@
                 <label>
                     <p class="deadlinename" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
                     <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                    <p>{{hw.dayRm}}일 남음</p>
                 </label>
-                <label style="padding-left: 20px;">
-                    {{hw.dayRm}}일 남음
-                </label>
+
                 <b-button-group vertical class="button-group">
                     <b-button class="btn" style="background-color: white" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
                     <b-button class="btn" style="background-color: white" v-on:click='completeHw(hw.hwId)'><Zondicon icon="checkmark" class="hi"></Zondicon></b-button>
