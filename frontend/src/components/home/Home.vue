@@ -11,23 +11,39 @@
         <span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span>
       </a>
       <a href ="#">
-        <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+          <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
       </a>
       <a href ="#">
-        <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
+          <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
       </a>
       <a href ="#">
-        <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
+          <span><router-link :to="{name: 'Login'}">log out</router-link></span>
       </a>
     </Slide>
   <h1>Home</h1>
 
   <p>Hello {{name}}</p>
 
+
   <div v-for='hw in hwList' :key="hw.id" >
-    <div class = 'deadline' id='short' v-if="hw.timeRemaining<604800000 && hw.status==0">
+    <div class = 'deadline' id='short' v-if="hw.timeRemaining<604800000 && hw.timeRemaining>0 && hw.status==0">
       <ul class="list-group">
             <li class="list-group-item">
+                <label>
+                    <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                </label>
+                <b-button-group vertical class="button-group">
+                    <b-button class="btn" style="background-color: #de1d1d" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
+                    <b-button class="btn" style="background-color: #de1d1d" v-on:click='completeHw(hw.hwId)'><Zondicon icon="checkmark" class="hi"></Zondicon></b-button>
+                </b-button-group>
+            </li>
+        </ul>
+    </div>
+
+    <div class = 'deadline2' id='long' v-if="hw.timeRemaining>604800000 && hw.timeRemaining<2592000000 && hw.status==0">
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color: #e26666; color:white">
                 <label>
                     <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
                     <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
@@ -41,19 +57,19 @@
     </div>
 
 
-    <div id='long' v-if="hw.timeRemaining>604800000 && hw.timeRemaining<2592000000 && hw.status==0">
-      과제이름: {{hw.hw_name}}
-      데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
-      <input class= 'btDelete' type = 'submit' value = 'Delete' v-on:click='deleteHw(hw.hwId)'/>
-      <input class= 'btComplete' type = 'submit' value = 'Complete' v-on:click='completeHw(hw.hwId)'/>
-    </div>
-
-
-    <div id='verylong' v-if="hw.timeRemaining>2592000000 && hw.status==0">
-      과제이름: {{hw.hw_name}}
-      데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일
-      <input class= 'btDelete' type = 'submit' value = 'Delete' v-on:click='deleteHw(hw.hwId)'/>
-      <input class= 'btComplete' type = 'submit' value = 'Complete' v-on:click='completeHw(hw.hwId)'/>
+    <div class = 'deadline3' id='verylong' v-if="hw.timeRemaining>2592000000 && hw.status==0">
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color: white; color:black">
+                <label>
+                    <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                </label>
+                <b-button-group vertical class="button-group">
+                    <b-button class="btn" style="background-color: white" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
+                    <b-button class="btn" style="background-color: white" v-on:click='completeHw(hw.hwId)'><Zondicon icon="checkmark" class="hi"></Zondicon></b-button>
+                </b-button-group>
+            </li>
+        </ul>
     </div>
 
   </div>
@@ -73,7 +89,6 @@ import { Slide } from 'vue-burger-menu'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Zondicon from 'vue-zondicons'
-
 export default {
   data: function() {
     return {
@@ -85,37 +100,32 @@ export default {
   },
   beforeRouteUpdate(){
     console.log("before")
-    axios.get('http://localhost:8000/home/deadlinelist').then(function(res){
+    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
       console.log("get home")
       this.hwList = res.data
       console.log(res.data)
-
     location.reload();
     })
-    for(var i = 0; i<this.hwList.length; i++){
-      if(this.hwList[i].status != 0){
-        this.hwList.splice(i,1)
+      for(var i = 0; i<this.hwList.length; i++){
+          if(this.hwList[i].status != 0){
+              this.hwList.splice(i,1)
+          }
       }
-    }
-
   },
   created() {
     console.log("created")
-    axios.get('http://localhost:8000/home/deadlinelist').then(function(res){
+    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
       console.log("get home")
       this.hwList = res.data
       console.log(res.data)
       //location.reload();
       this.splitDate();
-
-
     })
-    for(var i = 0; i<this.hwList.length; i++){
-      if(this.hwList[i].status != 0){
-        this.hwList.splice(i,1)
+      for(var i = 0; i<this.hwList.length; i++){
+          if(this.hwList[i].status != 0){
+              this.hwList.splice(i,1)
+          }
       }
-    }
-
   },
   methods : {
     splitDate(){
@@ -141,7 +151,6 @@ export default {
       console.log('deleteHw');
       console.log(deleteId);
       axios.post('http://localhost:8000/home/delete', {hwId: deleteId})
-
       for(var i = 0; i<this.hwList.length; i++){
         if(this.hwList[i].hwId == deleteId){
           this.hwList.splice(i,1)
@@ -150,14 +159,12 @@ export default {
     },
     completeHw(id){
       axios.post('http://localhost:8000/home/complete', {hwId: id})
-
       for(var i = 0; i<this.hwList.length; i++){
         if(this.hwList[i].hwId == id){
           this.hwList.splice(i,1)
         }
       }
-
-    }
+    },
   },
   components: {
     Slide,
@@ -168,26 +175,39 @@ export default {
 
 
 <style>
-#verylong{
-  color: blue;
-}
+/*#verylong{*/
+  /*color: blue;*/
+/*}*/
 .button-group{
         float: right;
         heigth:15px;
-
     }
+.deadline3{
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    width: 100%;
+    left: auto;
+    right: auto;
+}
+.deadline2{
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    width: 100%;
+    left: auto;
+    right: auto;
+}
     .list-group-item{
         margin-left: 300px;
         margin-right: 300px;
-        background-color: #e26666;
+        background-color: #de1d1d;
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 5px;
         padding-bottom: 5px;
-
     }
     .deadline{
-
         line-height: 1.5rem;
         padding: 10px 20px;
         margin: 0;
@@ -227,7 +247,6 @@ export default {
     font-size:10px;
     letter-spacing: 0.5px;
 }
-
 #short {
   color: white;
 }
@@ -245,14 +264,11 @@ a {
 #nav {
   padding: 30px;
 }
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-
 </style>
