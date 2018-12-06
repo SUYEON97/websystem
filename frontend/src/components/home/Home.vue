@@ -205,8 +205,8 @@ export default {
     right: auto;
 }
     .list-group-item{
-        margin-left: 300px;
-        margin-right: 300px;
+        margin-left: 400px;
+        margin-right: 400px;
         background-color: #de1d1d;
         padding-left: 0px;
         padding-right: 0px;
@@ -237,24 +237,6 @@ export default {
     .deadlinename{
         margin-top: 5px;
     }
-.btDelete {
-    padding: 16px;
-    display: block;
-    border-radius: 50px;
-    background: #129793;
-    border: none;
-    box-shadow: 0 8px 15px 0 rgba(18, 151, 147, .4);
-    margin: 0 auto;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 12%;
-    color: white;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: 700;
-    font-size:10px;
-    letter-spacing: 0.5px;
-}
 
 #short {
   color: white;
