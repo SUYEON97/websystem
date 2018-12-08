@@ -11,25 +11,72 @@
         <span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span>
       </a>
       <a href ="#">
-        <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+          <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
+      </a>
+      <a href ="#">
+          <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
+      </a>
+      <a href ="#">
+          <span><router-link :to="{name: 'Login'}">log out</router-link></span>
       </a>
     </Slide>
-
   <h1>Home</h1>
+
   <p>Hello {{name}}</p>
+
+
   <div v-for='hw in hwList' :key="hw.id" >
-    <div id='short' v-if="hw.timeRemaining<4000000000">
-      과제이름: {{hw.hw_name}}
-      데드라인: {{hw.hw_date}}
+      <!--<div v-if="hw.timeRemaining<0" v-on:prevent="modifyHw(hw.hwId)"></div>-->
+    <div class = 'deadline' id='short' v-if="hw.timeRemaining<604800000 && hw.timeRemaining>0 && hw.status==0">
+      <ul class="list-group">
+            <li class="list-group-item">
+                <label>
+                    <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                </label>
+                <b-button-group vertical class="button-group">
+                    <b-button class="btn" style="background-color: #de1d1d" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
+                    <b-button class="btn" style="background-color: #de1d1d" v-on:click='completeHw(hw.hwId)'><Zondicon icon="checkmark" class="hi"></Zondicon></b-button>
+                </b-button-group>
+            </li>
+        </ul>
     </div>
-    <div id='long' v-if="hw.timeRemaining>4000000000">
-      과제이름: {{hw.hw_name}}
-      데드라인: {{hw.hw_date}}
+
+    <div class = 'deadline2' id='long' v-if="hw.timeRemaining>604800000 && hw.timeRemaining<2592000000 && hw.status==0">
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color: #e26666; color:white">
+                <label>
+                    <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                </label>
+                <b-button-group vertical class="button-group">
+                    <b-button class="btn" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
+                    <b-button class="btn" v-on:click='completeHw(hw.hwId)'><Zondicon icon="checkmark" class="hi"></Zondicon></b-button>
+                </b-button-group>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class = 'deadline3' id='verylong' v-if="hw.timeRemaining>2592000000 && hw.status==0">
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color: white; color:black">
+                <label>
+                    <p class="deadlinename" >과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                </label>
+                <b-button-group vertical class="button-group">
+                    <b-button class="btn" style="background-color: white" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
+                    <b-button class="btn" style="background-color: white" v-on:click='completeHw(hw.hwId)'><Zondicon icon="checkmark" class="hi"></Zondicon></b-button>
+                </b-button-group>
+            </li>
+        </ul>
     </div>
 
   </div>
 
   <br /><br /><br /><br /><br />
+
 
 
 
@@ -40,6 +87,10 @@
 //import Vue from 'vue'
 import axios from 'axios'
 import { Slide } from 'vue-burger-menu'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Zondicon from 'vue-zondicons'
+
 export default {
   data: function() {
     return {
@@ -48,6 +99,11 @@ export default {
       name: this.$route.params.name,
       color:''
     }
+  },
+  mounted(){
+    axios.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
+      console.log(res.data)
+    })
   },
   beforeRouteUpdate(){
     console.log("before")
@@ -66,24 +122,150 @@ export default {
       this.hwList = res.data
       console.log(res.data)
       //location.reload();
+      this.splitDate();
     })
+  },
+  methods : {
+    splitDate(){
+      var stDate = {
+        year: "",
+        month: "",
+        day: "",
+      };
+      var arr=[];
+      var arr2=[];
+      for(var i=0; i<this.hwList.length; i++){
+        arr = this.hwList[i].hw_date.split("-")
+        stDate.year = arr[0];
+        stDate.month = arr[1];
+        arr2 = arr[2].split("T");
+        stDate.day = arr2[0];
+        this.hwList[i].year = stDate.year;
+        this.hwList[i].month = stDate.month;
+        this.hwList[i].day = stDate.day;
+      }
+    },
+    deleteHw(deleteId) {
+      console.log('deleteHw');
+      console.log(deleteId);
+      axios.post('http://localhost:8000/home/delete', {hwId: deleteId})
 
+      for(var i = 0; i<this.hwList.length; i++){
+        if(this.hwList[i].hwId == deleteId){
+          this.hwList.splice(i,1)
+        }
+      }
+    },
+    completeHw(id){
+      axios.post('http://localhost:8000/home/complete', {hwId: id})
 
-    //this.$http.get(`http://localhost:8000/user`).then(res => {
-      //this.user = res.data
-    //})
+      for(var i = 0; i<this.hwList.length; i++){
+        if(this.hwList[i].hwId == id){
+          this.hwList.splice(i,1)
+        }
+      }
+
+    },
+      // modifyHw(id){
+      //     axios.post('http://localhost:8000/home/modify', {hwId: id})
+      //     for(var i = 0; i<this.hwList.length; i++){
+      //         if(this.hwList[i].hwId == id){
+      //             this.hwList.splice(i,1)
+      //         }
+      //     }
+      // }
   },
   components: {
-    Slide
+    Slide,
+    Zondicon
   }
 }
 </script>
 
 
 <style>
+/*#verylong{*/
+  /*color: blue;*/
+/*}*/
+.button-group{
+        float: right;
+        heigth:15px;
+
+    }
+.deadline3{
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    width: 100%;
+    left: auto;
+    right: auto;
+}
+.deadline2{
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    width: 100%;
+    left: auto;
+    right: auto;
+}
+    .list-group-item{
+        margin-left: 300px;
+        margin-right: 300px;
+        background-color: #de1d1d;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+    }
+    .deadline{
+
+        line-height: 1.5rem;
+        padding: 10px 20px;
+        margin: 0;
+        width: 100%;
+        left: auto;
+        right: auto;
+    }
+    .btn{
+        background-color: #e26666;
+        border-style: none;
+    }
+    .hi{
+        width: 15px;
+        height: 15px;
+    }
+    .deadlinedate{
+        margin:0px;
+    }
+    .deadlinename{
+        margin-top: 5px;
+    }
+.btDelete {
+    padding: 16px;
+    display: block;
+    border-radius: 50px;
+    background: #129793;
+    border: none;
+    box-shadow: 0 8px 15px 0 rgba(18, 151, 147, .4);
+    margin: 0 auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 12%;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    font-size:10px;
+    letter-spacing: 0.5px;
+}
 
 #short {
-  color: red;
+  color: white;
+}
+a {
+    text-decoration: none;
+    color: inherit;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -105,65 +287,4 @@ export default {
   color: #42b983;
 }
 
-.bm-burger-button {
-      position: fixed;
-      width: 36px;
-      height: 30px;
-      left: 36px;
-      top: 36px;
-      cursor: pointer;
-    }
-    .bm-burger-bars {
-      background-color: #373a47;
-    }
-    .line-style {
-      position: absolute;
-      height: 20%;
-      left: 0;
-      right: 0;
-    }
-    .cross-style {
-      position: absolute;
-      top: 12px;
-      right: 2px;
-      cursor: pointer;
-    }
-    .bm-cross {
-      background: #bdc3c7;
-    }
-    .bm-cross-button {
-      height: 24px;
-      width: 24px;
-    }
-    .bm-menu {
-      height: 100%; /* 100% Full-height */
-      width: 0; /* 0 width - change this with JavaScript */
-      position: fixed; /* Stay in place */
-      z-index: 1000; /* Stay on top */
-      top: 0;
-      left: 0;
-      background-color: rgb(63, 63, 65); /* Black*/
-      overflow-x: hidden; /* Disable horizontal scroll */
-      padding-top: 60px; /* Place content 60px from the top */
-      transition: 0.5s; /*0.5 second transition effect to slide in the sidenav*/
-    }
-
-    .bm-overlay {
-      background: rgba(0, 0, 0, 0.3);
-    }
-    .bm-item-list {
-      color: #b8b7ad;
-      margin-left: 10%;
-      font-size: 20px;
-    }
-    .bm-item-list > * {
-      display: flex;
-      text-decoration: none;
-      padding: 0.7em;
-    }
-    .bm-item-list > * > span {
-      margin-left: 10px;
-      font-weight: 700;
-      color: white;
-    }
 </style>

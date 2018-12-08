@@ -8,9 +8,15 @@ const userSchema = new mongoose.Schema({
         unique: true
       },
     loginPw: String,
-    //create_date: { type:Date, default:Date.now }
 })
 
+const getToken= function() {
+    console.log("getToken")
+    var token = jwt.sign({
+        loginId: this.loginId
+    }, secret);
+    return token;
+}
 // doctorId를 Auto Increment 필드로 지정
 userSchema.plugin(autoIncrement, {
     model: 'User',

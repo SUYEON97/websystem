@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <ul>
       <Slide width='200'>
           <a id="home" href="#">
             <span><router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link></span>
@@ -20,39 +20,43 @@
             <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
           </a>
         </Slide>
-        <h1>Change Password</h1>
-        <form v-on:submit.prevent='change'>
-            present : <input type="password" name="presentpw" v-model="password.present"><br>
-            change : <input type="password" name="changepw" v-model="password.change">
-            <input type="submit" value="change">
-        </form>
-    </div>
+        <li v-for="Theme in list" v-bind:key="Theme.boardId">
+            <router-link :to="{name : 'board', params: {boardId:Theme.boardId}}">
+                <p>{{Theme.title}}</p>
+                <p>{{Theme.time}}</p>
+            </router-link>
+        </li>
+        <router-link to="/write">글쓰기</router-link>
+    </ul>
 </template>
 
 <script>
 import { Slide } from 'vue-burger-menu'
-export default {
-    data(){
-        return{
-            name: this.$route.params.name,
-            password:{
-                present:'',
-                change:''
+    export default {
+        name: 'home',
+        data: function () {
+            return {
+                list: [],
             }
+        },
+        methods: {
+            getList: function () {
+                this.$http.get('http://localhost:8000/board/list').then((result) => {
+                    this.list = result.data;
+                })
+            },
         }
-    },
-    methods:{
-        change(){
-            this.$http.post('http://localhost:8000/user/changepw', {presentpw: this.password.present, changepw: this.password.change, name: this.name}).then((res)=>{
-                if(res.data.result == 1){
-                    alert('success');
-                    this.$router.push({name: 'Information', params: {name: this.name}});
-                }
-            })
+        ,
+        created: function () {
+            this.getList()
+
+        },
+        components: {
+          Slide
         }
-    },
-    components : {
-      Slide
     }
-}
 </script>
+
+<style scoped>
+
+</style>

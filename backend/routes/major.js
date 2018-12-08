@@ -77,15 +77,43 @@ router.get('/subject', function(req, res, next) {
 
 
 router.post('/register', (req, res) => {
-    var aaa = new Date(Date.UTC(req.body.deadlineYear,req.body.deadlineMonth-1,req.body.deadlineDate)) - Date.now();
+    var aaa = new Date(req.body.hdate) - Date.now();
+    var bbb = new Date(req.body.hdate);
+    bbb.setHours(9);
 
-    const newDeadline = new deadlineModel({userId:1, hw_name: req.body.hw_name, major_name: req.body.major_name, subject_name:req.body.subject_name, hw_date : new Date(Date.UTC(req.body.deadlineYear,req.body.deadlineMonth-1,req.body.deadlineDate)), timeRemaining: aaa});
-    newDeadline.save(err => {
-        if (err) return res.status(500).send(err);
-        return res.end();
-    })
+    if(aaa>0) {
+        const newDeadline = new deadlineModel({
+            userId: 1,
+            hw_name: req.body.hw_name,
+            major_name: req.body.major_name,
+            subject_name: req.body.subject_name,
+            hw_date: new Date(bbb),
+            timeRemaining: aaa,
+            status: 0
+        });
 
-    console.log(newDeadline);
+        newDeadline.save(err => {
+            if (err) return res.status(500).send(err);
+            return res.end();
+        })
+    }
+    else{
+        const newDeadline = new deadlineModel({
+            userId: 1,
+            hw_name: req.body.hw_name,
+            major_name: req.body.major_name,
+            subject_name: req.body.subject_name,
+            hw_date: new Date(bbb),
+            timeRemaining: aaa,
+            status: 2
+        });
+
+        newDeadline.save(err => {
+            if (err) return res.status(500).send(err);
+            return res.end();
+        })
+    }
+   // console.log(newDeadline);
 });
 
 module.exports = router
