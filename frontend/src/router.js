@@ -6,8 +6,14 @@ import Login from './components/login/Login'
 import registTodo from './components/registTodo/registTodo'
 import Information from './components/account/Information'
 import ChangePw from './components/account/ChangePw'
-
+import communiteHome from './components/communite/communiteHome.vue'
+import Board from './components/communite/Board'
+import Write from './components/communite/Write'
 import Home from './components/home/Home'
+import History from './components/home/History'
+import workBoardHome from './components/communite/workBoardHome.vue'
+import writeWorkBoard from './components/communite/writeWorkBoard.vue'
+import workBoard from './components/communite/workBoard.vue'
 
 Vue.use(Router)
 
@@ -30,7 +36,7 @@ export default new Router({
       name: 'Information',
       component: Information
     },
-   
+
     {
       path: '/changepw',
       name: 'ChangePw',
@@ -45,6 +51,39 @@ export default new Router({
       path: '/regist',
       name: 'regist',
       component: registTodo
-    }
+    },{
+          path: '/board/:boardId',
+          name: 'board',
+          component: Board
+      }, {
+          path: '/write',
+          name: 'write',
+          component: Write
+      },{
+           path:'/communite',
+          name:'communiteHome',
+          component:communiteHome
+      },
+      {
+        path: '/history',
+        name: 'history',
+        component:History
+      },
+      {
+          path: '/workBoard',
+          name: 'workBoardHome',
+          component:workBoardHome
+      },
+      {
+          path: '/writeWorkBoard',
+          name: 'writeWorkBoard',
+          component: writeWorkBoard
+      },
+      {
+          path: '/workBoard/:boardId',
+          name: 'workBoard',
+          component: workBoard
+      }
+
   ]
 })
