@@ -24,7 +24,7 @@
         },
         methods:{
             login() {
-                this.$http.post('http://localhost:8000/login/check',{user: this.user}).then((response)=>{
+                this.$http.post('http://13.124.48.225:8000/login/check',{user: this.user}).then((response)=>{
                     alert('success')
                     this.name = response.data.userName
                     console.log(this.name)

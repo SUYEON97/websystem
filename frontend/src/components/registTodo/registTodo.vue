@@ -79,7 +79,7 @@ import Zondicon from "vue-zondicons/src/components/Zondicon";
         methods:{
 
             callMajorList:function(){
-                this.$http.get('http://localhost:8000/regist/subject').then((response)=> {
+                this.$http.get('http://13.124.48.225:8000/regist/subject').then((response)=> {
                     this.majorList = response.data;//모든 리스트 다 가져옴
                      console.log(response.data);
                 }).catch((error)=> {
@@ -99,7 +99,7 @@ import Zondicon from "vue-zondicons/src/components/Zondicon";
                 console.log(this.subjectList)
             },
             writeHwname:function () {
-                this.$http.post('http://localhost:8000/regist/register',
+                this.$http.post('http://13.124.48.225:8000/regist/register',
                     {hw_name: this.hwName,subject_name:this.selected2 ,major_name: this.selected, hdate:this.date}).then( (response)=> {
                     this.hwName="";
                     this.selected ="";

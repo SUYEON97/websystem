@@ -38,7 +38,7 @@ export default {
         }
     },
     created(){
-        this.$http.get('http://localhost:8000/user/'+this.name).then((res)=>{
+        this.$http.get('http://13.124.48.225:8000/user/'+this.name).then((res)=>{
             this.user = res.data
             console.log(this.user)
         })

@@ -1,4 +1,4 @@
-const { Router } = require('Express')
+const { Router } = require('express')
 var router = Router();
 const deadlineModel = require('../db/models/deadline')
 
@@ -812,7 +812,7 @@ router.get('/subject', function(req, res, next) {
 router.post('/register', (req, res) => {
     var aaa = new Date(req.body.hdate) - Date.now();
     var bbb = new Date(req.body.hdate);
-    bbb.setHours(9);
+    bbb.setHours(24); //UTC to KST
 
         const newDeadline = new deadlineModel({
             userId: 1,

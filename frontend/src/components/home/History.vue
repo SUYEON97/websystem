@@ -84,7 +84,7 @@ export default {
   },
   beforeRouteUpdate(){
     console.log("before")
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
+    axios.get('http://13.124.48.225:8000/home/deadlinelist').then(res => {
       console.log("get home")
       this.hwList = res.data
       console.log(res.data)
@@ -94,7 +94,7 @@ export default {
   },
   created() {
     console.log("created")
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
+    axios.get('http://13.124.48.225:8000/home/deadlinelist').then(res => {
       console.log("get home")
       this.hwList = res.data
       console.log(res.data)

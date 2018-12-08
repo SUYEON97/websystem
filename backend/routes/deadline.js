@@ -1,6 +1,6 @@
 const {
   Router
-} = require('Express')
+} = require('express')
 const router = Router()
 const deadLineModel = require('../db/models/deadline')
 

@@ -35,7 +35,7 @@
         },
         methods: {
             newbutton: function () {
-                this.$http.post('http://localhost:8000/write', {
+                this.$http.post('http://13.124.48.225:8000/write', {
                     title: this.newTitle,
                     content: this.newContent
                 }).then((result) => {

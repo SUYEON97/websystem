@@ -8,7 +8,7 @@
             <label style="font-size: 20px">Password: </label> <input type="password" name="signpassword" v-model="user.password">
             <input type="submit" value="Sign Up">
         </form>
-    </div>    
+    </div>
 </template>
 
 <script>
@@ -29,31 +29,31 @@ export default {
             else if(this.Isuniq==2) alert("check dup")
             else if(this.Isuniq==1) alert("dup")
             else if(this.Isuniq==0){
-                this.$http.post('http://localhost:8000/login/signup', {user: this.user}).then((response) => {
+                this.$http.post('http://13.124.48.225:8000/login/signup', {user: this.user}).then((response) => {
                     if(response.data.result == 1){
                         alert('success');
                         this.$router.push('/');
                     }
                 },(error)=>{
                 console.log('err')
-                alert(error.response.data.error)    
+                alert(error.response.data.error)
                 })
             }
         },
         dupcheck(){
             if(this.user.id=='') alert('fill')
             else{
-                this.$http.post('http://localhost:8000/login/signup/dupcheck', {id: this.user.id}).then((res)=>{
+                this.$http.post('http://13.124.48.225:8000/login/signup/dupcheck', {id: this.user.id}).then((res)=>{
                 if(res.data.result == 1) {
                     alert("uniq")
                     this.Isuniq=0
                 }
             },(error)=>{
                 console.log('err')
-                alert(error.response.data.error)    
+                alert(error.response.data.error)
                 })
             }
-            
+
         }
     }
 }
@@ -76,4 +76,3 @@ export default {
         letter-spacing: 1.05px;
     }
 </style>
-

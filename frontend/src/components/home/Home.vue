@@ -106,7 +106,7 @@ export default {
   },
   beforeRouteUpdate(){
     console.log("before")
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
+    axios.get('http://13.124.48.225:8000/home/deadlinelist').then(res => {
       console.log("get home")
       this.hwList = res.data
       console.log(res.data)
@@ -120,7 +120,7 @@ export default {
   },
   created() {
     console.log("created")
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
+    axios.get('http://13.124.48.225:8000/home/deadlinelist').then(res => {
       console.log("get home")
       this.hwList = res.data
       console.log(res.data)
@@ -157,7 +157,7 @@ export default {
     deleteHw(deleteId) {
       console.log('deleteHw');
       console.log(deleteId);
-      axios.post('http://localhost:8000/home/delete', {hwId: deleteId})
+      axios.post('http://13.124.48.225:8000/home/delete', {hwId: deleteId})
       for(var i = 0; i<this.hwList.length; i++){
         if(this.hwList[i].hwId == deleteId){
           this.hwList.splice(i,1)
@@ -165,7 +165,7 @@ export default {
       }
     },
     completeHw(id){
-      axios.post('http://localhost:8000/home/complete', {hwId: id})
+      axios.post('http://13.124.48.225:8000/home/complete', {hwId: id})
       for(var i = 0; i<this.hwList.length; i++){
         if(this.hwList[i].hwId == id){
           this.hwList.splice(i,1)

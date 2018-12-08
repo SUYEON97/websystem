@@ -53,7 +53,7 @@
             }
         },
         beforeRouteUpdate(to, from, next) {
-            this.$http.get('http://localhost:8000/board/' + this.boardId).then((result) => {
+            this.$http.get('http://13.124.48.225:8000/board/' + this.boardId).then((result) => {
                 // console.log(result)
                 this.boardId = to.params.boardId
                 this.collectList = result.data.filter(c=>c.boardId==this.boardId)
@@ -68,12 +68,12 @@
         },
         methods : {
             getCommentList : function () {
-                this.$http.get('http://localhost:8000/comment/list').then((result) => {
+                this.$http.get('http://13.124.48.225:8000/comment/list').then((result) => {
                     this.commentList = result.data.filter(c=>c.boardId==this.boardId)
                 })
             },
             newbutton : function() {
-                this.$http.post('http://localhost:8000/comment/create',{content:this.newComment, boardId:this.boardId}).then((result) => {
+                this.$http.post('http://13.124.48.225:8000/comment/create',{content:this.newComment, boardId:this.boardId}).then((result) => {
                     this.newComment=""
                     this.getCommentList()
                     this.$router.push({name: "board"})
@@ -87,14 +87,14 @@
             this.getCommentList()
         },
         mounted() {
-            this.$http.get('http://localhost:8000/board/' + this.boardId).then((result) => {
+            this.$http.get('http://13.124.48.225:8000/board/' + this.boardId).then((result) => {
                 // console.log(result)
                 this.collectList = result.data.filter(c=>c.boardId==this.boardId)
                 // console.log(this.collectList[0])
                 this.listTitle = this.collectList[0].title
                 this.listContent = this.collectList[0].content
             }),
-                this.$http.get('http://localhost:8000/comment/list').then((result) => {
+                this.$http.get('http://13.124.48.225:8000/comment/list').then((result) => {
                     //console.log(result)
                     //this.boardId = to.params.boardId
                     // console.log(this.boardId)

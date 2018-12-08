@@ -52,7 +52,7 @@
         ,
         methods: {
             getList: function () {
-                this.$http.get('http://localhost:8000/board/list').then((result) => {
+                this.$http.get('http://13.124.48.225:8000/board/list').then((result) => {
                     this.list = result.data;
                     this.splitDate();
                 })
