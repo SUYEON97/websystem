@@ -11,6 +11,9 @@ const major = require('./routes/major')
 const board = require('./routes/board')
 const comment = require('./routes/comment')
 const write = require('./routes/write')
+const workBoard = require('./routes/workBoard')
+const writeWorkBoard = require('./routes/writeWorkBoard')
+const workComment = require('./routes/workComment')
 const app = express()
 
 app.use((req, res, next) =>{
@@ -30,5 +33,8 @@ app.use('/regist', major)
 app.use('/board', board)
 app.use('/comment', comment)
 app.use('/write', write)
+app.use('/workBoard', workBoard)
+app.use('/writeWorkBoard', writeWorkBoard)
+app.use('/workComment', workComment)
 
 module.exports = app

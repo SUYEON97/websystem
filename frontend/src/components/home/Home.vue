@@ -30,11 +30,10 @@
                 <label>
                     <p class="deadlinename" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
                     <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
-                    <p>{{hw.dayRm}}일 남음</p>
                 </label>
-
-
-
+                <label style="padding-left: 20px;">
+                    {{hw.dayRm}}일 남음
+                </label>
                 <b-button-group vertical class="button-group">
                     <b-button class="btn" style="background-color: #de1d1d" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
                     <b-button class="btn" style="background-color: #de1d1d" v-on:click='completeHw(hw.hwId)'><Zondicon icon="checkmark" class="hi"></Zondicon></b-button>
@@ -49,9 +48,10 @@
                 <label>
                     <p class="deadlinename" style="font-size:18px" >과제이름: {{hw.hw_name}}</p>
                     <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
-                    <p>{{hw.dayRm}}일 남음</p>
                 </label>
-
+                <label style="padding-left: 20px;">
+                    {{hw.dayRm}}일 남음
+                </label>
                 <b-button-group vertical class="button-group">
                     <b-button class="btn" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
                     <b-button class="btn" v-on:click='completeHw(hw.hwId)'><Zondicon icon="checkmark" class="hi"></Zondicon></b-button>
@@ -67,9 +67,10 @@
                 <label>
                     <p class="deadlinename" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
                     <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
-                    <p>{{hw.dayRm}}일 남음</p>
                 </label>
-
+                <label style="padding-left: 20px;">
+                    {{hw.dayRm}}일 남음
+                </label>
                 <b-button-group vertical class="button-group">
                     <b-button class="btn" style="background-color: white" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
                     <b-button class="btn" style="background-color: white" v-on:click='completeHw(hw.hwId)'><Zondicon icon="checkmark" class="hi"></Zondicon></b-button>
@@ -95,6 +96,7 @@ import { Slide } from 'vue-burger-menu'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Zondicon from 'vue-zondicons'
+
 export default {
   data: function() {
     return {
@@ -110,6 +112,7 @@ export default {
       console.log("get home")
       this.hwList = res.data
       console.log(res.data)
+
     location.reload();
     })
       for(var i = 0; i<this.hwList.length; i++){
@@ -158,6 +161,7 @@ export default {
       console.log('deleteHw');
       console.log(deleteId);
       axios.post('http://localhost:8000/home/delete', {hwId: deleteId})
+
       for(var i = 0; i<this.hwList.length; i++){
         if(this.hwList[i].hwId == deleteId){
           this.hwList.splice(i,1)
@@ -166,11 +170,13 @@ export default {
     },
     completeHw(id){
       axios.post('http://localhost:8000/home/complete', {hwId: id})
+
       for(var i = 0; i<this.hwList.length; i++){
         if(this.hwList[i].hwId == id){
           this.hwList.splice(i,1)
         }
       }
+
     },
     dayRemain(){
       for(var i=0; i<this.hwList.length; i++){
@@ -196,6 +202,7 @@ export default {
 .button-group{
         float: right;
         heigth:15px;
+
     }
 .deadline3{
     line-height: 1.5rem;
@@ -221,8 +228,10 @@ export default {
         padding-right: 0px;
         padding-top: 5px;
         padding-bottom: 5px;
+
     }
     .deadline{
+
         line-height: 1.5rem;
         padding: 10px 20px;
         margin: 0;
