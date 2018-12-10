@@ -30,7 +30,9 @@
                 <label>
                     <p class="deadlinename" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
                     <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
-                    <p>{{hw.dayRm}}일 남음</p>
+                </label>
+                <label style="padding-left: 20px;">
+                    {{hw.dayRm}}일 남음
                 </label>
 
 
@@ -49,7 +51,9 @@
                 <label>
                     <p class="deadlinename" style="font-size:18px" >과제이름: {{hw.hw_name}}</p>
                     <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
-                    <p>{{hw.dayRm}}일 남음</p>
+                </label>
+                <label style="padding-left: 20px;">
+                    {{hw.dayRm}}일 남음
                 </label>
 
                 <b-button-group vertical class="button-group">
@@ -67,7 +71,9 @@
                 <label>
                     <p class="deadlinename" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
                     <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
-                    <p>{{hw.dayRm}}일 남음</p>
+                </label>
+                <label style="padding-left: 20px;">
+                    {{hw.dayRm}}일 남음
                 </label>
 
                 <b-button-group vertical class="button-group">
