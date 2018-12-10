@@ -16,9 +16,12 @@
           <a href ="#">
             <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
           </a>
+          <a href ="#">
+            <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
+          </a>
         </Slide>
         <h1>Information</h1>
-        
+
         <h1>{{name}}</h1>
         <p>{{user.loginId}}</p>
         <router-link :to="{name: 'ChangePw', params: {name: this.name}}">change password</router-link>

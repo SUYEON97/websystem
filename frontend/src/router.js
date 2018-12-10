@@ -6,12 +6,11 @@ import Login from './components/login/Login'
 import registTodo from './components/registTodo/registTodo'
 import Information from './components/account/Information'
 import ChangePw from './components/account/ChangePw'
-
 import communiteHome from './components/communite/communiteHome.vue'
 import Board from './components/communite/Board'
 import Write from './components/communite/Write'
-
 import Home from './components/home/Home'
+import History from './components/home/History'
 
 Vue.use(Router)
 
@@ -34,7 +33,7 @@ export default new Router({
       name: 'Information',
       component: Information
     },
-   
+
     {
       path: '/changepw',
       name: 'ChangePw',
@@ -61,6 +60,11 @@ export default new Router({
            path:'/communite',
           name:'communiteHome',
           component:communiteHome
+      },
+      {
+        path: '/history',
+        name: 'history',
+        component:History
       }
 
   ]
