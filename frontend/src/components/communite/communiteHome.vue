@@ -29,8 +29,7 @@
             return {
                 list: [],
             }
-        }
-        ,
+        },
         methods: {
             getList: function () {
                 this.$http.get('http://localhost:8000/board/list').then((result) => {

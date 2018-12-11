@@ -17,6 +17,14 @@ import workBoard from './components/communite/workBoard.vue'
 
 Vue.use(Router)
 
+function loggedin(to, from, next) {
+  if(!localStorage.token){
+    next('/')
+  }
+  else{
+    next();
+  }
+}
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -29,12 +37,14 @@ export default new Router({
     {
       path: '/login/signup',
       name: 'SignUp',
-      component: SignUp
+      component: SignUp,
+
     },
     {
       path: '/information',
       name: 'Information',
-      component: Information
+      component: Information,
+      beforeEnter: loggedin
     },
 
     {
@@ -45,7 +55,8 @@ export default new Router({
     {
       path: '/home',
       name: 'Home',
-      component: Home
+      component: Home,
+      beforeEnter: loggedin
     },
     {
       path: '/regist',

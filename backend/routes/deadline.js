@@ -53,4 +53,26 @@ router.post('/complete', function(req,res){
   });
 })
 
+router.post('/delete', function(req,res){
+  console.log(req.body.hwId);
+  //deadLineModel.deleteOne({hwId: req.body.hwId});
+  deadLineModel.deleteOne({ hwId: req.body.hwId }, function (err) {
+  if (err) return handleError(err);
+  });
+})
+
+router.post('/complete', function(req,res){
+  console.log(req.body.hwId);
+  deadLineModel.updateOne({ hwId: req.body.hwId }, { status: 1}, function(err){
+    if (err) return handleError(err);
+  });
+})
+
+router.post('/modify', function(req,res){
+    console.log(req.body.hwId);
+    deadLineModel.updateOne({ hwId: req.body.hwId }, { status: 2}, function(err){
+        if (err) return handleError(err);
+    });
+})
+
 module.exports = router

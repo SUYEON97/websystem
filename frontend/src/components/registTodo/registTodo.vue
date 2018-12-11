@@ -56,7 +56,9 @@ import Zondicon from "vue-zondicons/src/components/Zondicon";
             }
         },
         methods:{
-
+            goHome:function(){
+                this.$router.push({name: "Home"})
+            },
             callMajorList:function(){
                 this.$http.get('http://localhost:8000/regist/subject').then((response)=> {
                     this.majorList = response.data;//모든 리스트 다 가져옴

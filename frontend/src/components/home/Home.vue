@@ -3,6 +3,8 @@
   <h1>Home</h1>
 
   <p>Hello {{name}}</p>
+
+
   <div v-for='hw in hwList' :key="hw.id" >
     <div class = 'deadline' id='short' v-if="hw.timeRemaining<604800000 && hw.timeRemaining>0 && hw.status==0">
       <ul class="list-group">
@@ -85,6 +87,11 @@ export default {
       name: this.$route.params.name,
       color:''
     }
+  },
+  mounted(){
+    axios.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
+      console.log(res.data)
+    })
   },
   beforeRouteUpdate(){
     console.log("before")

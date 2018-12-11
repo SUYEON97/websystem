@@ -12,38 +12,37 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                user:{
-                    id:'',
-                    password:'',
-                },
-                name: ''
-            }
-        },
-        methods:{
-            login() {
-                this.$http.post('http://localhost:8000/login/check',{user: this.user}).then((response)=>{
-                    alert('success')
-                    this.name = response.data.userName
-                    console.log(this.name)
-                    this.$router.push({name: "Home", params: {name: this.name}});
-                },(error)=>{
-                    console.log('err')
-                    alert(error.response.data.error)
-                }).catch(error=>{
-                    alert(error)
-                })
-            }
-        },
+export default {
+    data() {
+        return {
+            user:{
+                id:'',
+                password:'',
+            },
+            name: ''
+        }
+    },
+    methods:{
+        login() {
+            this.$http.post('http://localhost:8000/auth/login',{user: this.user}).then((response)=>{
+                alert('success')
+                localStorage.token = response.data.token;
+                this.$router.push({name: "Home", params: {name: this.name}});
+            },(error)=>{
+                console.log('err')
+                alert(error.response.data.error)
+            }).catch(error=>{
+                alert(error)
+            })
+        }
     }
+  }
 </script>
 <style>
     html {
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         height: 100vh;
-        /*background: #F5F6F7;*/
+
         color: #5B5A5A;
         font-size:12px;
         font-weight: 200;
