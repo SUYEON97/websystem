@@ -24,7 +24,7 @@
         <div class="inDiv">
             <router-link to="/write" class="newWrite"><Zondicon icon="compose" class="w"></Zondicon></router-link>
             <ul>
-                <li id=question v-for="Theme in list" v-bind:key="Theme.boardId">
+                <li id=question v-for="Theme in calData" v-bind:key="Theme.boardId">
                     <router-link :to="{name : 'board', params: {boardId:Theme.boardId}}">
                         <p id="titleForm">{{Theme.title}}</p>
                         <!--<p id="timeForm">{{Theme.time}}</p>-->
@@ -32,8 +32,14 @@
                     </router-link>
                 </li>
             </ul>
+            <div class="page">
+            <p>Current page: {{ currentPage }}</p>
+            <b-pagination align="center" size="md" :total-rows="100" v-model="currentPage" :length="numOfPages">
+            </b-pagination>
+        </div>
 
         </div>
+
     </div>
 </template>
 
@@ -47,6 +53,8 @@
         data: function () {
             return {
                 list: [],
+                currentPage:1,
+                dataPerPage:10,
             }
         }
         ,
@@ -85,14 +93,29 @@
                     this.list[i].min = stDate.min;
                 }
             },
-        }
-        ,
+        },
+        computed:{
+          startOffset(){
+              return ((this.currentPage-1)*this.dataPerPage);
+          },
+          endOffset(){
+              return (this.startOffset+this.dataPerPage);
+          },
+          numOfPages(){//내가 받아오는 list를 보여줄 페이지 수로 잘라서 계산(math.ceil:소수점 이하 올림)
+              return Math.ceil(this.list.length/this.dataPerPage);
+          },
+          calData(){
+              return this.list.slice(this.startOffset,this.endOffset)
+              //page의 숫자와 page당 보여질 data의 갯수에 따라서 계산된 startOffset과 endOffset을 이용해
+              //slice 하여 return.
+          }
+        },
         created: function () {
             this.getList()
         },
         components: {
             Slide,
-            Zondicon
+            Zondicon,
         }
     }
 </script>

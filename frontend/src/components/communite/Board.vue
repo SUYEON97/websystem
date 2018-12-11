@@ -31,6 +31,8 @@
             </div>
             <p class="List"><b-btn @click="listView" style="font-size: 15px"><Zondicon icon="list-bullet" class="bullet"></Zondicon> 글 목록</b-btn></p>
         </div>
+
+
     </div>
 
 </template>
@@ -40,6 +42,7 @@
     import 'bootstrap/dist/css/bootstrap.css'
     import 'bootstrap-vue/dist/bootstrap-vue.css'
     import Zondicon from 'vue-zondicons'
+
     export default {
         name: "board",
         data: function () {
@@ -50,6 +53,7 @@
                 commentList :[],
                 newComment : "",
                 boardId: this.$route.params.boardId,
+
             }
         },
         beforeRouteUpdate(to, from, next) {
@@ -64,7 +68,8 @@
             })
         },
         components : {
-            Zondicon
+            Zondicon,
+
         },
         methods : {
             getCommentList : function () {
