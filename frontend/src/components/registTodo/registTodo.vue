@@ -1,26 +1,6 @@
 <template>
 
   <div id="app">
-    <Slide width='200'>
-      <a id="home" href="#">
-        <span><router-link :to="{name: 'Home'}">home</router-link></span>
-      </a>
-      <a href ="#">
-        <span><router-link :to="{name: 'Information'}">information</router-link></span>
-      </a>
-      <a href ="#">
-        <span><router-link :to="{name: 'regist'}">과제등록</router-link></span>
-      </a>
-      <a href ="#">
-          <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
-      </a>
-      <a href ="#">
-        <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
-      </a>
-      <a href ="#">
-          <span><router-link v-on:click.native="logout" :to="{name: 'Logout'}">log out</router-link></span>
-      </a>
-    </Slide>
         <div style="margin-bottom: 20px;">
           <h2>ADD HOMEWORK</h2>
         </div>
@@ -125,7 +105,14 @@ import Zondicon from "vue-zondicons/src/components/Zondicon";
         },
         created: function () {
             this.callMajorList();
-        }
+        },
+        mounted(){
+    this.$http.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
+      console.log(res.data)
+      this.user = res.data.user
+      console.log(this.user)
+    })
+    },
 
     }
 </script>

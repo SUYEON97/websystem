@@ -7,7 +7,7 @@ import 'vue-cal/dist/vuecal.css'
 Vue.use(feather, 'v-icon')
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)
-
+//Vue.use(Vuecal, 'Vuecal')
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
