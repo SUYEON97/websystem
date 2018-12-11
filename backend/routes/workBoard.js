@@ -10,6 +10,13 @@ router.get('/list', (req,res) => {
     })
 })
 
+// router.get('/wantlist', (req,res) => {
+//     workBoardModel.find({$or:[{major_name:{$regex:req.body.userWant}}]}).exec(function (err, result){
+//         if(err) return res.console.log('list error');
+//         return res.json(result)
+//     })
+// })
+
 router.get('/:boardId', (req,res) =>{
     workBoardModel.find({}, function (err, result){
         if(err) return res.console.log('list error');

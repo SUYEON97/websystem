@@ -11,12 +11,13 @@
                 <p class="content">
                     {{this.listContent}}
                 </p>
+
             </div>
             <!--<comment v-for="co in commentList" v-bind:key="co.commentId" :context="co.content"></comment>-->
 
             <ul class="commentL">
                 <li v-for="co in commentList" v-bind:key="co.commentId">
-                    <p class="annoy2"><Zondicon icon="user" class="image2"></Zondicon><strong>익명</strong></p>{{co.time}}
+                    <p class="annoy2"><Zondicon icon="user" class="image2"></Zondicon><strong>익명</strong></p>
                     <p id="commentTimeForm">{{co.month}}.{{co.day}}   {{co.hour}}:{{co.min}} </p>
                     {{co.content}}
                 </li>
@@ -71,6 +72,7 @@
                 this.$http.get('http://localhost:8000/workComment/list').then((result) => {
                     this.commentList = result.data.filter(c=>c.boardId==this.boardId)
                     this.splitDate()
+                    console.log(this.commentList[1].month)
                 })
 
             },
@@ -109,11 +111,12 @@
 
                     stDate.hour=arr3[0];
                     stDate.min=arr3[1];
-                    this.commentList[i].year = stDate.year;console.log(this.commentList[i].year)
+                    this.commentList[i].year = stDate.year;
                     this.commentList[i].month = stDate.month;
                     this.commentList[i].day = stDate.day;
                     this.commentList[i].hour = stDate.hour;
                     this.commentList[i].min = stDate.min;
+                    // console.log(this.commentList[i].month)
 
                 }
 
@@ -123,20 +126,13 @@
         },
         mounted() {
             this.$http.get('http://localhost:8000/workBoard/' + this.boardId).then((result) => {
-                // console.log(result)
+
                 this.collectList = result.data.filter(c=>c.boardId==this.boardId)
-                // console.log(this.collectList[0])
                 this.listTitle = this.collectList[0].title
                 this.listContent = this.collectList[0].content
             }),
                 this.$http.get('http://localhost:8000/workComment/list').then((result) => {
-                    //console.log(result)
-                    //this.boardId = to.params.boardId
-                    // console.log(this.boardId)
                     this.commentList = result.data.filter(c=>c.boardId==this.boardId)
-                    //  for(var i=0;i<this.commentContentList.length;i++){
-                    //      this.commentContentList[i]=this.commentList[i].content}
-                    // console.log(this.commentContentList)
                 })
 
 

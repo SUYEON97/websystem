@@ -24,8 +24,8 @@
         <div class="inDiv">
             <router-link to="/writeWorkBoard" class="newWrite"><Zondicon icon="compose" class="w"></Zondicon></router-link>
             <div class="clickBoard">과제게시판</div>
-            <ul>
-                <li id=question v-for="Theme in list" v-bind:key="Theme.boardId">
+            <ul class="boardList">
+                <li id=question v-for="Theme in calData" v-bind:key="Theme.boardId">
                     <router-link :to="{name : 'workBoard', params: {boardId:Theme.boardId}}">
                         <p id="titleForm">{{Theme.title}}</p>
 
@@ -34,7 +34,20 @@
                     </router-link>
                 </li>
             </ul>
-
+<div class="select-group">
+            <select v-model="selected" class="select" name="items1" v-on:change="filter">
+                <option v-for="majorlist in majorList" :key="majorlist.id" v-if="majorlist.majorNameId==1">{{majorlist.majorName}}</option>
+            </select>
+            <select v-model="selected2" class="select" name="items2">
+                <option v-for="subjectlist in subjectList" :key="subjectlist.id">{{subjectlist.subjectName}}</option>
+            </select>
+        </div>
+            <b-btn @click="find">찾기</b-btn>
+            <div class="page">
+                <p>Current page: {{ currentPage }}</p>
+                <b-pagination align="center" size="md" :total-rows="100" v-model="currentPage" :length="numOfPages">
+                </b-pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -50,6 +63,14 @@
         data: function () {
             return {
                 list: [],
+                findList :[],
+                userWant : "",
+                currentPage:1,
+                dataPerPage:10,
+                majorList:[],
+                subjectList:[],
+                selected: "",
+                selected2: "",
             }
         }
         ,
@@ -90,11 +111,71 @@
 
                 }
             },
+            find(){
+                this.$http.get('http://localhost:8000/workBoard/list').then((result) => {
+                    this.list = result.data.filter(c=>c.major_name={$regex:this.userWant})
+                    this.splitDate();
+            })
+            },
+            newbutton: function () {
+                //console.log(this.selected)
+                this.$http.post('http://localhost:8000/writeWorkBoard', {
+                    title: this.newTitle,
+                    content: this.newContent,
+                    major_name:this.selected,
+                    subject_name:this.selected2
+                }).then((result) => {
+                    this.newTitle = ''
+                    this.newContent = ''
+                    this.selected=''
+                    this.selected2=''
+                    this.$router.push({name: "workBoardHome"})
+                })
+            },
+            returnButton: function (){
+                this.$router.push({name: "workBoardHome"})
+            },
+            callMajorList:function(){
+                this.$http.get('http://localhost:8000/regist/subject').then((response)=> {
+                    this.majorList = response.data;//모든 리스트 다 가져옴
+                    console.log(response.data);
+                }).catch((error)=> {
+                    console.log(error.response);
+                })
+            },
+            filter:function () {
+                var k = 0;
+                for (var i = 0; i < this.majorList.length; i++) {
+                    // console.log(this.majorList[0].majorName)
+                    if (this.majorList[i].majorName == this.selected) {
+                        this.subjectList[k] = this.majorList[i];
+                        k++
+                    } //전공이름이 같을 경우
+
+                }
+                console.log(this.subjectList)
+            },
         }
         ,
         created: function () {
             this.getList()
 
+        },
+        computed:{
+            startOffset(){
+                return ((this.currentPage-1)*this.dataPerPage);
+            },
+            endOffset(){
+                return (this.startOffset+this.dataPerPage);
+            },
+            numOfPages(){//내가 받아오는 list를 보여줄 페이지 수로 잘라서 계산(math.ceil:소수점 이하 올림)
+                return Math.ceil(this.list.length/this.dataPerPage);
+            },
+            calData(){
+                return this.list.slice(this.startOffset,this.endOffset)
+                //page의 숫자와 page당 보여질 data의 갯수에 따라서 계산된 startOffset과 endOffset을 이용해
+                //slice 하여 return.
+            }
         },
         components: {
             Slide,
@@ -104,10 +185,10 @@
 </script>
 
 <style scoped>
-    * {
-        box-sizing: border-box;
-        font-family: "Open Sans";
-    }
+    /** {*/
+        /*box-sizing: border-box;*/
+        /*font-family: "Open Sans";*/
+    /*}*/
 
     .temp {
         font-size: 30px;
@@ -183,13 +264,13 @@
         width : 40px;
     }
 
-    ul{
+    .boardList{
         border: 2px solid #EEEEEE;
         margin:0 auto;
         margin-top: 20px;
         margin-bottom: 50px;
         padding-top: 15px;
-        padding-bottom: 50%;
+        padding-bottom: 20%;
         width: 800px;
         height: auto;
     }
@@ -197,4 +278,5 @@
 float: right;
     font-style: italic;
 }
+
 </style>
