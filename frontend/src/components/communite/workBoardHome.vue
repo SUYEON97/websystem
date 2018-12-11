@@ -28,8 +28,9 @@
                 <li id=question v-for="Theme in list" v-bind:key="Theme.boardId">
                     <router-link :to="{name : 'workBoard', params: {boardId:Theme.boardId}}">
                         <p id="titleForm">{{Theme.title}}</p>
-                        <!--<p id="timeForm">{{Theme.time}}</p>-->
-                        <p id="timeForm">{{Theme.month}}.{{Theme.day}}   {{Theme.hour}}:{{Theme.min}} </p>
+
+                        <p id="timeForm">{{Theme.month}}.{{Theme.day}}   {{Theme.hour}}:{{Theme.min}}
+                            <label id="what">{{Theme.major_name}} - {{Theme.subject_name}}</label></p>
                     </router-link>
                 </li>
             </ul>
@@ -192,5 +193,8 @@
         width: 800px;
         height: auto;
     }
-
+#what{
+float: right;
+    font-style: italic;
+}
 </style>
