@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08cda497-b1a6-4bc8-815d-9c8ef25e84be" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/routes/workBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/workBoard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/communite/workBoard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/communite/workBoard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/communite/workBoardHome.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/communite/workBoardHome.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -122,26 +121,26 @@
         <counts>
           <entry key="browserslistrc" value="1" />
           <entry key="js" value="5" />
-          <entry key="vue" value="4" />
+          <entry key="vue" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JavaScript" value="5" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Vue.js" value="4" />
+          <entry key="Vue.js" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="js" value="239" />
-          <entry key="vue" value="957" />
+          <entry key="vue" value="1689" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JavaScript" value="239" />
-          <entry key="Vue.js" value="957" />
+          <entry key="Vue.js" value="1689" />
         </counts>
       </usages-collector>
     </session>
@@ -162,11 +161,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/src/components/communite/workBoardHome.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="118" column="13" selection-start-line="118" selection-start-column="13" selection-end-line="118" selection-end-column="13" />
+            <state relative-caret-position="261">
+              <caret line="121" column="68" lean-forward="true" selection-start-line="121" selection-start-column="68" selection-end-line="121" selection-end-column="68" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#router-link#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -180,17 +179,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/db/models/workBoard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="42" column="21" lean-forward="true" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
+            <state>
+              <caret column="3" selection-start-column="2" selection-end-column="3" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/src/components/communite/writeWorkBoard.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="79" column="43" lean-forward="true" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
+            <state relative-caret-position="-361">
+              <caret line="45" column="30" lean-forward="true" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
               <folding>
                 <element signature="n#style#0;n#h3#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#textarea#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -234,10 +233,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/components/communite/Write.vue">
+        <entry file="file://$PROJECT_DIR$/frontend/src/components/registTodo/registTodo.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="230">
+              <caret line="90" column="24" lean-forward="true" selection-start-line="88" selection-start-column="13" selection-end-line="90" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -265,6 +264,13 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>selected2</find>
+      <find>filter</find>
+      <find>list</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -285,8 +291,8 @@
         <option value="$PROJECT_DIR$/backend/constants.js" />
         <option value="$PROJECT_DIR$/frontend/src/components/communite/communiteHome.vue" />
         <option value="$PROJECT_DIR$/frontend/src/components/communite/workBoard.vue" />
-        <option value="$PROJECT_DIR$/backend/routes/workBoard.js" />
         <option value="$PROJECT_DIR$/frontend/src/components/communite/writeWorkBoard.vue" />
+        <option value="$PROJECT_DIR$/backend/routes/workBoard.js" />
         <option value="$PROJECT_DIR$/frontend/src/components/communite/workBoardHome.vue" />
       </list>
     </option>
@@ -314,8 +320,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="868" />
-    <option name="width" value="1060" />
+    <option name="x" value="828" />
+    <option name="width" value="1100" />
     <option name="height" value="1042" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -335,6 +341,12 @@
               <item name="websystem" type="b2602c69:ProjectViewProjectNode" />
               <item name="websystem" type="462c0819:PsiDirectoryNode" />
               <item name="backend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="websystem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="websystem" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="websystem" type="b2602c69:ProjectViewProjectNode" />
@@ -362,6 +374,14 @@
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="communite" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="websystem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="websystem" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="registTodo" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -372,7 +392,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.9.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../lab8-201620906" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../homework2-201620906" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -408,7 +428,7 @@
       <workItem from="1543401400643" duration="3862000" />
       <workItem from="1543413497250" duration="2473000" />
       <workItem from="1544246157263" duration="3714000" />
-      <workItem from="1544269152375" duration="14348000" />
+      <workItem from="1544269152375" duration="20601000" />
     </task>
     <task id="LOCAL-00001" summary="올려봅니당">
       <created>1543401911480</created>
@@ -421,13 +441,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24397000" />
+    <option name="totallyTimeSpent" value="30650000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="758" y="0" width="925" height="909" extended-state="0" />
+    <frame x="723" y="0" width="960" height="909" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2200903" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.099891424" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -559,13 +579,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/registTodo/registTodo.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="14" lean-forward="true" selection-start-line="3" selection-start-column="3" selection-end-line="23" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/.browserslistrc">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -631,6 +644,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/registTodo/registTodo.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="90" column="24" lean-forward="true" selection-start-line="88" selection-start-column="13" selection-end-line="90" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/routes/workBoard.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
@@ -640,32 +660,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/db/models/workBoard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="42" column="21" lean-forward="true" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/communite/workBoardHome.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="118" column="13" selection-start-line="118" selection-start-column="13" selection-end-line="118" selection-end-column="13" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#router-link#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#router-link#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#1927#1966#0" expanded="true" />
-          </folding>
+        <state>
+          <caret column="3" selection-start-column="2" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/components/communite/writeWorkBoard.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="79" column="43" lean-forward="true" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
+        <state relative-caret-position="-361">
+          <caret line="45" column="30" lean-forward="true" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
           <folding>
             <element signature="n#style#0;n#h3#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#textarea#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#b-button#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/communite/workBoardHome.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="121" column="68" lean-forward="true" selection-start-line="121" selection-start-column="68" selection-end-line="121" selection-end-column="68" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#router-link#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#router-link#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#1927#1966#0" expanded="true" />
           </folding>
         </state>
       </provider>

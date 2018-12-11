@@ -41,8 +41,8 @@
             <select v-model="selected2" class="select" name="items2">
                 <option v-for="subjectlist in subjectList" :key="subjectlist.id">{{subjectlist.subjectName}}</option>
             </select>
+    <b-btn @click.prevent="Listfind">찾기</b-btn>
         </div>
-            <b-btn @click="find">찾기</b-btn>
             <div class="page">
                 <p>Current page: {{ currentPage }}</p>
                 <b-pagination align="center" size="md" :total-rows="100" v-model="currentPage" :length="numOfPages">
@@ -64,6 +64,7 @@
             return {
                 list: [],
                 findList :[],
+                findList2:[],
                 userWant : "",
                 currentPage:1,
                 dataPerPage:10,
@@ -71,6 +72,7 @@
                 subjectList:[],
                 selected: "",
                 selected2: "",
+                wantlist:[],
             }
         }
         ,
@@ -111,29 +113,24 @@
 
                 }
             },
-            find(){
+            Listfind(){
                 this.$http.get('http://localhost:8000/workBoard/list').then((result) => {
-                    this.list = result.data.filter(c=>c.major_name={$regex:this.userWant})
+                    this.findList = result.data
+                    console.log(this.findList)
+                    //console.log(this.selected2)
+                    var k = 0;
+                    for (var i = 0; i < this.findList.length; i++) {
+                        if(this.findList[i].subject_name==this.selected2){
+                            this.findList2[k] = this.findList[i]
+                            k++
+                        } //전공이름이 같을 경우
+
+                    }
+                    this.list = this.findList2
                     this.splitDate();
+                    console.log(this.list)
+
             })
-            },
-            newbutton: function () {
-                //console.log(this.selected)
-                this.$http.post('http://localhost:8000/writeWorkBoard', {
-                    title: this.newTitle,
-                    content: this.newContent,
-                    major_name:this.selected,
-                    subject_name:this.selected2
-                }).then((result) => {
-                    this.newTitle = ''
-                    this.newContent = ''
-                    this.selected=''
-                    this.selected2=''
-                    this.$router.push({name: "workBoardHome"})
-                })
-            },
-            returnButton: function (){
-                this.$router.push({name: "workBoardHome"})
             },
             callMajorList:function(){
                 this.$http.get('http://localhost:8000/regist/subject').then((response)=> {
@@ -159,6 +156,7 @@
         ,
         created: function () {
             this.getList()
+            this.callMajorList()
 
         },
         computed:{
