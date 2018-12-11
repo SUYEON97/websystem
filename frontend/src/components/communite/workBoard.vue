@@ -72,7 +72,6 @@
                 this.$http.get('http://localhost:8000/workComment/list').then((result) => {
                     this.commentList = result.data.filter(c=>c.boardId==this.boardId)
                     this.splitDate()
-                    console.log(this.commentList[1].month)
                 })
 
             },
@@ -134,8 +133,6 @@
                 this.$http.get('http://localhost:8000/workComment/list').then((result) => {
                     this.commentList = result.data.filter(c=>c.boardId==this.boardId)
                 })
-
-
 
         },
         // component :{

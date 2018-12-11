@@ -28,12 +28,12 @@
                 <li id=question v-for="Theme in calData" v-bind:key="Theme.boardId">
                     <router-link :to="{name : 'workBoard', params: {boardId:Theme.boardId}}">
                         <p id="titleForm">{{Theme.title}}</p>
-
                         <p id="timeForm">{{Theme.month}}.{{Theme.day}}   {{Theme.hour}}:{{Theme.min}}
                             <label id="what">{{Theme.major_name}} - {{Theme.subject_name}}</label></p>
                     </router-link>
                 </li>
             </ul>
+
 <div class="select-group">
             <select v-model="selected" class="select" name="items1" v-on:change="filter">
                 <option v-for="majorlist in majorList" :key="majorlist.id" v-if="majorlist.majorNameId==1">{{majorlist.majorName}}</option>
@@ -41,8 +41,11 @@
             <select v-model="selected2" class="select" name="items2">
                 <option v-for="subjectlist in subjectList" :key="subjectlist.id">{{subjectlist.subjectName}}</option>
             </select>
+
     <b-btn @click.prevent="Listfind">찾기</b-btn>
         </div>
+        </div>
+        <div>
             <div class="page">
                 <p>Current page: {{ currentPage }}</p>
                 <b-pagination align="center" size="md" :total-rows="100" v-model="currentPage" :length="numOfPages">
@@ -65,6 +68,7 @@
                 list: [],
                 findList :[],
                 findList2:[],
+                list2:[],
                 userWant : "",
                 currentPage:1,
                 dataPerPage:10,
@@ -73,6 +77,7 @@
                 selected: "",
                 selected2: "",
                 wantlist:[],
+
             }
         }
         ,
@@ -81,6 +86,7 @@
                 this.$http.get('http://localhost:8000/workBoard/list').then((result) => {
                     this.list = result.data;
                     this.splitDate();
+
                 })
             },splitDate(){
                 var stDate = {
@@ -113,23 +119,46 @@
 
                 }
             },
+            calData2:function(){
+                //this.list2=this.list
+                this.list= this.list.slice(this.startOffset,this.endOffset)
+                //this.list = list;
+                //page의 숫자와 page당 보여질 data의 갯수에 따라서 계산된 startOffset과 endOffset을 이용해
+                //slice 하여 return.
+            },
             Listfind(){
+                // console.log(this.findList[])
+                if(this.findList2[0]!=null){
+                    for(var z=0;z<this.findList2.length;z++){
+                        this.findList2.pop()
+                    }
+                }
+                if(this.findList[0]!=null){
+                    for(var z=0;z<this.findList.length;z++){
+                        this.findList.pop()
+                    }
+                }
                 this.$http.get('http://localhost:8000/workBoard/list').then((result) => {
+
                     this.findList = result.data
                     console.log(this.findList)
                     //console.log(this.selected2)
+
                     var k = 0;
+
                     for (var i = 0; i < this.findList.length; i++) {
+
                         if(this.findList[i].subject_name==this.selected2){
                             this.findList2[k] = this.findList[i]
                             k++
                         } //전공이름이 같을 경우
-
                     }
                     this.list = this.findList2
-                    this.splitDate();
-                    console.log(this.list)
 
+                    this.splitDate();
+                    //location.reload();
+                    this.calData2()
+                    //k=0;
             })
             },
             callMajorList:function(){
@@ -154,11 +183,6 @@
             },
         }
         ,
-        created: function () {
-            this.getList()
-            this.callMajorList()
-
-        },
         computed:{
             startOffset(){
                 return ((this.currentPage-1)*this.dataPerPage);
@@ -174,6 +198,10 @@
                 //page의 숫자와 page당 보여질 data의 갯수에 따라서 계산된 startOffset과 endOffset을 이용해
                 //slice 하여 return.
             }
+        },
+        created: function () {
+            this.getList()
+            this.callMajorList()
         },
         components: {
             Slide,

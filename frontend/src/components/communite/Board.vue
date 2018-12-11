@@ -12,13 +12,13 @@
                     {{this.listContent}}
                 </p>
             </div>
-            <!--<comment v-for="co in commentList" v-bind:key="co.commentId" :context="co.content"></comment>-->
 
             <ul class="commentL">
                 <li v-for="co in commentList" v-bind:key="co.commentId">
                     <p class="annoy2"><Zondicon icon="user" class="image2"></Zondicon><strong>익명</strong></p>
-                    {{co.content}}
+                    <p id="commentTimeForm">{{co.month}}.{{co.day}}   {{co.hour}}:{{co.min}} </p>
 
+                    {{co.content}}
                 </li>
             </ul>
 
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-    // import comment from './Comment.vue'
+
     import 'bootstrap/dist/css/bootstrap.css'
     import 'bootstrap-vue/dist/bootstrap-vue.css'
     import Zondicon from 'vue-zondicons'
@@ -54,7 +54,7 @@
         },
         beforeRouteUpdate(to, from, next) {
             this.$http.get('http://localhost:8000/board/' + this.boardId).then((result) => {
-                // console.log(result)
+
                 this.boardId = to.params.boardId
                 this.collectList = result.data.filter(c=>c.boardId==this.boardId)
                 console.log(this.collectList[0])
@@ -70,6 +70,7 @@
             getCommentList : function () {
                 this.$http.get('http://localhost:8000/comment/list').then((result) => {
                     this.commentList = result.data.filter(c=>c.boardId==this.boardId)
+                    this.splitDate()
                 })
             },
             newbutton : function() {
@@ -81,6 +82,41 @@
             },
             listView : function () {
                 this.$router.push({name: "communiteHome"})
+            },
+            splitDate(){
+                var stDate = {
+                    year: "",
+                    month: "",
+                    day: "",
+                    time : "",
+                    hour :"",
+                    min :"",
+                };
+                var arr=[];
+                var arr2=[];
+                var arr3=[];
+                for(var i=0; i<this.commentList.length; i++){
+                    arr = this.commentList[i].time.split("-")
+
+                    stDate.year = arr[0];
+                    stDate.month = arr[1];
+                    arr2 = arr[2].split("T");
+
+                    stDate.day = arr2[0];
+                    stDate.time = arr2[1];
+                    arr3=arr2[1].split(":");
+
+                    stDate.hour=arr3[0];
+                    stDate.min=arr3[1];
+                    this.commentList[i].year = stDate.year;
+                    this.commentList[i].month = stDate.month;
+                    this.commentList[i].day = stDate.day;
+                    this.commentList[i].hour = stDate.hour;
+                    this.commentList[i].min = stDate.min;
+
+
+                }
+
             }
         },
         created: function () {
@@ -88,25 +124,20 @@
         },
         mounted() {
             this.$http.get('http://localhost:8000/board/' + this.boardId).then((result) => {
-                // console.log(result)
+
                 this.collectList = result.data.filter(c=>c.boardId==this.boardId)
-                // console.log(this.collectList[0])
+
                 this.listTitle = this.collectList[0].title
                 this.listContent = this.collectList[0].content
             }),
                 this.$http.get('http://localhost:8000/comment/list').then((result) => {
-                    //console.log(result)
-                    //this.boardId = to.params.boardId
-                    // console.log(this.boardId)
+
                     this.commentList = result.data.filter(c=>c.boardId==this.boardId)
-                    //  for(var i=0;i<this.commentContentList.length;i++){
-                    //      this.commentContentList[i]=this.commentList[i].content}
-                    // console.log(this.commentContentList)
+
+
                 })
         },
-        // component :{
-        //     comment
-        // }
+
     }
 </script>
 
