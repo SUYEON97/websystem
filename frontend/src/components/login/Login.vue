@@ -36,7 +36,7 @@
                     alert(error)
                 })
             }
-        }
+        },
     }
 </script>
 <style>

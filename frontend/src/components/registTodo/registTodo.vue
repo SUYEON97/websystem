@@ -1,27 +1,6 @@
 <template>
 
   <div id="app">
-    <Slide width='200'>
-        <a id="home" href="#">
-          <span><router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link></span>
-        </a>
-        <a href ="#">
-          <span><router-link :to="{name: 'Information', params: {name: this.name}}">information</router-link></span>
-        </a>
-        <a href ="#">
-          <span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span>
-        </a>
-        <a href ="#">
-            <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
-        </a>
-        <a href ="#">
-            <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
-        </a>
-        <a href ="#">
-            <span><router-link :to="{name: 'Login'}">log out</router-link></span>
-        </a>
-
-      </Slide>
         <div style="margin-bottom: 20px;">
           <h2>ADD HOMEWORK</h2>
         </div>
