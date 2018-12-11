@@ -60,7 +60,7 @@ import Zondicon from "vue-zondicons/src/components/Zondicon";
                 this.$router.push({name: "Home"})
             },
             callMajorList:function(){
-                this.$http.get('http://localhost:8000/regist/subject').then((response)=> {
+                this.$http.get('http://localhost:8000/regist/subject',{user: this.user}).then((response)=> {
                     this.majorList = response.data;//모든 리스트 다 가져옴
                      console.log(response.data);
                 }).catch((error)=> {
@@ -80,8 +80,9 @@ import Zondicon from "vue-zondicons/src/components/Zondicon";
                 console.log(this.subjectList)
             },
             writeHwname:function () {
+                console.log(this.user.loginId)
                 this.$http.post('http://localhost:8000/regist/register',
-                    {hw_name: this.hwName,subject_name:this.selected2 ,major_name: this.selected, hdate:this.date}).then( (response)=> {
+                    {userId: this.user.loginId, hw_name: this.hwName,subject_name:this.selected2 ,major_name: this.selected, hdate:this.date}).then( (response)=> {
                     this.hwName="";
                     this.selected ="";
                     this.selected2="";
@@ -96,7 +97,14 @@ import Zondicon from "vue-zondicons/src/components/Zondicon";
         },
         created: function () {
             this.callMajorList();
-        }
+        },
+        mounted(){
+    this.$http.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
+      console.log(res.data)
+      this.user = res.data.user
+      console.log(this.user)
+    })
+    },
 
     }
 </script>

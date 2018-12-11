@@ -2,7 +2,7 @@
 <div class="home">
   <h1>Home</h1>
 
-  <p>Hello {{name}}</p>
+  <p>Hello {{this.user.loginId}}</p>
 
 
   <div v-for='hw in hwList' :key="hw.id" >
@@ -74,7 +74,6 @@
 <script>
 //import Vue from 'vue'
 import axios from 'axios'
-import { Slide } from 'vue-burger-menu'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Zondicon from 'vue-zondicons'
@@ -84,47 +83,64 @@ export default {
     return {
       hwList: [],
       //user: {userId:0},
-      name: this.$route.params.name,
+      //name: this.$route.params.name,
+      user:{},
       color:''
     }
   },
-  mounted(){
+  beforeMount(){
     axios.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
-      console.log(res.data)
-    })
-  },
-  beforeRouteUpdate(){
-    console.log("before")
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
-      console.log("get home")
+      //console.log(res.data.user);
+      this.user = res.data.user;
+      console.log("bfmountid",this.user.loginId);
+      axios.post('http://localhost:8000/home/deadlinelist',{userId: this.user.loginId}).then(res => {
+      console.log("mountedid2",this.user.loginId);
+      console.log(res.data);
       this.hwList = res.data
-      console.log(res.data)
-
-    location.reload();
-    })
-      for(var i = 0; i<this.hwList.length; i++){
-          if(this.hwList[i].status != 0){
-              this.hwList.splice(i,1)
-          }
-      }
-  },
-  created() {
-    console.log(this.$route.name)
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
-      console.log("get home")
-      this.hwList = res.data
-      console.log(res.data)
-      //location.reload();
       this.splitDate();
       this.dayRemain();
-    })
-      for(var i = 0; i<this.hwList.length; i++){
-          if(this.hwList[i].status != 0){
-              this.hwList.splice(i,1)
-          }
-      }
+      console.log(this.hwList)
+    });
+    });
   },
+  // mounted(){
+  //   axios.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
+  //     console.log(res.data)
+  //   })
+  // },
+  beforeRouteUpdate(){
+    axios.post('http://localhost:8000/home/deadlinelist',{userId: this.user.loginId}).then(res => {
+    console.log(this.user.loginId)
+    this.hwList = res.data
+    location.reload();
+    })
+    for(var i = 0; i<this.hwList.length; i++){
+      if(this.hwList[i].status != 0){
+        this.hwList.splice(i,1)
+      }
+    }
+  },
+  // created() {
+  //   console.log(this.$route.name)
+  //   axios.get('http://localhost:8000/home/deadlinelist').then(res => {
+  //     console.log("get home")
+  //     this.hwList = res.data
+  //     console.log(res.data)
+  //     //location.reload();
+  //     this.splitDate();
+  //     this.dayRemain();
+  //   })
+  //     // for(var i = 0; i<this.hwList.length; i++){
+  //     //     if(this.hwList[i].status != 0){
+  //     //         this.hwList.splice(i,1)
+  //     //     }
+  //     // }
+  // },
   methods : {
+    logout(){
+      localStorage.clear();
+      this.$router.push('/')
+    },
     splitDate(){
       var stDate = {
         year: "",
@@ -175,7 +191,6 @@ export default {
     },
   },
   components: {
-    Slide,
     Zondicon
   }
 }

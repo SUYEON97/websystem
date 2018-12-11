@@ -57,31 +57,46 @@ export default {
   data: function() {
     return {
       hwList: [],
-      //user: {userId:0},
+      user: {},
       name: this.$route.params.name,
       color:''
     }
   },
-  beforeRouteUpdate(){
-    console.log("before")
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
-      console.log("get home")
+  beforeMount(){
+    axios.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
+      this.user = res.data.user;
+      console.log("bfmountid",this.user.loginId);
+      axios.post('http://localhost:8000/home/deadlinelist',{userId: this.user.loginId}).then(res => {
+      console.log("mountedid2",this.user.loginId);
       this.hwList = res.data
-      console.log(res.data)
+      this.splitDate();
 
+      console.log(this.hwList)
+    });
+    });
+  },
+  beforeRouteUpdate(){
+    axios.post('http://localhost:8000/home/deadlinelist',{userId: this.user.loginId}).then(res => {
+    console.log(this.user.loginId)
+    this.hwList = res.data
     location.reload();
     })
+    for(var i = 0; i<this.hwList.length; i++){
+      if(this.hwList[i].status == 0){
+        this.hwList.splice(i,1)
+      }
+    }
   },
-  created() {
-    console.log("created")
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
-      console.log("get home")
-      this.hwList = res.data
-      console.log(res.data)
-      //location.reload();
-      this.splitDate();
-    })
-  },
+  // created() {
+  //   console.log("created")
+  //   axios.get('http://localhost:8000/home/deadlinelist').then(res => {
+  //     console.log("get home")
+  //     this.hwList = res.data
+  //     console.log(res.data)
+  //     //location.reload();
+  //     this.splitDate();
+  //   })
+  // },
   methods : {
     splitDate(){
       var stDate = {
@@ -102,13 +117,8 @@ export default {
         this.hwList[i].day = stDate.day;
       }
     },
-    deleteTodo(todo) {
-      const todoIndex = this.hwList.indexOf(todo);
-      this.hwList.splice(todoIndex, 1);
-    }
   },
   components: {
-    Slide,
       Zondicon
   }
 }

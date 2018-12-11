@@ -1,15 +1,16 @@
 <template>
   <div id="app">
     <div id="nav">
-      <b-navbar v-if='this.$route.name!="Login"' style="margin-bottom:50px" toggleable="md" type="dark" variant="info">
+      <b-navbar v-if='this.$route.name!="Login"' style="margin-bottom:50px; height:50px" toggleable="md" type="dark" variant="info">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
 
-      <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'Home', params: {name: this.name}}">Home</router-link></span></b-navbar-brand>
-      <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'Information', params: {name: this.name}}">Information</router-link></span></b-navbar-brand>
-      <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span></b-navbar-brand>
+      <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'Home'}">Home</router-link></span></b-navbar-brand>
+      <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'Information'}">Information</router-link></span></b-navbar-brand>
+      <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'regist'}">과제등록</router-link></span></b-navbar-brand>
       <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'history'}">히스토리</router-link></span></b-navbar-brand>
       <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span></b-navbar-brand>
+
 
       <b-collapse is-nav id="nav_collapse">
 
@@ -40,7 +41,7 @@
             <template slot="button-content">
               <em>User</em>
             </template>
-            <b-dropdown-item v-on:click='test'>Profile</b-dropdown-item>
+            <b-dropdown-item>Profile</b-dropdown-item>
             <b-dropdown-item v-on:click='logout'>Signout</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -74,14 +75,15 @@ import Login from './components/login/Login'
             console.log('profile');
           },
           logout(){
-            console.log('logout');
+            localStorage.clear();
+            this.$router.push('/')
           }
         }
 
     }
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -99,6 +101,6 @@ import Login from './components/login/Login'
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: white;
 }
 </style>

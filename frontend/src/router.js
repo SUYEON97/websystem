@@ -19,12 +19,22 @@ Vue.use(Router)
 
 function loggedin(to, from, next) {
   if(!localStorage.token){
+    alert('로그인 하세요')
     next('/')
   }
   else{
     next();
   }
 }
+function login(to, from, next) {
+  if(localStorage.token){
+    next('/home')
+  }
+  else{
+    next();
+  }
+}
+
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -32,13 +42,19 @@ export default new Router({
     {
       path: '/',
       name: 'Login',
-      component: Login
+      component: Login,
+      beforeEnter: login
     },
     {
       path: '/login/signup',
       name: 'SignUp',
       component: SignUp,
-
+      beforeEnter: login
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      redirect: '/'
     },
     {
       path: '/information',
@@ -50,7 +66,8 @@ export default new Router({
     {
       path: '/changepw',
       name: 'ChangePw',
-      component: ChangePw
+      component: ChangePw,
+      beforeEnter: loggedin
     },
     {
       path: '/home',
@@ -61,40 +78,50 @@ export default new Router({
     {
       path: '/regist',
       name: 'regist',
-      component: registTodo
-    },{
-          path: '/board/:boardId',
-          name: 'board',
-          component: Board
-      }, {
-          path: '/write',
-          name: 'write',
-          component: Write
-      },{
-           path:'/communite',
-          name:'communiteHome',
-          component:communiteHome
-      },
-      {
-        path: '/history',
-        name: 'history',
-        component:History
-      },
-      {
-          path: '/workBoard',
-          name: 'workBoardHome',
-          component:workBoardHome
-      },
-      {
-          path: '/writeWorkBoard',
-          name: 'writeWorkBoard',
-          component: writeWorkBoard
-      },
-      {
-          path: '/workBoard/:boardId',
-          name: 'workBoard',
-          component: workBoard
-      }
-
+      component: registTodo,
+      beforeEnter: loggedin
+    },
+    {
+      path: '/board/:boardId',
+      name: 'board',
+      component: Board,
+      beforeEnter: loggedin
+    },
+    {
+      path: '/write',
+      name: 'write',
+      component: Write,
+      beforeEnter: loggedin
+    },
+    {
+      path:'/communite',
+      name:'communiteHome',
+      component:communiteHome,
+      beforeEnter: loggedin
+    },
+    {
+      path: '/history',
+      name: 'history',
+      component:History,
+      beforeEnter: loggedin
+    },
+    {
+      path: '/workBoard',
+      name: 'workBoardHome',
+      component:workBoardHome,
+      beforeEnter: loggedin
+    },
+    {
+      path: '/writeWorkBoard',
+      name: 'writeWorkBoard',
+      component: writeWorkBoard,
+      beforeEnter: loggedin
+    },
+    {
+      path: '/workBoard/:boardId',
+      name: 'workBoard',
+      component: workBoard,
+      beforeEnter: loggedin
+    }
   ]
 })
