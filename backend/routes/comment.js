@@ -1,6 +1,8 @@
 const Router = require('Express')
 const router = Router()
 const commentModel = require('../db/models/comment')
+const boardModel = require('../db/models/board')
+var Num=[]
 
 router.post('/create', (req,res) => {
     var comments = new commentModel({
@@ -9,7 +11,16 @@ router.post('/create', (req,res) => {
     });
 
     comments.save(function(err){
-        console.log(comments)
+        if(Num[req.body.boardId]==null){
+            Num[req.body.boardId]=0;
+        }
+        Num[req.body.boardId]++;
+        boardModel.findOneAndUpdate({boardId: req.body.boardId},{commentNum:Num[req.body.boardId]}, function (err, result) {
+
+            if(err) return console.log(err)
+        }).catch((err)=>{
+            console.error(err);
+        })
         if(err) return console.log('save error')
         return res.end()
     })

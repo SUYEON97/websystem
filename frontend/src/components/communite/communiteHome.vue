@@ -30,6 +30,7 @@
                         <p id="titleForm">{{Theme.title}}</p>
                         <!--<p id="timeForm">{{Theme.time}}</p>-->
                         <p id="timeForm">{{Theme.month}}.{{Theme.day}}   {{Theme.hour}}:{{Theme.min}} </p>
+                        <p id="commentNum"> <Zondicon icon="chat-bubble-dots" class="Num"></Zondicon>{{Theme.commentNum}}</p>
                     </router-link>
                 </li>
             </ul>
@@ -190,6 +191,10 @@
         height: 25px;
         width : 40px;
     }
+    .Num{
+        height: 20px;
+        width : 30px;
+    }
 
     ul{
         border: 2px solid #EEEEEE;
@@ -200,6 +205,9 @@
         padding-bottom: 50%;
         width: 800px;
         height: auto;
+    }
+    #commentNum{
+        text-align: right;
     }
 
 </style>

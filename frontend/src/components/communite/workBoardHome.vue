@@ -30,7 +30,8 @@
                         <p id="titleForm">{{Theme.title}}</p>
 
                         <p id="timeForm">{{Theme.month}}.{{Theme.day}}   {{Theme.hour}}:{{Theme.min}}
-                            <label id="what">{{Theme.major_name}} - {{Theme.subject_name}}</label></p>
+                            <p id="what">{{Theme.major_name}} - {{Theme.subject_name}}</p>
+                        <label id="commentNum"> <Zondicon icon="chat-bubble-dots" class="Num"></Zondicon>{{Theme.commentNum}}</label>
                     </router-link>
                 </li>
             </ul>
@@ -256,6 +257,13 @@
         text-decoration: none;
         color: black;
     }
+    .Num{
+        height: 20px;
+        width : 30px;
+    }
+    #commentNum{
+        float: right;
+    }
     .newWrite{
 
         margin-left: 1000px;
@@ -284,9 +292,9 @@
         width: 800px;
         height: auto;
     }
-#what{
-float: right;
-    font-style: italic;
-}
+    #what{
+        text-align: left;
+        font-style: italic;
+    }
 
 </style>
