@@ -18,7 +18,6 @@
             <ul class="commentL">
                 <li v-for="co in commentList" v-bind:key="co.commentId">
                     <p class="annoy2"><Zondicon icon="user" class="image2"></Zondicon><strong>익명</strong></p>
-                    <p id="commentTimeForm">{{co.month}}.{{co.day}}   {{co.hour}}:{{co.min}} </p>
                     {{co.content}}
                 </li>
             </ul>
@@ -71,56 +70,25 @@
             getCommentList : function () {
                 this.$http.get('http://localhost:8000/workComment/list').then((result) => {
                     this.commentList = result.data.filter(c=>c.boardId==this.boardId)
-                    this.splitDate()
-                    console.log(this.commentList[1].month)
                 })
 
             },
             newbutton : function() {
-                this.$http.post('http://localhost:8000/workComment/create',{content:this.newComment, boardId:this.boardId}).then((result) => {
-                    this.newComment=""
-                    this.getCommentList()
+                if(this.newComment==''){
+                    alert('내용을 적어주세요')
                     this.$router.push({name: "workBoard"})
-                })
+                }
+                else{
+                    this.$http.post('http://localhost:8000/workComment/create',{content:this.newComment, boardId:this.boardId}).then((result) => {
+                        this.newComment=""
+                        this.getCommentList()
+                        this.$router.push({name: "workBoard"})
+                    })}
             },
             listView : function () {
                 this.$router.push({name: "workBoardHome"})
             },
-            splitDate(){
-                var stDate = {
-                    year: "",
-                    month: "",
-                    day: "",
-                    time : "",
-                    hour :"",
-                    min :"",
-                };
-                var arr=[];
-                var arr2=[];
-                var arr3=[];
-                for(var i=0; i<this.commentList.length; i++){
-                    arr = this.commentList[i].time.split("-")
-
-                    stDate.year = arr[0];
-                    stDate.month = arr[1];
-                    arr2 = arr[2].split("T");
-
-                    stDate.day = arr2[0];
-                    stDate.time = arr2[1];
-                    arr3=arr2[1].split(":");
-
-                    stDate.hour=arr3[0];
-                    stDate.min=arr3[1];
-                    this.commentList[i].year = stDate.year;
-                    this.commentList[i].month = stDate.month;
-                    this.commentList[i].day = stDate.day;
-                    this.commentList[i].hour = stDate.hour;
-                    this.commentList[i].min = stDate.min;
-                    // console.log(this.commentList[i].month)
-
-                }
-
-            }},
+        },
         created: function () {
             this.getCommentList()
         },

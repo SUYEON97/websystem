@@ -48,7 +48,11 @@
         },
         methods: {
             newbutton: function () {
-                //console.log(this.selected)
+                if(this.newContent==''||this.newTitle==''||this.selected==''||this.selected2==''){
+                    alert('형식이 올바르지 않습니다. 확인해주세요!')
+                    this.$router.push({name: "write"})
+                }
+                else{
                 this.$http.post('http://localhost:8000/writeWorkBoard', {
                     title: this.newTitle,
                     content: this.newContent,
@@ -60,7 +64,7 @@
                     this.selected=''
                     this.selected2=''
                     this.$router.push({name: "workBoardHome"})
-                })
+                })}
             },
             returnButton: function (){
                 this.$router.push({name: "workBoardHome"})

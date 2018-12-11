@@ -23,6 +23,11 @@ const workCommentSchema = new mongoose.Schema({
     content: {
         type : String,
         required : true
+    },
+    commentNum:{
+        type : Number,
+        default : 0,
+        required : true
     }
 })
 

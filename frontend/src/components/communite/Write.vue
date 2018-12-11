@@ -35,6 +35,12 @@
         },
         methods: {
             newbutton: function () {
+
+                if(this.newContent==''||this.newTitle==''){
+                    alert('형식이 올바르지 않습니다. 확인해주세요!')
+                    this.$router.push({name: "write"})
+                }
+                else{
                 this.$http.post('http://localhost:8000/write', {
                     title: this.newTitle,
                     content: this.newContent
@@ -42,7 +48,7 @@
                     this.newTitle = ''
                     this.newContent = ''
                     this.$router.push({name: "communiteHome"})
-                })
+                })}
             },
             returnButton: function (){
                 this.$router.push({name: "communiteHome"})

@@ -1,24 +1,25 @@
 <template>
     <div class="communiteHome" style="margin-top: 50px;">
         <Slide width='200'>
-          <a id="home" href="#">
-            <span><router-link :to="{name: 'Home'}">home</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'Information'}">information</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'regist'}">과제등록</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link v-on:click.native="logout" :to="{name: 'Logout'}">log out</router-link></span>
-          </a>
+            <a id="home" href="#">
+                <span><router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'Information', params: {name: this.name}}">information</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+            </a>
+
         </Slide>
         <router-link to="/communite" class="temp" style=" color : black;">자유게시판  |  </router-link><router-link to="/workBoard" class="temp" style=" color : black;">과제게시판</router-link>
         <div class="inDiv">
@@ -49,20 +50,10 @@
         data: function () {
             return {
                 list: [],
-                user:{}
             }
-        },
-        mouted(){
-            this.$http.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
-            console.log(res.data)
-            this.user = res.data.user
-            })
-        },
+        }
+        ,
         methods: {
-            logout(){
-      localStorage.clear();
-      this.$router.push('/')
-    },
             getList: function () {
                 this.$http.get('http://localhost:8000/board/list').then((result) => {
                     this.list = result.data;
@@ -190,12 +181,12 @@
     .w{
         height: 25px;
         width : 40px;
+        margin-right: 5px;
     }
     .Num{
         height: 20px;
         width : 30px;
     }
-
     ul{
         border: 2px solid #EEEEEE;
         margin:0 auto;

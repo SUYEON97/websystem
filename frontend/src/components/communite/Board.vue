@@ -45,11 +45,11 @@
         data: function () {
             return {
                 collectList: [],
-                listTitle: "",
-                listContent: "",
-                commentList :[],
-                newComment : "",
-                boardId: this.$route.params.boardId,
+                listTitle: "",//글 제목
+                listContent: "",//글 내용
+                commentList :[],//댓글 리스트불러오기
+                newComment : "",//댓글 내용
+                boardId: this.$route.params.boardId, //들어와있는 게시판 글 아이디
             }
         },
         beforeRouteUpdate(to, from, next) {
@@ -62,7 +62,7 @@
                 this.listContent = this.collectList[0].content
                 next()
             })
-        },
+        }, //boardId 바뀔때 마다 다시 업데이트
         components : {
             Zondicon
         },
@@ -70,18 +70,23 @@
             getCommentList : function () {
                 this.$http.get('http://localhost:8000/comment/list').then((result) => {
                     this.commentList = result.data.filter(c=>c.boardId==this.boardId)
-                })
+                })//board list 불러오기
             },
             newbutton : function() {
+                if(this.newComment==''){
+                    alert('내용을 적어주세요')
+                    this.$router.push({name: "board"})
+                }
+                else{
                 this.$http.post('http://localhost:8000/comment/create',{content:this.newComment, boardId:this.boardId}).then((result) => {
                     this.newComment=""
                     this.getCommentList()
                     this.$router.push({name: "board"})
-                })
+                })} // 글쓰기 버튼 누르면 댓글 생성 후 다시 원페이지로
             },
             listView : function () {
                 this.$router.push({name: "communiteHome"})
-            }
+            }//다시 원래 게시판글보기로 돌아가기
         },
         created: function () {
             this.getCommentList()
@@ -104,9 +109,6 @@
                     // console.log(this.commentContentList)
                 })
         },
-        // component :{
-        //     comment
-        // }
     }
 </script>
 

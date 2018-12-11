@@ -1,24 +1,24 @@
 <template>
     <div class="workBoardHome" style="margin-top: 50px;">
         <Slide width='200'>
-          <a id="home" href="#">
-            <span><router-link :to="{name: 'Home'}">home</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'Information'}">information</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'regist'}">과제등록</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link v-on:click.native="logout" :to="{name: 'Logout'}">log out</router-link></span>
-          </a>
+            <a id="home" href="#">
+                <span><router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'Information', params: {name: this.name}}">information</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
+            </a>
+            <a href ="#">
+                <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
+            </a>
         </Slide>
         <router-link to="/communite" class="temp" style=" color : black;">자유게시판  |  </router-link><router-link to="/workBoard" class="temp" style=" color : black;">과제게시판</router-link>
         <div class="inDiv">
@@ -30,20 +30,22 @@
                         <p id="titleForm">{{Theme.title}}</p>
 
                         <p id="timeForm">{{Theme.month}}.{{Theme.day}}   {{Theme.hour}}:{{Theme.min}}
-                            <p id="what">{{Theme.major_name}} - {{Theme.subject_name}}</p>
-                        <label id="commentNum"> <Zondicon icon="chat-bubble-dots" class="Num"></Zondicon>{{Theme.commentNum}}</label>
+                        <p id="what">{{Theme.major_name}} - {{Theme.subject_name}}
+                            <label id="commentNum"> <Zondicon icon="chat-bubble-dots" class="Num"></Zondicon>{{Theme.commentNum}}</label>
+                        </p>
+
                     </router-link>
                 </li>
             </ul>
-<div class="select-group">
-            <select v-model="selected" class="select" name="items1" v-on:change="filter">
-                <option v-for="majorlist in majorList" :key="majorlist.id" v-if="majorlist.majorNameId==1">{{majorlist.majorName}}</option>
-            </select>
-            <select v-model="selected2" class="select" name="items2">
-                <option v-for="subjectlist in subjectList" :key="subjectlist.id">{{subjectlist.subjectName}}</option>
-            </select>
-        </div>
-            <b-btn @click="find">찾기</b-btn>
+            <div class="select-group">
+                <select v-model="selected" class="select" name="items1" v-on:change="filter">
+                    <option v-for="majorlist in majorList" :key="majorlist.id" v-if="majorlist.majorNameId==1">{{majorlist.majorName}}</option>
+                </select>
+                <select v-model="selected2" class="select" name="items2">
+                    <option v-for="subjectlist in subjectList" :key="subjectlist.id">{{subjectlist.subjectName}}</option>
+                </select>
+                <b-btn @click.prevent="Listfind">찾기</b-btn>
+            </div>
             <div class="page">
                 <p>Current page: {{ currentPage }}</p>
                 <b-pagination align="center" size="md" :total-rows="100" v-model="currentPage" :length="numOfPages">
@@ -65,6 +67,7 @@
             return {
                 list: [],
                 findList :[],
+                findList2:[],
                 userWant : "",
                 currentPage:1,
                 dataPerPage:10,
@@ -72,20 +75,11 @@
                 subjectList:[],
                 selected: "",
                 selected2: "",
-                user:{}
+                wantlist:[],
             }
-        },
-        mouted(){
-            this.$http.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
-            console.log(res.data)
-            this.user = res.data.user
-            })
-        },
+        }
+        ,
         methods: {
-            logout(){
-      localStorage.clear();
-      this.$router.push('/')
-    },
             getList: function () {
                 this.$http.get('http://localhost:8000/workBoard/list').then((result) => {
                     this.list = result.data;
@@ -122,29 +116,24 @@
 
                 }
             },
-            find(){
+            Listfind(){
                 this.$http.get('http://localhost:8000/workBoard/list').then((result) => {
-                    this.list = result.data.filter(c=>c.major_name={$regex:this.userWant})
+                    this.findList = result.data
+                    console.log(this.findList)
+                    //console.log(this.selected2)
+                    var k = 0;
+                    for (var i = 0; i < this.findList.length; i++) {
+                        if(this.findList[i].subject_name==this.selected2){
+                            this.findList2[k] = this.findList[i]
+                            k++
+                        } //전공이름이 같을 경우
+
+                    }
+                    this.list = this.findList2
                     this.splitDate();
-            })
-            },
-            newbutton: function () {
-                //console.log(this.selected)
-                this.$http.post('http://localhost:8000/writeWorkBoard', {
-                    title: this.newTitle,
-                    content: this.newContent,
-                    major_name:this.selected,
-                    subject_name:this.selected2
-                }).then((result) => {
-                    this.newTitle = ''
-                    this.newContent = ''
-                    this.selected=''
-                    this.selected2=''
-                    this.$router.push({name: "workBoardHome"})
+                    console.log(this.list)
+
                 })
-            },
-            returnButton: function (){
-                this.$router.push({name: "workBoardHome"})
             },
             callMajorList:function(){
                 this.$http.get('http://localhost:8000/regist/subject').then((response)=> {
@@ -162,7 +151,6 @@
                         this.subjectList[k] = this.majorList[i];
                         k++
                     } //전공이름이 같을 경우
-
                 }
                 console.log(this.subjectList)
             },
@@ -170,7 +158,7 @@
         ,
         created: function () {
             this.getList()
-
+            this.callMajorList()
         },
         computed:{
             startOffset(){
@@ -197,8 +185,8 @@
 
 <style scoped>
     /** {*/
-        /*box-sizing: border-box;*/
-        /*font-family: "Open Sans";*/
+    /*box-sizing: border-box;*/
+    /*font-family: "Open Sans";*/
     /*}*/
 
     .temp {
@@ -216,8 +204,8 @@
     #titleForm {
         text-align: left;
         margin-top: 0.2em;
-        margin-bottom: 0.2em;
-        font-size: 20px;
+        margin-bottom: 0.3em;
+        font-size: 23px;
     }
 
     #timeForm {
