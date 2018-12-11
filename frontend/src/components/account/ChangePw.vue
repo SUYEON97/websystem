@@ -2,16 +2,22 @@
     <div>
       <Slide width='200'>
           <a id="home" href="#">
-            <span><router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link></span>
+            <span><router-link :to="{name: 'Home'}">home</router-link></span>
           </a>
           <a href ="#">
-            <span><router-link :to="{name: 'Information', params: {name: this.name}}">information</router-link></span>
+            <span><router-link :to="{name: 'Information'}">information</router-link></span>
           </a>
           <a href ="#">
-            <span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span>
+            <span><router-link :to="{name: 'regist'}">과제등록</router-link></span>
           </a>
           <a href ="#">
             <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+          </a>
+          <a href ="#">
+            <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
+          </a>
+          <a href ="#">
+            <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
           </a>
         </Slide>
         <h1>Change Password</h1>
@@ -28,7 +34,7 @@ import { Slide } from 'vue-burger-menu'
 export default {
     data(){
         return{
-            name: this.$route.params.name,
+            loginId: this.$route.params.logindId,
             password:{
                 present:'',
                 change:''
@@ -37,10 +43,11 @@ export default {
     },
     methods:{
         change(){
-            this.$http.post('http://localhost:8000/user/changepw', {presentpw: this.password.present, changepw: this.password.change, name: this.name}).then((res)=>{
+            this.$http.post('http://localhost:8000/user/changepw', {presentpw: this.password.present, changepw: this.password.change, loginId: this.loginId}).then((res)=>{
                 if(res.data.result == 1){
                     alert('success');
-                    this.$router.push({name: 'Information', params: {name: this.name}});
+                    this.$router.push({name: 'Information'});
+                    //토큰 삭제 재 로그인
                 }
             })
         }

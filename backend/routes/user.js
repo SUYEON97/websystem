@@ -9,19 +9,6 @@ router.use(bodyParser.urlencoded({
 }));
 router.use(bodyParser.json());
 
-router.get('/:name', function(req, res){
-    console.log("menu");
-    let username = req.params.name;
-
-    User.findOne({userName: username}, function(err, user){
-
-        if(err){
-            console.log("err")
-        }
-        res.send(user)
-
-    })
-})
 router.post('/changepw', function (req,res){
     console.log("changepw");
     var p = req.body.presentpw
