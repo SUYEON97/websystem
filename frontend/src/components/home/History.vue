@@ -17,7 +17,7 @@
         <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
       </a>
       <a href ="#">
-          <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+          <span><router-link v-on:click.native="logout" :to="{name: 'Logout'}">log out</router-link></span>
       </a>
     </Slide>
   <h1>History</h1>
@@ -77,7 +77,6 @@ export default {
   data: function() {
     return {
       hwList: [],
-      //user: {userId:0},
       user: {},
       color:''
     }
@@ -109,6 +108,10 @@ export default {
     })
   },
   methods : {
+    logout(){
+      localStorage.clear();
+      this.$router.push('/')
+    },
     splitDate(){
       var stDate = {
         year: "",

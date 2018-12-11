@@ -2,26 +2,25 @@
 
   <div id="app">
     <Slide width='200'>
-        <a id="home" href="#">
-          <span><router-link :to="{name: 'Home', params: {name: this.name}}">home</router-link></span>
-        </a>
-        <a href ="#">
-          <span><router-link :to="{name: 'Information', params: {name: this.name}}">information</router-link></span>
-        </a>
-        <a href ="#">
-          <span><router-link :to="{name: 'regist', params: {name: this.name}}">과제등록</router-link></span>
-        </a>
-        <a href ="#">
-            <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
-        </a>
-        <a href ="#">
-            <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
-        </a>
-        <a href ="#">
-            <span><router-link :to="{name: 'Login'}">log out</router-link></span>
-        </a>
-
-      </Slide>
+      <a id="home" href="#">
+        <span><router-link :to="{name: 'Home'}">home</router-link></span>
+      </a>
+      <a href ="#">
+        <span><router-link :to="{name: 'Information'}">information</router-link></span>
+      </a>
+      <a href ="#">
+        <span><router-link :to="{name: 'regist'}">과제등록</router-link></span>
+      </a>
+      <a href ="#">
+          <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
+      </a>
+      <a href ="#">
+        <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
+      </a>
+      <a href ="#">
+          <span><router-link v-on:click.native="logout" :to="{name: 'Logout'}">log out</router-link></span>
+      </a>
+    </Slide>
         <div style="margin-bottom: 20px;">
           <h2>ADD HOMEWORK</h2>
         </div>
@@ -73,19 +72,23 @@ import Zondicon from "vue-zondicons/src/components/Zondicon";
                 selected: '과를 선택해주세요',
                 selected2: '과목을 선택해주세요',
                 hwName:"",
-                name: this.$route.params.name
+                user:{}
             }
         },
         mounted(){
     this.$http.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
       console.log(res.data)
       this.user = res.data.user
+      console.log(this.user)
     })
   },
         methods:{
-
+            logout(){
+      localStorage.clear();
+      this.$router.push('/')
+    },
             callMajorList:function(){
-                this.$http.get('http://localhost:8000/regist/subject').then((response)=> {
+                this.$http.get('http://localhost:8000/regist/subject',{user: this.user}).then((response)=> {
                     this.majorList = response.data;//모든 리스트 다 가져옴
                      console.log(response.data);
                 }).catch((error)=> {
@@ -105,8 +108,9 @@ import Zondicon from "vue-zondicons/src/components/Zondicon";
                 console.log(this.subjectList)
             },
             writeHwname:function () {
+                console.log(this.user.loginId)
                 this.$http.post('http://localhost:8000/regist/register',
-                    {hw_name: this.hwName,subject_name:this.selected2 ,major_name: this.selected, hdate:this.date}).then( (response)=> {
+                    {userId: this.user.loginId, hw_name: this.hwName,subject_name:this.selected2 ,major_name: this.selected, hdate:this.date}).then( (response)=> {
                     this.hwName="";
                     this.selected ="";
                     this.selected2="";

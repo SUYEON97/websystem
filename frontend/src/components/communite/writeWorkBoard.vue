@@ -44,7 +44,6 @@
                 subjectList:[],
                 selected: "",
                 selected2: "",
-
             }
         },
         methods: {

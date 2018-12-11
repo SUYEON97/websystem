@@ -815,7 +815,8 @@ router.post('/register', (req, res) => {
     bbb.setHours(9);
 
         const newDeadline = new deadlineModel({
-            userId: 1,
+            
+            userId: req.body.userId,
             hw_name: req.body.hw_name,
             major_name: req.body.major_name,
             subject_name: req.body.subject_name,
@@ -823,7 +824,7 @@ router.post('/register', (req, res) => {
             timeRemaining: aaa,
             status: 0
         });
-
+        
         newDeadline.save(err => {
             if (err) return res.status(500).send(err);
             return res.end();

@@ -17,7 +17,7 @@
         <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
       </a>
       <a href ="#">
-          <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+          <span><router-link v-on:click.native="logout" :to="{name: 'logout'}">log out</router-link></span>
       </a>
     </Slide>
   <h1>Home</h1>
@@ -82,10 +82,6 @@
   </div>
 
   <br /><br /><br /><br /><br />
-
-
-
-
 </div>
 </template>
 
@@ -101,49 +97,51 @@ export default {
   data: function() {
     return {
       hwList: [],
-      //user: {userId:0},
       user: {},
       color:''
     }
   },
-  mounted(){
+  beforeMount(){
     axios.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
-      console.log(res.data)
-      this.user = res.data.user
-    })
-  },
-  beforeRouteUpdate(){
-    console.log("before")
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
-      console.log("get home")
-      this.hwList = res.data
-      console.log(res.data)
-
-    location.reload();
-    })
-      for(var i = 0; i<this.hwList.length; i++){
-          if(this.hwList[i].status != 0){
-              this.hwList.splice(i,1)
-          }
-      }
-  },
-  created() {
-    console.log("created")
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
-      console.log("get home")
-      this.hwList = res.data
-      console.log(res.data)
-      //location.reload();
+      this.user = res.data.user;
+      console.log("bfmountid",this.user.loginId);
+      axios.post('http://localhost:8000/home/deadlinelist',{userId: this.user.loginId}).then(res => {
+      console.log("mountedid2",this.user.loginId);
+      this.hwList = res.data  
       this.splitDate();
       this.dayRemain();
-    })
-      for(var i = 0; i<this.hwList.length; i++){
-          if(this.hwList[i].status != 0){
-              this.hwList.splice(i,1)
-          }
+      console.log(this.hwList)
+    });
+    });
+  },
+  /*
+  mounted(){
+    console.log("mountedid1",this.user.loginId);
+    
+    for(var i = 0; i<this.hwList.length; i++){
+      if(this.hwList[i].status != 0){
+        this.hwList.splice(i,1)
       }
+    }
+  },
+  */
+  beforeRouteUpdate(){
+    axios.get('http://localhost:8000/home/deadlinelist',{userId: this.user.loginId}).then(res => {
+    console.log(this.user.loginId)
+    this.hwList = res.data
+    location.reload();
+    })
+    for(var i = 0; i<this.hwList.length; i++){
+      if(this.hwList[i].status != 0){
+        this.hwList.splice(i,1)
+      }
+    }
   },
   methods : {
+    logout(){
+      localStorage.clear();
+      this.$router.push('/')
+    },
     splitDate(){
       var stDate = {
         year: "",

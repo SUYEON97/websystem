@@ -23,8 +23,8 @@
         methods:{
             login() {
                 this.$http.post('http://localhost:8000/auth/login',{user: this.user}).then((response)=>{
-                    alert('success')
-                    localStorage.token = response.data.token;
+                    alert('success');
+                    localStorage.setItem('token',response.data.token);
                     this.$router.push({name: "Home"});
                 },(error)=>{
                     console.log('err')

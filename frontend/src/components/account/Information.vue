@@ -11,13 +11,13 @@
             <span><router-link :to="{name: 'regist'}">과제등록</router-link></span>
           </a>
           <a href ="#">
-            <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+            <span><router-link :to="{name: 'Logout'}">log out</router-link></span>
           </a>
           <a href ="#">
             <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
           </a>
           <a href ="#">
-            <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
+            <span><router-link v-on:click.native="logout" :to="{name: 'history'}">히스토리</router-link></span>
           </a>
         </Slide>
         <h1>Information</h1>
@@ -39,6 +39,12 @@ export default {
       console.log(res.data)
       this.user = res.data.user
     })
+  },
+  method:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/')
+    },
   },
     components: {
       Slide

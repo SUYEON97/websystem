@@ -51,6 +51,11 @@ export default new Router({
       beforeEnter: login
     },
     {
+      path: '/logout',
+      name: 'logout',
+      redirect: '/'
+    },
+    {
       path: '/information',
       name: 'Information',
       component: Information,

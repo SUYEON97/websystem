@@ -6,7 +6,7 @@ const deadLineSchema = new mongoose.Schema({
       unique: true
     },
     userId: {
-      type: Number,
+      type: String,
       required: true
     },
     major_name: {

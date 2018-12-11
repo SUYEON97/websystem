@@ -11,7 +11,7 @@
             <span><router-link :to="{name: 'regist'}">과제등록</router-link></span>
           </a>
           <a href ="#">
-            <span><router-link :to="{name: 'Login'}">log out</router-link></span>
+            <span><router-link :to="{name: 'Logout'}">log out</router-link></span>
           </a>
           <a href ="#">
             <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
