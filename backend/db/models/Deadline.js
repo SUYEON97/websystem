@@ -13,6 +13,10 @@ const deadLineSchema = new mongoose.Schema({
       type: String,
       required: true
     },
+    subject_name: {
+      type: String,
+      required: true
+    },
     hw_name: {
       type: String,
       required: true

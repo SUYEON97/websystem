@@ -8,8 +8,9 @@
         <ul class="list-group">
             <li class="list-group-item" style="border-color: blue; background-color: white; color:black">
                 <label class="work2">
-                    <p class="historyname" style="font-size:18px" >과제이름: {{hw.hw_name}}</p>
-                    <p class="historydate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                  <p class="deadlinename" style="font-size:16px; text-align:left">과목명: {{hw.subject_name}}</p>
+                    <p class="historyname" style="font-size:16px; text-align:left" >과제이름: {{hw.hw_name}}</p>
+                    <p class="historydate" style="font-size:16px; text-align:left">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
                 </label>
                 <label class="iconloc">
                     <Zondicon  icon="mood-happy-outline" class="historyicon"></Zondicon>
@@ -26,8 +27,9 @@
         <ul class="list-group">
             <li class="list-group-item" style="border-color: red; background-color: white; color:black;">
                 <label class="work2">
-                    <p class="historyname" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
-                    <p class="historydate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                  <p class="deadlinename" style="font-size:16px"> 과목명: {{hw.subject_name}}</p>
+                    <p class="historyname" style="font-size:16px">과제이름: {{hw.hw_name}}</p>
+                    <p class="historydate" style="font-size:16px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
                 </label>
                 <label class="iconloc">
                     <Zondicon style="color: blue;" icon="mood-sad-outline" class="historyicon"></Zondicon>

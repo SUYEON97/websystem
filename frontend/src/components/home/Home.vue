@@ -10,8 +10,9 @@
       <ul class="list-group">
             <li class="list-group-item">
                 <label>
-                    <p class="deadlinename" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
-                    <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                  <p class="deadlinename" style="font-size:16px; text-align:left"> 과목명: {{hw.subject_name}}</p>
+                    <p class="deadlinename" style="font-size:16px; text-align:left">과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate" style="font-size:16px; text-align:left;margin-left:10px ">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
                 </label>
                 <label style="padding-left: 20px;">
                     {{hw.dayRm}}일 남음
@@ -28,10 +29,11 @@
         <ul class="list-group">
             <li class="list-group-item" style="background-color: #e26666; color:white">
                 <label>
-                    <p class="deadlinename" style="font-size:18px" >과제이름: {{hw.hw_name}}</p>
-                    <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                  <p class="deadlinename" style="font-size:16px; text-align:left"> 과목명: {{hw.subject_name}}</p>
+                    <p class="deadlinename" style="font-size:16px; text-align:left">과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate" style="font-size:16px; text-align:left;margin-left:10px ">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
                 </label>
-                <label style="padding-left: 20px;">
+                <label style="padding-left: 20px; ">
                     {{hw.dayRm}}일 남음
                 </label>
                 <b-button-group vertical class="button-group">
@@ -47,8 +49,9 @@
         <ul class="list-group">
             <li class="list-group-item" style="background-color: white; color:black">
                 <label>
-                    <p class="deadlinename" style="font-size:18px">과제이름: {{hw.hw_name}}</p>
-                    <p class="deadlinedate" style="font-size:18px">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
+                  <p class="deadlinename" style="font-size:16px; text-align:left"> 과목명: {{hw.subject_name}}</p>
+                    <p class="deadlinename" style="font-size:16px; text-align:left">과제이름: {{hw.hw_name}}</p>
+                    <p class="deadlinedate" style="font-size:16px; text-align:left;margin-left:10px ">데드라인: {{hw.year}}년 {{hw.month}}월 {{hw.day}}일</p>
                 </label>
                 <label style="padding-left: 20px;">
                     {{hw.dayRm}}일 남음
@@ -246,6 +249,7 @@ export default {
     }
     .deadlinename{
         margin-top: 5px;
+        margin-left: 10px;
     }
 
 #short {
