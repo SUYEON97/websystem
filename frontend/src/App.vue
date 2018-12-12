@@ -6,7 +6,7 @@
 
 
       <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'Home'}">Home</router-link></span></b-navbar-brand>
-      <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'Information'}">Information</router-link></span></b-navbar-brand>
+      <!--<b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'Information'}">Information</router-link></span></b-navbar-brand>-->
       <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'regist'}">과제등록</router-link></span></b-navbar-brand>
       <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'history'}">히스토리</router-link></span></b-navbar-brand>
       <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span></b-navbar-brand>
@@ -41,7 +41,7 @@
             <template slot="button-content">
               <em>User</em>
             </template>
-            <b-dropdown-item>Profile</b-dropdown-item>
+            <b-dropdown-item id="profile"><span><router-link :to="{name: 'Information'}">Profile</router-link></span></b-dropdown-item>
             <b-dropdown-item v-on:click='logout'>Signout</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -102,5 +102,8 @@ import Login from './components/login/Login'
 
 #nav a.router-link-exact-active {
   color: white;
+}
+#profile a.router-link-exact-active {
+  color: black;
 }
 </style>
