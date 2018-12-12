@@ -27,6 +27,11 @@ const boardSchema = new mongoose.Schema({
     title : {
         type : String,
         required : true
+    },
+    commentNum:{
+        type : Number,
+        default : 0,
+        required : true
     }
 })
 

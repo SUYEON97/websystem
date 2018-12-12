@@ -18,7 +18,6 @@
             <ul class="commentL">
                 <li v-for="co in commentList" v-bind:key="co.commentId">
                     <p class="annoy2"><Zondicon icon="user" class="image2"></Zondicon><strong>익명</strong></p>
-                    <p id="commentTimeForm">{{co.month}}.{{co.day}}   {{co.hour}}:{{co.min}} </p>
                     {{co.content}}
                 </li>
             </ul>
