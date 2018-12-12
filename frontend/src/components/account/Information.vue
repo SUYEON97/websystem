@@ -6,16 +6,16 @@
         <h2>내 글</h2>
         <ul class="paper">
           <li v-for="fpap in fbdlist" v-bind:key="fpap.boardId">
-            <p class="inpaper"><strong>[자유]{{fpap.title}}</strong>    {{fpap.content}}</p>
+            <router-link :to="{name : 'board', params: {boardId:fpap.boardId}}"><strong>[자유]{{fpap.title}}</strong>    {{fpap.content}}</router-link> 
           </li>
           <li v-for="wpap in wbdlist" v-bind:key="wpap.boardId">
-            <p class="inpaper"><strong>[과제]{{wpap.title}}</strong>    {{wpap.content}}</p>
+            <router-link :to="{name : 'workBoard', params: {boardId:wpap.boardId}}"><strong>[과제]{{wpap.title}}</strong>    {{wpap.content}}</router-link>
           </li>
           <li v-for="fcpap in fcmlist" v-bind:key="fcpap.boardId">
-            <p class="inpaper">[댓글]{{fcpap.content}}</p>
+                        <router-link :to="{name : 'board', params: {boardId:fcpap.boardId}}"><strong>[댓글]</strong>    {{fcpap.content}}</router-link> 
           </li>
           <li v-for="wcpap in wcmlist" v-bind:key="wcpap.boardId">
-            <p class="inpaper">[댓글]{{wcpap.content}}</p>
+                        <router-link :to="{name : 'workBoard', params: {boardId:wcpap.boardId}}"><strong>[댓글]</strong>    {{wcpap.content}}</router-link> 
           </li>
         </ul>
         <router-link v-on:click='deluser'>ㅌㅌㅌㅌ</router-link>
