@@ -3,13 +3,15 @@ const router = Router()
 const workCommentModel = require('../db/models/workComment')
 
 router.post('/create', (req,res) => {
+    console.log(req.body.userId)
     var workComments = new workCommentModel({
+        userId: req.body.userId,
         content: req.body.content,
         boardId : req.body.boardId
     });
 
     workComments.save(function(err){
-        if(err) return console.log('save error')
+        if(err) return console.error(err)
         return res.end()
     })
 })

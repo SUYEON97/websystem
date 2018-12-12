@@ -3,7 +3,10 @@ const router = Router()
 const commentModel = require('../db/models/comment')
 
 router.post('/create', (req,res) => {
+    console.log(req.body.userId)
     var comments = new commentModel({
+        
+        userId: req.body.userId,
         content: req.body.content,
         boardId : req.body.boardId
     });

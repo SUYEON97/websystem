@@ -114,17 +114,6 @@ export default {
     });
     });
   },
-  /*
-  mounted(){
-    console.log("mountedid1",this.user.loginId);
-    
-    for(var i = 0; i<this.hwList.length; i++){
-      if(this.hwList[i].status != 0){
-        this.hwList.splice(i,1)
-      }
-    }
-  },
-  */
   beforeRouteUpdate(){
     axios.get('http://localhost:8000/home/deadlinelist',{userId: this.user.loginId}).then(res => {
     console.log(this.user.loginId)

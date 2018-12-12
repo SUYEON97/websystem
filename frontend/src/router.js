@@ -52,7 +52,7 @@ export default new Router({
     },
     {
       path: '/logout',
-      name: 'logout',
+      name: 'Logout',
       redirect: '/'
     },
     {
@@ -88,7 +88,7 @@ export default new Router({
     },
     {
       path: '/write',
-      name: 'write',
+      name: 'Write',
       component: Write,
       beforeEnter: loggedin
     },

@@ -7,7 +7,7 @@ const workCommentSchema = new mongoose.Schema({
         required : true
     },
     userId: {
-        type : Number,
+        type : String,
         required : false,
 
     },

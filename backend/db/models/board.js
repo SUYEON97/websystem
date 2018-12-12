@@ -7,9 +7,8 @@ const boardSchema = new mongoose.Schema({
         required : true
     },
     userId: {
-        type : Number,
-        required : false
-
+        type : String,
+        required : true
     },
     time: {
         type : Date,

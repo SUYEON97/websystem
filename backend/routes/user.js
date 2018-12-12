@@ -1,7 +1,7 @@
 const { Router } = require('Express')
 const User = require('../db/models/user')
 const router = Router()
-const crypto = require('crypto')
+const bcrypt = require('bcrypt')
 const bodyParser = require('body-parser');
 
 router.use(bodyParser.urlencoded({
@@ -10,37 +10,43 @@ router.use(bodyParser.urlencoded({
 router.use(bodyParser.json());
 
 router.post('/changepw', function (req,res){
-    console.log("changepw");
+    //console.log("changepw");
     var p = req.body.presentpw
     var c = req.body.changepw
     let username = req.body.name
     //console.log(p, c, username)
 
-    let cipher = crypto.createCipher('aes128', 'key');
-    cipher.update(p, 'utf8', 'base64');
-    var cipheredOutput = cipher.final('base64');
-    p = cipheredOutput;
-
-    User.findOne({userName: username}, function(err, user){
-        //console.log(user)
-        if(err){
-            console.log("err")
+    User.findOne({loginId: username}, function (err, user) {
+        if(user) {
+            console.log(user)
+            bcrypt.compare(p, user.loginPw).then(result => {
+                if(result){
+                    console.log("현재 통과")
+                    bcrypt.hash(c, 12).then(hashed => {
+                        console.log(hashed)
+                        
+                        user.userName = user.userName;
+                        user.loginId = user.loginId;
+                        user.loginPw = hashed;
+    
+                        user.save(function (err) {
+                            if(err){
+                                console.error(err)
+                            }
+                            console.log("바꿈")
+                            res.json({result:1});
+                        });
+                    });
+                }
+                else{
+                    return res.status(404).json({error:'다시'});
+                }
+            })
         }
-        if(p != user.loginPw) return res.status(404).json({error:'not correct'});
-
-        let cipher = crypto.createCipher('aes128', 'key');
-        cipher.update(c, 'utf8', 'base64');
-        var cipheredOutput = cipher.final('base64');
-        user.loginPw = cipheredOutput;
-        user.save(function (err) {
-            if(err){
-                console.error(err)
-            }
-            res.send({result:1});
-            console.log("send")
-        });
-
-    })
+        else {
+            return res.status(404).json({error:'다시'});
+        }
+    });
 })
 
 module.exports = router

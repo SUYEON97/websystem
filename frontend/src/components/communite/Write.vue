@@ -29,13 +29,22 @@
         name: "Write",
         data: function () {
             return {
+                user:{},
                 newTitle: "",
                 newContent: "",
             }
         },
+        mounted(){
+            this.$http.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
+                this.user = res.data.user
+                console.log(this.user.loginId)
+            })
+        },
         methods: {
             newbutton: function () {
+                console.log(this.user.loginId)
                 this.$http.post('http://localhost:8000/write', {
+                    userId: this.user.loginId,
                     title: this.newTitle,
                     content: this.newContent
                 }).then((result) => {

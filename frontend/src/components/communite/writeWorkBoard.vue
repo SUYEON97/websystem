@@ -44,12 +44,20 @@
                 subjectList:[],
                 selected: "",
                 selected2: "",
+                user:{}
             }
+        },
+        mounted(){
+            this.$http.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
+                this.user = res.data.user
+                console.log(this.user.loginId)
+            })
         },
         methods: {
             newbutton: function () {
                 //console.log(this.selected)
                 this.$http.post('http://localhost:8000/writeWorkBoard', {
+                    userId: this.user.loginId,
                     title: this.newTitle,
                     content: this.newContent,
                     major_name:this.selected,

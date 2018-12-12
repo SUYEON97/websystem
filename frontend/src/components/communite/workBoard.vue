@@ -4,7 +4,7 @@
         <h1>과제게시판</h1>
         <div class="inDiv">
             <div class="collectBoard">
-                <div class="annoy"><Zondicon icon="user-solid-square" class="image"></Zondicon><strong>익명</strong></div>
+                <div class="annoy"><Zondicon icon="user-solid-square" class="image"></Zondicon><strong>{{this.collectList[0].userId}}</strong></div>
                 <p class="title">
                     <strong> {{this.listTitle}}</strong>
                 </p>
@@ -17,7 +17,7 @@
 
             <ul class="commentL">
                 <li v-for="co in commentList" v-bind:key="co.commentId">
-                    <p class="annoy2"><Zondicon icon="user" class="image2"></Zondicon><strong>익명</strong></p>
+                    <p class="annoy2"><Zondicon icon="user" class="image2"></Zondicon><strong>{{co.userId}}</strong></p>
                     <p id="commentTimeForm">{{co.month}}.{{co.day}}   {{co.hour}}:{{co.min}} </p>
                     {{co.content}}
                 </li>
@@ -52,6 +52,7 @@
                 commentList :[],
                 newComment : "",
                 boardId: this.$route.params.boardId,
+                user:{}
             }
         },
         beforeRouteUpdate(to, from, next) {
@@ -72,12 +73,11 @@
                 this.$http.get('http://localhost:8000/workComment/list').then((result) => {
                     this.commentList = result.data.filter(c=>c.boardId==this.boardId)
                     this.splitDate()
-                    console.log(this.commentList[1].month)
                 })
 
             },
             newbutton : function() {
-                this.$http.post('http://localhost:8000/workComment/create',{content:this.newComment, boardId:this.boardId}).then((result) => {
+                this.$http.post('http://localhost:8000/workComment/create',{userId: this.user.loginId, content:this.newComment, boardId:this.boardId}).then((result) => {
                     this.newComment=""
                     this.getCommentList()
                     this.$router.push({name: "workBoard"})
@@ -121,15 +121,16 @@
                 }
 
             }},
-        created: function () {
-            this.getCommentList()
-        },
         mounted() {
+            this.$http.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
+                this.user = res.data.user
+            })
             this.$http.get('http://localhost:8000/workBoard/' + this.boardId).then((result) => {
 
                 this.collectList = result.data.filter(c=>c.boardId==this.boardId)
                 this.listTitle = this.collectList[0].title
                 this.listContent = this.collectList[0].content
+                
             }),
                 this.$http.get('http://localhost:8000/workComment/list').then((result) => {
                     this.commentList = result.data.filter(c=>c.boardId==this.boardId)

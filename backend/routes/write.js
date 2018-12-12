@@ -4,14 +4,15 @@ const boardModel = require('../db/models/board')
 
 
 router.post('/', (req,res) => {
+    console.log(req.body.userId)
     var boards = new boardModel({
+        userId: req.body.userId,
         title: req.body.title,
         content: req.body.content
-        // userId : req.body.userId,
     });
 
     boards.save(function(err){
-        if(err) return console.log('save error')
+        if(err) return console.error(err)
         return res.end();
     })
 })

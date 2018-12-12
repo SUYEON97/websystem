@@ -22,7 +22,7 @@
         </Slide>
         <router-link to="/communite" class="temp" style=" color : black;">자유게시판  |  </router-link><router-link to="/workBoard" class="temp" style=" color : black;">과제게시판</router-link>
         <div class="inDiv">
-            <router-link to="/write" class="newWrite"><Zondicon icon="compose" class="w"></Zondicon></router-link>
+            <router-link :to="{name: 'Write'}" class="newWrite"><Zondicon icon="compose" class="w"></Zondicon></router-link>
             <div class="clickBoard">자유게시판</div>
             <ul>
                 <li id=question v-for="Theme in list" v-bind:key="Theme.boardId">
@@ -48,20 +48,13 @@
         data: function () {
             return {
                 list: [],
-                user:{}
             }
-        },
-        mouted(){
-            this.$http.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
-            console.log(res.data)
-            this.user = res.data.user
-            })
         },
         methods: {
             logout(){
-      localStorage.clear();
-      this.$router.push('/')
-    },
+            localStorage.clear();
+            this.$router.push('/')
+            },
             getList: function () {
                 this.$http.get('http://localhost:8000/board/list').then((result) => {
                     this.list = result.data;
@@ -94,15 +87,12 @@
                     this.list[i].day = stDate.day;
                     this.list[i].hour = stDate.hour;
                     this.list[i].min = stDate.min;
-
-
                 }
             },
         }
         ,
         created: function () {
             this.getList()
-
         },
         components: {
             Slide,
