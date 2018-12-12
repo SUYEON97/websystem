@@ -6,7 +6,6 @@
 
 
       <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'Home'}">Home</router-link></span></b-navbar-brand>
-      <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'Information'}">Information</router-link></span></b-navbar-brand>
       <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'regist'}">과제등록</router-link></span></b-navbar-brand>
       <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'history'}">히스토리</router-link></span></b-navbar-brand>
       <b-navbar-brand style="margin-left: 130px" href="#"><span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span></b-navbar-brand>

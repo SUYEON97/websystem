@@ -8,7 +8,7 @@ const User = require('../db/models/user')
 const { SECRET } = require('../constants');
 
 const signup = joi.object().keys({
-    name:joi.string().alphanum().min(3).max(30).required(),
+    name:joi.string().min(3).max(30).required(),
     id:joi.string().alphanum().min(4).max(30).required(),
     password:joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required()
 });

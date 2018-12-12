@@ -10,19 +10,24 @@
                         <p id="titleForm">{{Theme.title}}</p>
 
                         <p id="timeForm">{{Theme.month}}.{{Theme.day}}   {{Theme.hour}}:{{Theme.min}}
-                            <label id="what">{{Theme.major_name}} - {{Theme.subject_name}}</label></p>
+                        <p id="what">{{Theme.major_name}} - {{Theme.subject_name}}
+                            <label id="commentNum"> <Zondicon icon="chat-bubble-dots" class="Num"></Zondicon>{{Theme.commentNum}}</label>
+                        </p>
                     </router-link>
                 </li>
             </ul>
-<div class="select-group">
-            <select v-model="selected" class="select" name="items1" v-on:change="filter">
-                <option v-for="majorlist in majorList" :key="majorlist.id" v-if="majorlist.majorNameId==1">{{majorlist.majorName}}</option>
-            </select>
-            <select v-model="selected2" class="select" name="items2">
-                <option v-for="subjectlist in subjectList" :key="subjectlist.id">{{subjectlist.subjectName}}</option>
-            </select>
+            <div class="select-group">
+                <select v-model="selected" class="select" name="items1" v-on:change="filter">
+                    <option v-for="majorlist in majorList" :key="majorlist.id" v-if="majorlist.majorNameId==1">{{majorlist.majorName}}</option>
+                </select>
+                <select v-model="selected2" class="select" name="items2">
+                    <option v-for="subjectlist in subjectList" :key="subjectlist.id">{{subjectlist.subjectName}}</option>
+                </select>
+
+                <b-btn @click.prevent="Listfind">찾기</b-btn>
+            </div>
         </div>
-            <b-btn @click="find">찾기</b-btn>
+        <div>
             <div class="page">
                 <p>Current page: {{ currentPage }}</p>
                 <b-pagination align="center" size="md" :total-rows="100" v-model="currentPage" :length="numOfPages">
@@ -43,7 +48,9 @@
         data: function () {
             return {
                 list: [],
+                list2:[],
                 findList :[],
+                findList2:[],
                 userWant : "",
                 currentPage:1,
                 dataPerPage:10,
@@ -51,10 +58,11 @@
                 subjectList:[],
                 selected: "",
                 selected2: "",
+                wantlist:[],
                 user:{}
             }
         },
-        mouted(){
+        mounted(){
             this.$http.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
             console.log(res.data)
             this.user = res.data.user
@@ -101,29 +109,42 @@
 
                 }
             },
-            find(){
+            calData2:function(){
+                //this.list2=this.list
+                this.list= this.list.slice(this.startOffset,this.endOffset)
+                //this.list = list;
+                //page의 숫자와 page당 보여질 data의 갯수에 따라서 계산된 startOffset과 endOffset을 이용해
+                //slice 하여 return.
+            },
+            Listfind(){
+                // console.log(this.findList[])
+                if(this.findList2[0]!=null){
+                    for(var z=0;z<this.findList2.length;z++){
+                        this.findList2.pop()
+                    }
+                }
+                if(this.findList[0]!=null){
+                    for(var z=0;z<this.findList.length;z++){
+                        this.findList.pop()
+                    }
+                }
                 this.$http.get('http://localhost:8000/workBoard/list').then((result) => {
-                    this.list = result.data.filter(c=>c.major_name={$regex:this.userWant})
+                    this.findList = result.data
+                    console.log(this.findList)
+                    //console.log(this.selected2)
+                    var k = 0;
+                    for (var i = 0; i < this.findList.length; i++) {
+                        if(this.findList[i].subject_name==this.selected2){
+                            this.findList2[k] = this.findList[i]
+                            k++
+                        } //전공이름이 같을 경우
+                    }
+                    this.list = this.findList2
                     this.splitDate();
-            })
-            },
-            newbutton: function () {
-                //console.log(this.selected)
-                this.$http.post('http://localhost:8000/writeWorkBoard', {
-                    title: this.newTitle,
-                    content: this.newContent,
-                    major_name:this.selected,
-                    subject_name:this.selected2
-                }).then((result) => {
-                    this.newTitle = ''
-                    this.newContent = ''
-                    this.selected=''
-                    this.selected2=''
-                    this.$router.push({name: "workBoardHome"})
+                    //location.reload();
+                    this.calData2()
+                    //k=0;
                 })
-            },
-            returnButton: function (){
-                this.$router.push({name: "workBoardHome"})
             },
             callMajorList:function(){
                 this.$http.get('http://localhost:8000/regist/subject').then((response)=> {
@@ -141,7 +162,6 @@
                         this.subjectList[k] = this.majorList[i];
                         k++
                     } //전공이름이 같을 경우
-
                 }
                 console.log(this.subjectList)
             },
@@ -149,7 +169,7 @@
         ,
         created: function () {
             this.getList()
-
+            this.callMajorList()
         },
         computed:{
             startOffset(){
@@ -175,11 +195,6 @@
 </script>
 
 <style scoped>
-    /** {*/
-        /*box-sizing: border-box;*/
-        /*font-family: "Open Sans";*/
-    /*}*/
-
     .temp {
         font-size: 30px;
         text-align: center;
@@ -191,14 +206,12 @@
         width: 800px;
         font-size: 25px;
     }
-
     #titleForm {
         text-align: left;
         margin-top: 0.2em;
         margin-bottom: 0.2em;
         font-size: 20px;
     }
-
     #timeForm {
         margin-top: 0.2em;
         margin-bottom: 0.2em;
@@ -206,7 +219,6 @@
         text-align: left;
         margin-top: 5px;
     }
-
     #question {
         position: center;
         margin: 0.3em auto;
@@ -221,23 +233,26 @@
         transition: all 0.1s, border 0.25s ease-out;
         list-style: none;
     }
-
     a:link {
         text-decoration: none;
         color: white;
     }
-
     a:visited {
         text-decoration: none;
         color: white;
     }
-
     a:hover {
         text-decoration: none;
         color: black;
     }
+    .Num{
+        height: 20px;
+        width : 30px;
+    }
+    #commentNum{
+        float: right;
+    }
     .newWrite{
-
         margin-left: 1000px;
         margin-right: 500px;
         margin-bottom: 30px;
@@ -253,7 +268,6 @@
         height: 25px;
         width : 40px;
     }
-
     .boardList{
         border: 2px solid #EEEEEE;
         margin:0 auto;
@@ -264,9 +278,9 @@
         width: 800px;
         height: auto;
     }
-#what{
-float: right;
-    font-style: italic;
-}
+    #what{
+        text-align: left;
+        font-style: italic;
+    }
 
 </style>

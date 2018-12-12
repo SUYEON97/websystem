@@ -4,15 +4,23 @@
         <div class="inDiv">
             <router-link :to="{name: 'Write'}" class="newWrite"><Zondicon icon="compose" class="w"></Zondicon></router-link>
             <div class="clickBoard">자유게시판</div>
-            <ul>
-                <li id=question v-for="Theme in list" v-bind:key="Theme.boardId">
+            <ul class="boardList">
+                <li id=question v-for="Theme in calData" v-bind:key="Theme.boardId">
                     <router-link :to="{name : 'board', params: {boardId:Theme.boardId}}">
                         <p id="titleForm">{{Theme.title}}</p>
                         <!--<p id="timeForm">{{Theme.time}}</p>-->
                         <p id="timeForm">{{Theme.month}}.{{Theme.day}}   {{Theme.hour}}:{{Theme.min}} </p>
+                        <p id="commentNum"> <Zondicon icon="chat-bubble-dots" class="Num"></Zondicon>{{Theme.commentNum}}</p>
                     </router-link>
                 </li>
             </ul>
+        </div>
+        <div>
+            <div class="page">
+                <p>Current page: {{ currentPage }}</p>
+                <b-pagination align="center" size="md" :total-rows="100" v-model="currentPage" :length="numOfPages">
+                </b-pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -28,6 +36,8 @@
         data: function () {
             return {
                 list: [],
+                currentPage:1,
+                dataPerPage:10,
             }
         },
         methods: {
@@ -74,6 +84,22 @@
         created: function () {
             this.getList()
         },
+        computed:{
+            startOffset(){
+                return ((this.currentPage-1)*this.dataPerPage);
+            },
+            endOffset(){
+                return (this.startOffset+this.dataPerPage);
+            },
+            numOfPages(){//내가 받아오는 list를 보여줄 페이지 수로 잘라서 계산(math.ceil:소수점 이하 올림)
+                return Math.ceil(this.list.length/this.dataPerPage);
+            },
+            calData(){
+                return this.list.slice(this.startOffset,this.endOffset)
+                //page의 숫자와 page당 보여질 data의 갯수에 따라서 계산된 startOffset과 endOffset을 이용해
+                //slice 하여 return.
+            }
+        },
         components: {
             Slide,
             Zondicon
@@ -82,11 +108,6 @@
 </script>
 
 <style scoped>
-    * {
-        box-sizing: border-box;
-        font-family: "Open Sans";
-        /*font-size:30px;*/
-    }
     .clickBoard{
         font-size: 25px;
         border: 2px solid #EEEEEE;
@@ -98,14 +119,12 @@
         text-align: center;
         padding: 0;
     }
-
     #titleForm {
         text-align: left;
         margin-top: 0.2em;
         margin-bottom: 0.2em;
         font-size: 20px;
     }
-
     #timeForm {
         margin-top: 0.2em;
         margin-bottom: 0.2em;
@@ -113,7 +132,6 @@
         text-align: left;
         margin-top: 5px;
     }
-
     #question {
         position: center;
         margin: 0.3em auto;
@@ -128,23 +146,19 @@
         transition: all 0.1s, border 0.25s ease-out;
         list-style: none;
     }
-
     a:link {
         text-decoration: none;
         color: white;
     }
-
     a:visited {
         text-decoration: none;
         color: white;
     }
-
     a:hover {
         text-decoration: none;
         color: black;
     }
     .newWrite{
-
         margin-left: 1000px;
         margin-right: 500px;
         margin-bottom: 30px;
@@ -160,8 +174,11 @@
         height: 25px;
         width : 40px;
     }
-
-    ul{
+    .Num{
+        height: 20px;
+        width : 30px;
+    }
+    .boardList{
         border: 2px solid #EEEEEE;
         margin:0 auto;
         margin-top: 20px;
@@ -170,6 +187,9 @@
         padding-bottom: 50%;
         width: 800px;
         height: auto;
+    }
+    #commentNum{
+        text-align: right;
     }
 
 </style>

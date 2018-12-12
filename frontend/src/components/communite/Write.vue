@@ -42,6 +42,11 @@
         },
         methods: {
             newbutton: function () {
+                if(this.newTitle==''||this.newContent=='')
+                {
+                    alert('양식이 올바르지 않습니다. 확인해주세요.')
+                }
+                else{
                 console.log(this.user.loginId)
                 this.$http.post('http://localhost:8000/write', {
                     userId: this.user.loginId,
@@ -51,7 +56,7 @@
                     this.newTitle = ''
                     this.newContent = ''
                     this.$router.push({name: "communiteHome"})
-                })
+                })}
             },
             returnButton: function (){
                 this.$router.push({name: "communiteHome"})

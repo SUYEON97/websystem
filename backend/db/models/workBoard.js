@@ -34,6 +34,12 @@ const workBoardSchema = new mongoose.Schema({
     subject_name:{
         type: String,
         required : true
+    },
+    commentNum: {
+        type: Number,
+        default: 0,
+        required: true
+
     }
 
 })

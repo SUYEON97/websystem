@@ -4,28 +4,34 @@ const boardSchema = new mongoose.Schema({
     boardId: {
         type: Number,
         unique: true,
-        required : true
+        required: true
     },
     userId: {
-        type : String,
-        required : true
+        type: String,
+        required: true
     },
     time: {
-        type : Date,
-        required : true,
-        default : Date.now
+        type: Date,
+        required: true,
+        default: Date.now
     },
     commentId: {
-        type : Number,
-        required : false
+        type: Number,
+        required: false
     },
     content: {
-        type : String,
-        required : true
+        type: String,
+        required: true
     },
-    title : {
-        type : String,
-        required : true
+    title: {
+        type: String,
+        required: true
+    },
+    commentNum: {
+        type: Number,
+        default: 0,
+        required: true
+
     }
 })
 

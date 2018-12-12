@@ -1,7 +1,7 @@
 <template>
     <div class="board" style="margin-top: 50px;">
 
-        <h1>게시판</h1>
+        <h1>자유게시판</h1>
         <div class="inDiv">
             <div class="collectBoard">
                 <div class="annoy"><Zondicon icon="user-solid-square" class="image"></Zondicon><strong>{{this.collectList[0].userId}}</strong></div>
@@ -18,7 +18,6 @@
                 <li v-for="co in commentList" v-bind:key="co.commentId">
                     <p class="annoy2"><Zondicon icon="user" class="image2"></Zondicon><strong>{{co.userId}}</strong></p>
                     {{co.content}}
-
                 </li>
             </ul>
 
@@ -74,11 +73,20 @@
                 })
             },
             newbutton : function() {
-                this.$http.post('http://localhost:8000/comment/create',{userId: this.user.loginId, content:this.newComment, boardId:this.boardId}).then((result) => {
-                    this.newComment=""
-                    this.getCommentList()
-                    this.$router.push({name: "board"})
-                })
+                if(this.newComment==''){
+                    alert('내용을 적어주세요');
+                }
+                else {
+                    this.$http.post('http://localhost:8000/comment/create', {
+                        userId: this.user.loginId,
+                        content: this.newComment,
+                        boardId: this.boardId
+                    }).then((result) => {
+                        this.newComment = ""
+                        this.getCommentList()
+                        this.$router.push({name: "board"})
+                    })
+                }
             },
             listView : function () {
                 this.$router.push({name: "communiteHome"})

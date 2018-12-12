@@ -55,20 +55,24 @@
         },
         methods: {
             newbutton: function () {
-                //console.log(this.selected)
-                this.$http.post('http://localhost:8000/writeWorkBoard', {
-                    userId: this.user.loginId,
-                    title: this.newTitle,
-                    content: this.newContent,
-                    major_name:this.selected,
-                    subject_name:this.selected2
-                }).then((result) => {
-                    this.newTitle = ''
-                    this.newContent = ''
-                    this.selected=''
-                    this.selected2=''
-                    this.$router.push({name: "workBoardHome"})
-                })
+                if(this.newContent==''||this.newTitle==''||this.selected2==''||this.selected==''){
+                    alert('양식이 올바르지 않습니다. 확인해주세요.')
+                }
+                else {
+                    this.$http.post('http://localhost:8000/writeWorkBoard', {
+                        userId: this.user.loginId,
+                        title: this.newTitle,
+                        content: this.newContent,
+                        major_name: this.selected,
+                        subject_name: this.selected2
+                    }).then((result) => {
+                        this.newTitle = ''
+                        this.newContent = ''
+                        this.selected = ''
+                        this.selected2 = ''
+                        this.$router.push({name: "workBoardHome"})
+                    })
+                }
             },
             returnButton: function (){
                 this.$router.push({name: "workBoardHome"})
