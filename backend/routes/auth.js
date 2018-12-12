@@ -8,18 +8,20 @@ const User = require('../db/models/user')
 const { SECRET } = require('../constants');
 
 const signup = joi.object().keys({
-    name:joi.string().min(3).max(30).required(),
+    name:joi.string().regex(/^[a-zA-Z0-9가-힣]+$/).min(2).max(30).required(),
     id:joi.string().alphanum().min(4).max(30).required(),
     password:joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required()
 });
 
 router.post('/signup', (req,res)=>{
+    console.log(req.body.user)
     const result = joi.validate(req.body.user, signup);
+    console.log(result)
     if(result.error === null){
         User.findOne({loginId: req.body.user.id}, function (err, user) {
             if(!user) {
                 bcrypt.hash(req.body.user.password, 12).then(hashed => {
-                    
+
                     const user = new User();
                     user.userName = req.body.user.name;
                     user.loginId = req.body.user.id;
@@ -78,7 +80,7 @@ router.post('/login', (req, res)=>{
 router.post('/signup/dupcheck', function (req, res, next) {
     console.log("dupcheck")
     var id = req.body.id;
-    
+
     User.findOne({loginId: id}, function (err, user) {
         if(!user) {
             return res.send({result:1})

@@ -24,7 +24,7 @@
         </ul>
     </div>
 
-    <div class = 'deadline2' id='long' v-if="hw.timeRemaining>604800000 && hw.timeRemaining<2592000000 && hw.status==0">
+    <div class = 'deadline2' id='long' v-if="hw.timeRemaining>604800000 && hw.timeRemaining<1209600000 && hw.status==0">
         <ul class="list-group">
             <li class="list-group-item" style="background-color: #e26666; color:white">
                 <label>
@@ -43,7 +43,7 @@
     </div>
 
 
-    <div class = 'deadline3' id='verylong' v-if="hw.timeRemaining>2592000000 && hw.status==0">
+    <div class = 'deadline3' id='verylong' v-if="hw.timeRemaining>1209600000 && hw.status==0">
         <ul class="list-group">
             <li class="list-group-item" style="background-color: white; color:black">
                 <label>

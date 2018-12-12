@@ -15,7 +15,11 @@
 export default {
     data() {
         return{
-            user :{},
+            user :{
+                name:"",
+                id:"",
+                password:""
+            },
             Isuniq:2
         }
     },

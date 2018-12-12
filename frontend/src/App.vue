@@ -40,7 +40,7 @@
             <template slot="button-content">
               <em>User</em>
             </template>
-            <b-dropdown-item id='profile'><span><router-link :to="{name: 'Information', params: {name: this.name}}">information</router-link></span></b-dropdown-item>
+            <b-dropdown-item id="profile"><span><router-link :to="{name: 'Information'}">Profile</router-link></span></b-dropdown-item>
             <b-dropdown-item v-on:click='logout'>Signout</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>

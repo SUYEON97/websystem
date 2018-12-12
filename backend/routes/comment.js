@@ -35,5 +35,11 @@ router.get('/list', (req,res) => {
         return res.json(result)
     })
 })
+router.post('/', (req,res) =>{
+    commentModel.find({userId: req.body.userId}, function (err, result){
+        if(err) return res.console.log('list error');
+        return res.json(result)
+    })
+})
 
 module.exports = router
