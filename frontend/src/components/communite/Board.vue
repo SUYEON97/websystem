@@ -18,7 +18,6 @@
                 <li v-for="co in commentList" v-bind:key="co.commentId">
                     <p class="annoy2"><Zondicon icon="user" class="image2"></Zondicon><strong>{{co.userId}}</strong></p>
                     {{co.content}}
-
                 </li>
             </ul>
 

@@ -25,7 +25,7 @@ router.get('/:boardId', (req,res) =>{
 })
 
 router.post('/', (req,res) =>{
-    workBoardModel.find({}, function (err, result){
+    workBoardModel.find({userId: req.body.userId}, function (err, result){
         if(err) return res.console.log('list error');
         return res.json(result)
     })

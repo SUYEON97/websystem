@@ -16,5 +16,10 @@ router.get('/:boardId', (req,res) =>{
         return res.json(result)
     })
 })
-
+router.post('/', (req,res) =>{
+    boardModel.find({userId: req.body.userId}, function (err, result){
+        if(err) return res.console.log('list error');
+        return res.json(result)
+    })
+})
 module.exports = router
