@@ -44,23 +44,8 @@ export default {
     })
 
   },
-  method:{
-    deluser(){
-      localStorage.clear();
-      this.$http.post('http://localhost:8000/auth/deluser', {user: this.user}).then((response) => {
-        if(response.data.result == 1){
-          alert('만들어봤네요');
-          this.$router.push('/');
-        }
-      },(error)=>{
-        console.log('err')
-        alert(error.response.data.error)
-      })
-      this.$router.push('/')
-    }
-  },
     components: {
-      Slide
+      
     }
 }
 </script>

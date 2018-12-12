@@ -1,8 +1,5 @@
 const { mongoose, autoIncrement } = require('../mongo')
 
-var now = new Date();
-now.setHours(26);
-
 const workBoardSchema = new mongoose.Schema({
     boardId: {
         type: Number,
@@ -16,7 +13,7 @@ const workBoardSchema = new mongoose.Schema({
     time: {
         type : Date,
         required : true,
-        default : now
+        default : Date.now
     },
     commentId: {
         type : Number,

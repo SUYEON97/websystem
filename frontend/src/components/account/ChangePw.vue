@@ -1,27 +1,5 @@
 <template>
     <div>
-
-     <Slide width='200'>
-      <a id="home" href="#">
-        <span><router-link :to="{name: 'Home'}">home</router-link></span>
-      </a>
-      <a href ="#">
-        <span><router-link :to="{name: 'Information'}">information</router-link></span>
-      </a>
-      <a href ="#">
-        <span><router-link :to="{name: 'regist'}">과제등록</router-link></span>
-      </a>
-      <a href ="#">
-          <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
-      </a>
-      <a href ="#">
-        <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
-      </a>
-      <a href ="#">
-          <span><router-link v-on:click.native="logout" :to="{name: 'Logout'}">log out</router-link></span>
-      </a>
-    </Slide>
-
         <h1>Change Password</h1>
         <form v-on:submit.prevent='change'>
             present : <input type="password" name="presentpw" v-model="password.present"><br>
@@ -55,7 +33,7 @@ export default {
       this.$router.push('/')
     },
         change(){
-            
+
             this.$http.post('http://localhost:8000/user/changepw', {presentpw: this.password.present, changepw: this.password.change, name: this.user.loginId}).then((res)=>{
                 if(res.data.result == 1){
                     alert('로그인 다시');
