@@ -40,7 +40,7 @@
             <template slot="button-content">
               <em>User</em>
             </template>
-            <b-dropdown-item>Profile</b-dropdown-item>
+            <b-dropdown-item id='profile'><span><router-link :to="{name: 'Information', params: {name: this.name}}">information</router-link></span></b-dropdown-item>
             <b-dropdown-item v-on:click='logout'>Signout</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -93,13 +93,18 @@ import Login from './components/login/Login'
 #nav {
   padding: 30px;
 }
+#nav a.router-link-exact-active {
+  color: white;
+}
+
+#profile a.router-link-exact-active {
+  color: black;
+}
 
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
 
-#nav a.router-link-exact-active {
-  color: white;
-}
+
 </style>
