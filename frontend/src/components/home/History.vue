@@ -14,6 +14,7 @@
                 <label class="iconloc">
                     <Zondicon  icon="mood-happy-outline" class="historyicon"></Zondicon>
                 </label>
+                <b-button class="historybtn" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
             </li>
         </ul>
     </div>
@@ -31,6 +32,7 @@
                 <label class="iconloc">
                     <Zondicon style="color: blue;" icon="mood-sad-outline" class="historyicon"></Zondicon>
                 </label>
+                <b-button class="historybtn" v-on:click='deleteHw(hw.hwId)'><Zondicon icon="trash" class="hi"></Zondicon></b-button>
             </li>
         </ul>
     </div>
@@ -121,6 +123,17 @@ export default {
         this.hwList[i].day = stDate.day;
       }
     },
+      deleteHw(deleteId) {
+          console.log('deleteHw');
+          console.log(deleteId);
+          axios.post('http://localhost:8000/home/delete', {hwId: deleteId})
+
+          for(var i = 0; i<this.hwList.length; i++){
+              if(this.hwList[i].hwId == deleteId){
+                  this.hwList.splice(i,1)
+              }
+          }
+      },
   },
   components: {
       Zondicon
@@ -134,10 +147,15 @@ export default {
         float: right;
     }
     .iconloc{
-        float: right;
+        float: left;
         padding-top: 20px;
-        padding-right: 8px;
+        padding-left: 8px;
 
+    }
+    .historybtn{
+        background-color: white;
+        float: right;
+        margin-top: 17px;
     }
     .history{
 
@@ -171,7 +189,7 @@ export default {
         /*margin-left: 50px;*/
     }
     .work2{
-        margin-left: 35px;
+        /*margin-left: 35px;*/
     }
 
 </style>
