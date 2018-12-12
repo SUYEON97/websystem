@@ -3,8 +3,9 @@
         <h1>Login</h1>
         <form v-on:submit.prevent='login'>
             <input id="loginId" type="text" placeholder="ID" name="loginid" v-model="user.id" style="margin-top: 20px;"><br>
-            <input type="password" placeholder="Password" name="loginpassword" v-model="user.password"><br>
+            <input type="password" name="loginpassword" placeholder="Password" v-model="user.password"><br>
             <input type="submit" value="login" id="form">
+
             <router-link to="/login/signup" id="link">Sign Up</router-link>
         </form>
     </div>

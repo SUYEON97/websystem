@@ -19,6 +19,7 @@ Vue.use(Router)
 
 function loggedin(to, from, next) {
   if(!localStorage.token){
+    alert('로그인 하세요')
     next('/')
   }
   else{

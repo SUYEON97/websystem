@@ -1,25 +1,5 @@
 <template>
     <div class="communiteHome" style="margin-top: 50px;">
-        <Slide width='200'>
-          <a id="home" href="#">
-            <span><router-link :to="{name: 'Home'}">home</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'Information'}">information</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'regist'}">과제등록</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
-          </a>
-          <a href ="#">
-            <span><router-link v-on:click.native="logout" :to="{name: 'Logout'}">log out</router-link></span>
-          </a>
-        </Slide>
         <router-link to="/communite" class="temp" style=" color : black;">자유게시판  |  </router-link><router-link to="/workBoard" class="temp" style=" color : black;">과제게시판</router-link>
         <div class="inDiv">
             <router-link :to="{name: 'Write'}" class="newWrite"><Zondicon icon="compose" class="w"></Zondicon></router-link>

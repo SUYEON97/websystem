@@ -1,5 +1,6 @@
 <template>
     <div>
+
      <Slide width='200'>
       <a id="home" href="#">
         <span><router-link :to="{name: 'Home'}">home</router-link></span>
@@ -20,6 +21,7 @@
           <span><router-link v-on:click.native="logout" :to="{name: 'Logout'}">log out</router-link></span>
       </a>
     </Slide>
+
         <h1>Change Password</h1>
         <form v-on:submit.prevent='change'>
             present : <input type="password" name="presentpw" v-model="password.present"><br>

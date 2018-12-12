@@ -1,28 +1,10 @@
 <template>
 <div class="home">
-  <Slide width='200'>
-      <a id="home" href="#">
-        <span><router-link :to="{name: 'Home'}">home</router-link></span>
-      </a>
-      <a href ="#">
-        <span><router-link :to="{name: 'Information'}">information</router-link></span>
-      </a>
-      <a href ="#">
-        <span><router-link :to="{name: 'regist'}">과제등록</router-link></span>
-      </a>
-      <a href ="#">
-          <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
-      </a>
-      <a href ="#">
-        <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
-      </a>
-      <a href ="#">
-          <span><router-link v-on:click.native="logout" :to="{name: 'logout'}">log out</router-link></span>
-      </a>
-    </Slide>
   <h1>Home</h1>
 
-  <p>Hello {{user.name}}</p>
+  <p>Hello {{this.user.loginId}}</p>
+
+
   <div v-for='hw in hwList' :key="hw.id" >
     <div class = 'deadline' id='short' v-if="hw.timeRemaining<604800000 && hw.timeRemaining>0 && hw.status==0">
       <ul class="list-group">
@@ -88,7 +70,6 @@
 <script>
 //import Vue from 'vue'
 import axios from 'axios'
-import { Slide } from 'vue-burger-menu'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Zondicon from 'vue-zondicons'
@@ -97,25 +78,30 @@ export default {
   data: function() {
     return {
       hwList: [],
-      user: {},
+      //user: {userId:0},
+      //name: this.$route.params.name,
+      user:{},
       color:''
     }
   },
   beforeMount(){
     axios.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
+      //console.log(res.data.user);
       this.user = res.data.user;
       console.log("bfmountid",this.user.loginId);
       axios.post('http://localhost:8000/home/deadlinelist',{userId: this.user.loginId}).then(res => {
       console.log("mountedid2",this.user.loginId);
-      this.hwList = res.data  
+      console.log(res.data);
+      this.hwList = res.data
       this.splitDate();
       this.dayRemain();
       console.log(this.hwList)
     });
     });
   },
+
   beforeRouteUpdate(){
-    axios.get('http://localhost:8000/home/deadlinelist',{userId: this.user.loginId}).then(res => {
+    axios.post('http://localhost:8000/home/deadlinelist',{userId: this.user.loginId}).then(res => {
     console.log(this.user.loginId)
     this.hwList = res.data
     location.reload();
@@ -126,6 +112,22 @@ export default {
       }
     }
   },
+  // created() {
+  //   console.log(this.$route.name)
+  //   axios.get('http://localhost:8000/home/deadlinelist').then(res => {
+  //     console.log("get home")
+  //     this.hwList = res.data
+  //     console.log(res.data)
+  //     //location.reload();
+  //     this.splitDate();
+  //     this.dayRemain();
+  //   })
+  //     // for(var i = 0; i<this.hwList.length; i++){
+  //     //     if(this.hwList[i].status != 0){
+  //     //         this.hwList.splice(i,1)
+  //     //     }
+  //     // }
+  // },
   methods : {
     logout(){
       localStorage.clear();
@@ -181,7 +183,6 @@ export default {
     },
   },
   components: {
-    Slide,
     Zondicon
   }
 }
@@ -264,12 +265,10 @@ a {
 #nav {
   padding: 30px;
 }
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   color: #42b983;
 }

@@ -814,8 +814,8 @@ router.post('/register', (req, res) => {
     var bbb = new Date(req.body.hdate);
     bbb.setHours(9);
 
+    if(aaa>0) {
         const newDeadline = new deadlineModel({
-            
             userId: req.body.userId,
             hw_name: req.body.hw_name,
             major_name: req.body.major_name,
@@ -824,11 +824,28 @@ router.post('/register', (req, res) => {
             timeRemaining: aaa,
             status: 0
         });
-        
+
         newDeadline.save(err => {
             if (err) return res.status(500).send(err);
             return res.end();
         })
+    }
+    else{
+        const newDeadline = new deadlineModel({
+            userId: req.body.userId,
+            hw_name: req.body.hw_name,
+            major_name: req.body.major_name,
+            subject_name: req.body.subject_name,
+            hw_date: new Date(bbb),
+            timeRemaining: aaa,
+            status: 2
+        });
+
+        newDeadline.save(err => {
+            if (err) return res.status(500).send(err);
+            return res.end();
+        })
+    }
    // console.log(newDeadline);
 });
 

@@ -1,27 +1,7 @@
 <template>
 <div class="home">
-  <Slide width='200'>
-      <a id="home" href="#">
-        <span><router-link :to="{name: 'Home'}">home</router-link></span>
-      </a>
-      <a href ="#">
-        <span><router-link :to="{name: 'Information'}">information</router-link></span>
-      </a>
-      <a href ="#">
-        <span><router-link :to="{name: 'regist'}">과제등록</router-link></span>
-      </a>
-      <a href ="#">
-          <span><router-link :to="{name: 'history'}">히스토리</router-link></span>
-      </a>
-      <a href ="#">
-        <span><router-link :to="{name: 'communiteHome'}">커뮤니티</router-link></span>
-      </a>
-      <a href ="#">
-          <span><router-link v-on:click.native="logout" :to="{name: 'Logout'}">log out</router-link></span>
-      </a>
-    </Slide>
   <h1>History</h1>
-  <p>Hello {{user.name}}</p><br />
+  <p>Hello {{this.user.loginId}}</p><br />
   <p style="font-size:20px">완료 목록</p>
   <div v-for='hw in hwList' :key="hw.id" >
     <div class="history" v-if="hw.status ==1">
@@ -78,35 +58,45 @@ export default {
     return {
       hwList: [],
       user: {},
+      name: this.$route.params.name,
       color:''
     }
   },
-  mounted(){
+  beforeMount(){
     axios.get('http://localhost:8000/',{'headers': {authorization: `Bearer ${localStorage.token}`}}).then(res => {
-      console.log(res.data)
-      this.user = res.data.user
-    })
+      this.user = res.data.user;
+      console.log("bfmountid",this.user.loginId);
+      axios.post('http://localhost:8000/home/deadlinelist',{userId: this.user.loginId}).then(res => {
+      console.log("mountedid2",this.user.loginId);
+      this.hwList = res.data
+      this.splitDate();
+
+      console.log(this.hwList)
+    });
+    });
   },
   beforeRouteUpdate(){
-    console.log("before")
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
-      console.log("get home")
-      this.hwList = res.data
-      console.log(res.data)
-
+    axios.post('http://localhost:8000/home/deadlinelist',{userId: this.user.loginId}).then(res => {
+    console.log(this.user.loginId)
+    this.hwList = res.data
     location.reload();
     })
+    for(var i = 0; i<this.hwList.length; i++){
+      if(this.hwList[i].status == 0){
+        this.hwList.splice(i,1)
+      }
+    }
   },
-  created() {
-    console.log("created")
-    axios.get('http://localhost:8000/home/deadlinelist').then(res => {
-      console.log("get home")
-      this.hwList = res.data
-      console.log(res.data)
-      //location.reload();
-      this.splitDate();
-    })
-  },
+  // created() {
+  //   console.log("created")
+  //   axios.get('http://localhost:8000/home/deadlinelist').then(res => {
+  //     console.log("get home")
+  //     this.hwList = res.data
+  //     console.log(res.data)
+  //     //location.reload();
+  //     this.splitDate();
+  //   })
+  // },
   methods : {
     logout(){
       localStorage.clear();
@@ -131,13 +121,8 @@ export default {
         this.hwList[i].day = stDate.day;
       }
     },
-    deleteTodo(todo) {
-      const todoIndex = this.hwList.indexOf(todo);
-      this.hwList.splice(todoIndex, 1);
-    }
   },
   components: {
-    Slide,
       Zondicon
   }
 }

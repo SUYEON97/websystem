@@ -1,5 +1,6 @@
 <template>
     <div>
+
       <Slide width='200'>
       <a id="home" href="#">
         <span><router-link :to="{name: 'Home'}">home</router-link></span>
@@ -20,6 +21,7 @@
           <span><router-link v-on:click.native="logout" :to="{name: 'Logout'}">log out</router-link></span>
       </a>
     </Slide>
+
         <h1>Information</h1>
         <p>{{user.name}}</p>
         <router-link :to="{name: 'ChangePw', params: {loginId: this.user.loginId}}">change password</router-link>

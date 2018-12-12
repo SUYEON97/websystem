@@ -1,4 +1,4 @@
-const Router = require('Express')
+const Router = require('express')
 const router = Router()
 const workBoardModel = require('../db/models/workBoard')
 

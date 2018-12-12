@@ -43,5 +43,7 @@ app.use('/write', write)
 app.use('/workBoard', workBoard)
 app.use('/writeWorkBoard', writeWorkBoard)
 app.use('/workComment', workComment)
+app.use('/auth', auth)
+
 
 module.exports = app

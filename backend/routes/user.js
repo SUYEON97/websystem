@@ -1,4 +1,4 @@
-const { Router } = require('Express')
+const { Router } = require('express')
 const User = require('../db/models/user')
 const router = Router()
 const bcrypt = require('bcrypt')
