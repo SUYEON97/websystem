@@ -156,6 +156,11 @@
                 })
             },
             filter:function () {
+              if(this.subjectList[0]!=null){
+                  for(var z=0;z<this.subjectList.length;z++){
+                      this.subjectList.pop()
+                  }
+              }
                 var k = 0;
                 for (var i = 0; i < this.majorList.length; i++) {
                     // console.log(this.majorList[0].majorName)
