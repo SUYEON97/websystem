@@ -111,6 +111,7 @@
             },
             calData2:function(){
                 //this.list2=this.list
+                this.currentPage=1;
                 this.list= this.list.slice(this.startOffset,this.endOffset)
                 //this.list = list;
                 //page의 숫자와 page당 보여질 data의 갯수에 따라서 계산된 startOffset과 endOffset을 이용해
@@ -228,18 +229,18 @@
         padding: 0.3em;
         padding-left: 20px;
         padding-right: 30px;
-        background: rgb(200,191,231);
+        border: 1.3px solid rgb(23, 162, 184);
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
         transition: all 0.1s, border 0.25s ease-out;
         list-style: none;
     }
     a:link {
         text-decoration: none;
-        color: white;
+        color: black;
     }
     a:visited {
         text-decoration: none;
-        color: white;
+        color: black;
     }
     a:hover {
         text-decoration: none;
@@ -274,7 +275,7 @@
         margin-top: 20px;
         margin-bottom: 50px;
         padding-top: 15px;
-        padding-bottom: 20%;
+        padding-bottom: 30px;
         width: 800px;
         height: auto;
     }

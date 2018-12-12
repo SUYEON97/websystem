@@ -141,18 +141,18 @@
         padding: 0.3em;
         padding-left: 20px;
         padding-right: 30px;
-        background: rgb(200,191,231);
+        border: 1.3px solid rgb(23, 162, 184);
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
         transition: all 0.1s, border 0.25s ease-out;
         list-style: none;
     }
     a:link {
         text-decoration: none;
-        color: white;
+        color: black;
     }
     a:visited {
         text-decoration: none;
-        color: white;
+        color: black;
     }
     a:hover {
         text-decoration: none;
@@ -184,7 +184,7 @@
         margin-top: 20px;
         margin-bottom: 50px;
         padding-top: 15px;
-        padding-bottom: 50%;
+        padding-bottom: 30px;
         width: 800px;
         height: auto;
     }
